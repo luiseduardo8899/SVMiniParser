@@ -13,6 +13,7 @@ matrix = [sv_files, svh_files]
 def delete_parenthesis(string):
 	string = string.replace('[', '   [   ')
         string = string.replace(']', '   ]   ')
+	#string = string.replace(',', '   ,   ')
 	string = string + '    '
 	#print(string)
 	#flag2 = 0
@@ -40,14 +41,16 @@ def delete_parenthesis(string):
 
 def separate(string):	
 	string = string.replace('=', '  =  ')
-	string = re.sub("[,;()]", " ", string)
+	string = string.replace(',', '   ,   ')
+	string = re.sub("[;()]", " ", string)
 	#No quitar las comas, y dejarlas como elemento del arreglo para luego utilizarlas para separar si es entrada o salida, los tipos de variables y nombres  
         return string.split()
 
 def data_task(sv, line, line_list, i):
 	cut2 = sv[::-1].find('/')
         name_file = sv[(len(sv)-cut2):]
-	print(line_list)
+	#print(line_list)
+	remove_equal = []
 	if line_list[0] != 'task':
 		name = line_list[2]
 		line_list = line_list[3:]	
@@ -62,12 +65,61 @@ def data_task(sv, line, line_list, i):
 		cont = 0
 		for word in line_list:
                 	if word == '=':
-                        	cont = 2
+                        	cont = 3 # con 2 cuando no habia , 3 para incorporarla
                         if cont == 0:
-                        	print(word)
-				#Aquí va a generar arreglos con los datos de los parametros HACER UNA FUNCIÍN QUE TRATE LAS COMAS Y PONERLA AQUÍ
+                        	#print(word)
+				remove_equal.append(word)
+				#Aqu va a generar arreglos con los datos de los parametros HACER UNA FUNCIN QUE TRATE LAS COMAS Y PONERLA AQU:wq
                                 cont = 1
                         cont = cont - 1
+		print(fix_argvs(remove_equal))
+
+
+#creamos la funcion que arregla los argumentos
+def fix_argvs(vec_string):
+	description_i = []
+	description = []
+	flag = 0
+	temp = []
+	for word in vec_string:
+		if word != ',':					#we use # to separate
+			if (vec_string[0] != 'input') and (vec_string[0] != 'inout') and (vec_string[0] != 'output') and (flag==0):		#We guarantee that the first argument has input
+				description_i.append('input')
+				description_i.append(word)
+			else:
+				description_i.append(word)
+		else:						#llenamos los espacios faltantes del argumento
+			if len(description_i) == 2:
+				description_i.insert(0, temp[0])
+				temp = description_i
+                                description = description + description_i
+                                description_i = []
+			else:
+				if len(description_i) == 1:
+					description_i.insert(0, temp[1])
+					description_i.insert(0, temp[0])
+					temp = description_i
+					description = description + description_i
+					description_i = []
+				else:
+					temp = description_i
+                                        description = description + description_i
+                                        description_i = []
+		flag = 1
+	#last argument
+	if len(description_i) == 2:
+         	description_i.insert(0, temp[0])
+                description = description + description_i
+        else:
+                if len(description_i) == 1:
+                	description_i.insert(0, temp[1])
+                        description_i.insert(0, temp[0])
+			description = description + description_i
+		else:
+			description = description + description_i
+	return description
+
+
 			
 	
 for directory in matrix:
@@ -77,13 +129,24 @@ for directory in matrix:
 		flag = 0
 	        with open(sv, 'r') as fp:
         	        for line in fp:
-				if ('task' in line) and ('(' in line):
+				#delete comment
+				vec_temp = []
+				line_temp = line
+				line_temp = line.replace('//', '  //  ')
+				if "//" in line_temp:
+					line_temp = line_temp.split('//')
+					line_temp = line_temp[0]
+					#print('======================================>', line)
+				#We build a single row
+				if ('task' in line_temp) and ('(' in line_temp):
 					flag = 1
 				if (('task' in fix_line) and ('(' in fix_line) and ((')' in fix_line) == False)) or flag:
-                			fix_line = fix_line + line
+                			#print('==========================================>', line_temp)
+					fix_line = fix_line + line_temp
                                 if ('task' in fix_line) and ((('(' in fix_line) and ( ')' in fix_line)) or ('()' in fix_line)):
                                         print('\n\n')
 					print(fix_line)
+					#we invoke functions
 					fix_line = delete_parenthesis(fix_line) 
 					temp_list = separate(fix_line )
 					data_task(sv, fix_line, temp_list, i)
