@@ -65,30 +65,30 @@ def data_task(sv, line, line_list, i):
 		cont = 0
 		for word in line_list:
                 	if word == '=':
-                        	cont = 3 # con 2 cuando no habia , 3 para incorporarla
+                        	cont = 3 #with 2 when there was no "," 3 to incorporate it
                         if cont == 0:
                         	#print(word)
 				remove_equal.append(word)
-				#Aqu va a generar arreglos con los datos de los parametros HACER UNA FUNCIN QUE TRATE LAS COMAS Y PONERLA AQU:wq
                                 cont = 1
                         cont = cont - 1
 		print(fix_argvs(remove_equal))
 
 
-#creamos la funcion que arregla los argumentos
+#we create the function that fixes the arguments
 def fix_argvs(vec_string):
 	description_i = []
 	description = []
 	flag = 0
 	temp = []
 	for word in vec_string:
-		if word != ',':					#we use # to separate
-			if (vec_string[0] != 'input') and (vec_string[0] != 'inout') and (vec_string[0] != 'output') and (flag==0):		#We guarantee that the first argument has input
+		if word != ',':					#we use "," to separate
+			#We guarantee that the first argument has input
+			if (vec_string[0]!='input') and (vec_string[0]!='inout') and (vec_string[0]!='output') and (flag==0):
 				description_i.append('input')
 				description_i.append(word)
 			else:
 				description_i.append(word)
-		else:						#llenamos los espacios faltantes del argumento
+		else:						#we fill in the missing spaces of the argument
 			if len(description_i) == 2:
 				description_i.insert(0, temp[0])
 				temp = description_i
@@ -136,12 +136,10 @@ for directory in matrix:
 				if "//" in line_temp:
 					line_temp = line_temp.split('//')
 					line_temp = line_temp[0]
-					#print('======================================>', line)
 				#We build a single row
 				if ('task' in line_temp) and ('(' in line_temp):
 					flag = 1
 				if (('task' in fix_line) and ('(' in fix_line) and ((')' in fix_line) == False)) or flag:
-                			#print('==========================================>', line_temp)
 					fix_line = fix_line + line_temp
                                 if ('task' in fix_line) and ((('(' in fix_line) and ( ')' in fix_line)) or ('()' in fix_line)):
                                         print('\n\n')
