@@ -52,8 +52,7 @@ def separate(string):
 	string = string.replace(')', '   )   ')
 	string = re.sub("[;]", " ", string) #for process function parentesis
 	end = string.find(')')
-        string = string[:end]
-	#No quitar las comas, y dejarlas como elemento del arreglo para luego utilizarlas para separar si es entrada o salida, los tipos de variables y nombres  
+        string = string[:end]  
         return string.split()
 
 def data_task(sv, line, line_list, i):
@@ -65,29 +64,31 @@ def data_task(sv, line, line_list, i):
 	if line_list[0] == vfuntion:
 		if (len(line_list)>=4) and (line_list[3] == '('):
 			name = line_list[2]
-                	type_task = line_list[1]
+                	#type_ = line_list[1]
 			line_list.pop(3)
-			#line_list.pop(len(line_list)-1)
                 	line_list = line_list[3:]
 		else:
 			name = line_list[1]
-                        type_task = 'unknown'
+                        #type_ = 'unknown'
 			line_list.pop(2)
-			#line_list.pop(len(line_list)-1)
                         line_list = line_list[2:]
+		type_ = 'function'
 	else:
 		if line_list[0] != vtask: # + f
 			name = line_list[2]
-			line_list = line_list[3:]	
+			#type_ = line_list[0]
+			line_list = line_list[4:]	
 		else:
 			name = line_list[1]
-			type_task = line_list[0]
-			line_list = line_list[2:]
+			#type_ = 'unknown'
+			line_list = line_list[3:]
+		type_ = 'task'
+
 	if '()' in line:
         	print('Name: ', name, 'File: ', name_file,'Line: ', i)
         	#print('paremeters: NONE')
-		print(make_json(name, fix_argvs(remove_equal)))
-		struc_i = make_json(name, fix_argvs(remove_equal))
+		print(make_json(name, fix_argvs(remove_equal), type_, line))
+		struc_i = make_json(name, fix_argvs(remove_equal), type_, line)
 	else:
 		print('Name: ', name, 'File: ', name_file,'Line: ', i)
 		cont = 0
@@ -100,14 +101,14 @@ def data_task(sv, line, line_list, i):
                                 cont = 1
                         cont = cont - 1
 		#print(fix_argvs(remove_equal))
-		struc_i = make_json(name, fix_argvs(remove_equal))
-		print(struc_i)
+		struc_i = make_json(name, fix_argvs(remove_equal), type_, line)
+	print(struc_i)
 	return struc_i
 
 
 #we create the function that fixes the arguments
-def fix_argvs(vec_string):
-	#print('=================================================>', vec_string)
+'''def fix_argvs(vec_string):
+	print('=================================================>', vec_string)
 	description_i = []
 	description = []
 	flag = 0
@@ -150,17 +151,42 @@ def fix_argvs(vec_string):
 			description = description + description_i
 		else:
 			description = description + description_i
-	return description
+	return description'''
+
+def fix_argvs(vec_arg):
+	vec_arg_temp = []
+        args_name = []
+	if vec_arg != []:
+		for arg in vec_arg:
+			if arg == ',':
+				arg_name = vec_arg_temp[len(vec_arg_temp)-1]
+				vec_arg_temp = []
+				args_name.append(arg_name)
+			else:
+				vec_arg_temp.append(arg)
+		arg_name = vec_arg_temp[len(vec_arg_temp)-1]
+		vec_arg_temp = []
+       		args_name.append(arg_name)
+		#preparamos los argumentos para el formato json
+		cont = 0
+		for name in args_name:
+			vec_arg_temp.append('${' + str(len(args_name)-1-cont) + ':' + name + '}') 
+			cont = cont + 1
+	else:
+		vec_arg_temp.append('${' + str(0) + ':' + '' + '}')
+	return vec_arg_temp
+		
 
 
 
-def make_json(name, arguments):
 
-	name_ = []
-	name_.append(name + "()")
+
+def make_json(name, arguments, type_, function):
+
+	name_ = [name, type_ + ':' + name ]
 	final_arguments = name + "("
 	#we construct the string of arguments
-	cont = 0
+	'''cont = 0
 	for arv in arguments:
 		if cont == 3:
 			final_arguments = final_arguments + ", "
@@ -169,12 +195,13 @@ def make_json(name, arguments):
 		else:
 			final_arguments = final_arguments + " " + arv
 			cont = cont + 1
-	final_arguments = final_arguments + " )"
+	final_arguments = final_arguments + " )"'''
 
-	temp = [name, name]	
+	temp = ", ".join(arguments)	
+	body = [name +'(' + temp + ')']	
 
-	dates = {"prefix": temp, "body": name_, "description": final_arguments}
-	task_i = {"task nombre_del_task": dates}
+	dates = {"prefix": name_, "body": body, "description": function}
+	task_i = {name: dates}
 	return json.dumps(task_i)
 
 
@@ -205,11 +232,11 @@ for directory in matrix:
 					#we invoke functions
 					fix_line = delete_parenthesis(fix_line) 
 					temp_list = separate(fix_line )
-					#we eliminate the fields before the word -function-
-        				if (len(temp_list) >= 2) and (temp_list[1] == vfuntion):
+					#we eliminate the fields before the word -function or task-
+        				if (len(temp_list) >= 2) and ((temp_list[1] == vfuntion) or (temp_list[1] == vtask)):
                 				temp_list.pop(0)
         				else:
-                				if (len(temp_list) >= 3) and (temp_list[2] == vfuntion):
+                				if (len(temp_list) >= 3) and ((temp_list[2] == vfuntion) or (temp_list[1] == vtask)):
                         				temp_list.pop(0)
                        					temp_list.pop(0)
 					if (temp_list[0] == vtask) or (len(temp_list) >= 2 and temp_list[1] == vtask) or (temp_list[0] == vfuntion):
