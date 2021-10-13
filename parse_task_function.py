@@ -2,6 +2,7 @@ from os.path import isfile, join
 import os
 import re
 import glob
+import json
 #from yattag import Doc
 #import xlwt
 
@@ -9,6 +10,11 @@ sv_files = glob.glob(os.environ['AVERY_PCIE']+"/src/*.sv")
 svh_files = glob.glob(os.environ['AVERY_PCIE']+"/src.VCS/*.svh")
 
 matrix = [sv_files, svh_files]
+
+
+vtask = 'task'
+vfuntion = 'function'
+
 
 def delete_parenthesis(string):
 	string = string.replace('[', '   [   ')
@@ -42,7 +48,11 @@ def delete_parenthesis(string):
 def separate(string):	
 	string = string.replace('=', '  =  ')
 	string = string.replace(',', '   ,   ')
-	string = re.sub("[;()]", " ", string)
+	string = string.replace('(', '   (   ')
+	string = string.replace(')', '   )   ')
+	string = re.sub("[;]", " ", string) #for process function parentesis
+	end = string.find(')')
+        string = string[:end]
 	#No quitar las comas, y dejarlas como elemento del arreglo para luego utilizarlas para separar si es entrada o salida, los tipos de variables y nombres  
         return string.split()
 
@@ -51,15 +61,33 @@ def data_task(sv, line, line_list, i):
         name_file = sv[(len(sv)-cut2):]
 	#print(line_list)
 	remove_equal = []
-	if line_list[0] != 'task':
-		name = line_list[2]
-		line_list = line_list[3:]	
+	#we extract name and type of function and the arguments
+	if line_list[0] == vfuntion:
+		if (len(line_list)>=4) and (line_list[3] == '('):
+			name = line_list[2]
+                	type_task = line_list[1]
+			line_list.pop(3)
+			#line_list.pop(len(line_list)-1)
+                	line_list = line_list[3:]
+		else:
+			name = line_list[1]
+                        type_task = 'unknown'
+			line_list.pop(2)
+			#line_list.pop(len(line_list)-1)
+                        line_list = line_list[2:]
 	else:
-		name = line_list[1]
-		line_list = line_list[1:]
+		if line_list[0] != vtask: # + f
+			name = line_list[2]
+			line_list = line_list[3:]	
+		else:
+			name = line_list[1]
+			type_task = line_list[0]
+			line_list = line_list[2:]
 	if '()' in line:
         	print('Name: ', name, 'File: ', name_file,'Line: ', i)
-        	print('paremeters: NONE')
+        	#print('paremeters: NONE')
+		print(make_json(name, fix_argvs(remove_equal)))
+		struc_i = make_json(name, fix_argvs(remove_equal))
 	else:
 		print('Name: ', name, 'File: ', name_file,'Line: ', i)
 		cont = 0
@@ -71,15 +99,20 @@ def data_task(sv, line, line_list, i):
 				remove_equal.append(word)
                                 cont = 1
                         cont = cont - 1
-		print(fix_argvs(remove_equal))
+		#print(fix_argvs(remove_equal))
+		struc_i = make_json(name, fix_argvs(remove_equal))
+		print(struc_i)
+	return struc_i
 
 
 #we create the function that fixes the arguments
 def fix_argvs(vec_string):
+	#print('=================================================>', vec_string)
 	description_i = []
 	description = []
 	flag = 0
 	temp = []
+	vec_str_jsom = []
 	for word in vec_string:
 		if word != ',':					#we use "," to separate
 			#We guarantee that the first argument has input
@@ -120,7 +153,32 @@ def fix_argvs(vec_string):
 	return description
 
 
-			
+
+def make_json(name, arguments):
+
+	name_ = []
+	name_.append(name + "()")
+	final_arguments = name + "("
+	#we construct the string of arguments
+	cont = 0
+	for arv in arguments:
+		if cont == 3:
+			final_arguments = final_arguments + ", "
+			final_arguments = final_arguments + " " + arv
+			cont = 1
+		else:
+			final_arguments = final_arguments + " " + arv
+			cont = cont + 1
+	final_arguments = final_arguments + " )"
+
+	temp = [name, name]	
+
+	dates = {"prefix": temp, "body": name_, "description": final_arguments}
+	task_i = {"task nombre_del_task": dates}
+	return json.dumps(task_i)
+
+
+vec_struc_json = []
 	
 for directory in matrix:
 	for sv in directory:
@@ -137,21 +195,35 @@ for directory in matrix:
 					line_temp = line_temp.split('//')
 					line_temp = line_temp[0]
 				#We build a single row
-				if ('task' in line_temp) and ('(' in line_temp):
+				if ((vtask in line_temp) or (vfuntion in line_temp)) and ('(' in line_temp): # + f
 					flag = 1
-				if (('task' in fix_line) and ('(' in fix_line) and ((')' in fix_line) == False)) or flag:
+				if (((vtask in fix_line) or (vfuntion in fix_line)) and ('(' in fix_line) and ((')' in fix_line) == False)) or flag: # + f
 					fix_line = fix_line + line_temp
-                                if ('task' in fix_line) and ((('(' in fix_line) and ( ')' in fix_line)) or ('()' in fix_line)):
+                                if ((vtask in fix_line) or (vfuntion in fix_line)) and ((('(' in fix_line) and ( ')' in fix_line)) or ('()' in fix_line)): # + f
                                         print('\n\n')
 					print(fix_line)
 					#we invoke functions
 					fix_line = delete_parenthesis(fix_line) 
 					temp_list = separate(fix_line )
-					data_task(sv, fix_line, temp_list, i)
+					#we eliminate the fields before the word -function-
+        				if (len(temp_list) >= 2) and (temp_list[1] == vfuntion):
+                				temp_list.pop(0)
+        				else:
+                				if (len(temp_list) >= 3) and (temp_list[2] == vfuntion):
+                        				temp_list.pop(0)
+                       					temp_list.pop(0)
+					if (temp_list[0] == vtask) or (len(temp_list) >= 2 and temp_list[1] == vtask) or (temp_list[0] == vfuntion):
+						struc_json = data_task(sv, fix_line, temp_list, i)
+						vec_struc_json.append(struc_json)
 					fix_line = ''
 					flag = 0
                         	i = i + 1
 
+#we write in the file
+with open('datos.json', 'w') as f:
+	for struc_json_i in vec_struc_json:
+		f.write(struc_json_i)
+		f.write('\n')
 
 
 
