@@ -101,7 +101,8 @@ def data_task(sv, line, line_list, i):
                                 cont = 1
                         cont = cont - 1
 		#print(fix_argvs(remove_equal))
-		struc_i = make_json(name, fix_argvs(remove_equal), type_, line)
+		struc_i = [0, 0]
+		struc_i[0], struc_i[1]  = make_json(name, fix_argvs(remove_equal), type_, line)
 	print(struc_i)
 	return struc_i
 
@@ -201,11 +202,12 @@ def make_json(name, arguments, type_, function):
 	body = [name +'(' + temp + ')']	
 
 	dates = {"prefix": name_, "body": body, "description": function}
-	task_i = {name: dates}
-	return json.dumps(task_i)
+	#task_i = {name: dates}
+	#return json.dumps(name:dates)
+	return name, dates
 
 
-vec_struc_json = []
+vec_struc_json = {}
 	
 for directory in matrix:
 	for sv in directory:
@@ -241,16 +243,17 @@ for directory in matrix:
                        					temp_list.pop(0)
 					if (temp_list[0] == vtask) or (len(temp_list) >= 2 and temp_list[1] == vtask) or (temp_list[0] == vfuntion):
 						struc_json = data_task(sv, fix_line, temp_list, i)
-						vec_struc_json.append(struc_json)
+						vec_struc_json[struc_json[0]] = struc_json[1]
 					fix_line = ''
 					flag = 0
                         	i = i + 1
 
 #we write in the file
 with open('datos.json', 'w') as f:
-	for struc_json_i in vec_struc_json:
-		f.write(struc_json_i)
-		f.write('\n')
+	#for struc_json_i in vec_struc_json:
+		#f.write(struc_json_i)
+		#f.write('\n')
+	json.dump(vec_struc_json, f)
 
 
 
