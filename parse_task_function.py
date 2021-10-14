@@ -19,30 +19,18 @@ vfuntion = 'function'
 def delete_parenthesis(string):
 	string = string.replace('[', '   [   ')
         string = string.replace(']', '   ]   ')
-	#string = string.replace(',', '   ,   ')
 	string = string + '    '
-	#print(string)
-	#flag2 = 0
-	#flag3 = 0
 	while (('[' in string) and (']' in string)):
 		init = string.find('[')
 		end = string.find(']')
 		temp = string[init+2:end-2]
-		#flag = 0
 		if '[' in temp:
 			init2 = temp.find('[')
 			temp2 = string[:init2-2+init] + '   ' +  string[end+2:]
 			string = temp2
-			#print(string)
-			#flag2 = flag2 + 1
 		else:
 			temp2 = string[:init-2] + '   ' +  string[end+2:]
 			string = temp2
-			#print(string)
-			#if flag3 == 1:
-			#	exit()
-			#if flag2 != flag:
-			#	flag3 = 1
 	return string
 
 def separate(string):	
@@ -108,52 +96,6 @@ def data_task(sv, line, line_list, i):
 
 
 #we create the function that fixes the arguments
-'''def fix_argvs(vec_string):
-	print('=================================================>', vec_string)
-	description_i = []
-	description = []
-	flag = 0
-	temp = []
-	vec_str_jsom = []
-	for word in vec_string:
-		if word != ',':					#we use "," to separate
-			#We guarantee that the first argument has input
-			if (vec_string[0]!='input') and (vec_string[0]!='inout') and (vec_string[0]!='output') and (flag==0):
-				description_i.append('input')
-				description_i.append(word)
-			else:
-				description_i.append(word)
-		else:						#we fill in the missing spaces of the argument
-			if len(description_i) == 2:
-				description_i.insert(0, temp[0])
-				temp = description_i
-                                description = description + description_i
-                                description_i = []
-			else:
-				if len(description_i) == 1:
-					description_i.insert(0, temp[1])
-					description_i.insert(0, temp[0])
-					temp = description_i
-					description = description + description_i
-					description_i = []
-				else:
-					temp = description_i
-                                        description = description + description_i
-                                        description_i = []
-		flag = 1
-	#last argument
-	if len(description_i) == 2:
-         	description_i.insert(0, temp[0])
-                description = description + description_i
-        else:
-                if len(description_i) == 1:
-                	description_i.insert(0, temp[1])
-                        description_i.insert(0, temp[0])
-			description = description + description_i
-		else:
-			description = description + description_i
-	return description'''
-
 def fix_argvs(vec_arg):
 	vec_arg_temp = []
         args_name = []
@@ -168,42 +110,21 @@ def fix_argvs(vec_arg):
 		arg_name = vec_arg_temp[len(vec_arg_temp)-1]
 		vec_arg_temp = []
        		args_name.append(arg_name)
-		#preparamos los argumentos para el formato json
-		cont = 0
+		#we prepare the arguments for the json format
+		cont = 1
 		for name in args_name:
-			vec_arg_temp.append('${' + str(len(args_name)-1-cont) + ':' + name + '}') 
+			vec_arg_temp.append('${' + str(cont) + ':' + '.' + name + '( )' + '}') 
 			cont = cont + 1
 	else:
 		vec_arg_temp.append('${' + str(0) + ':' + '' + '}')
 	return vec_arg_temp
 		
-
-
-
-
-
+#we prepare the top dictionary arguments
 def make_json(name, arguments, type_, function):
-
 	name_ = [name, type_ + ':' + name ]
-	final_arguments = name + "("
-	#we construct the string of arguments
-	'''cont = 0
-	for arv in arguments:
-		if cont == 3:
-			final_arguments = final_arguments + ", "
-			final_arguments = final_arguments + " " + arv
-			cont = 1
-		else:
-			final_arguments = final_arguments + " " + arv
-			cont = cont + 1
-	final_arguments = final_arguments + " )"'''
-
 	temp = ", ".join(arguments)	
-	body = [name +'(' + temp + ')']	
-
+	body = [name +'(' + temp + ');']	
 	dates = {"prefix": name_, "body": body, "description": function}
-	#task_i = {name: dates}
-	#return json.dumps(name:dates)
 	return name, dates
 
 
@@ -250,9 +171,9 @@ for directory in matrix:
 
 #we write in the file
 with open('datos.json', 'w') as f:
-	#for struc_json_i in vec_struc_json:
-		#f.write(struc_json_i)
-		#f.write('\n')
+	'''for struc_json_i in vec_struc_json:
+		f.write(struc_json_i)
+		f.write('\n')'''
 	json.dump(vec_struc_json, f)
 
 
