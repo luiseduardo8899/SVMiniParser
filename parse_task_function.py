@@ -148,7 +148,7 @@ for directory in matrix:
                 #we detect a class and extract its type
                 list_extr_class = separate(line_temp)
                 
-                if 'class' in list_extr_class:
+                if ('class' in list_extr_class) and (('typedef' in list_extr_class) == False):
                     flag_class = 1
                 if 'endclass' in list_extr_class:
                     flag_class = 0
