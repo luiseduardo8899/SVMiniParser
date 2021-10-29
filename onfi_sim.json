@@ -1,0 +1,3970 @@
+{
+    "anvm_component": {
+        "prefix": "anvm_component",
+        "body": [
+            "anvm_component  ${0:name_class};"
+        ],
+        "description": "class anvm_component extends avery_component;\n"
+    },
+    "anvm_component :: new": {
+        "prefix": [
+            "new",
+            "function:new -> anvm_component"
+        ],
+        "body": [
+            "new(${1:name}, ${2:parent}, ${3:stream_id});"
+        ],
+        "description": "[Class:anvm_component]\n     function new(\n string          name,\n    `ifdef ANVM_UVM       uvm_component  parent    = null,\n    `endif    int             stream_id = 0    );    "
+    },
+    "anvm_component :: check_result": {
+        "prefix": [
+            "check_result",
+            "function:check_result -> anvm_component"
+        ],
+        "body": [
+            "check_result(${1:verbosity});"
+        ],
+        "description": "[Class:anvm_component]\n     virtual function bit check_result(\n int verbosity = 0 );    "
+    },
+    "anvm_component :: end_sim_cb": {
+        "prefix": [
+            "end_sim_cb",
+            "task:end_sim_cb -> anvm_component"
+        ],
+        "body": [
+            "end_sim_cb(${1:msg});"
+        ],
+        "description": "[Class:anvm_component]\n     virtual task end_sim_cb(\nstring msg = \"\");    "
+    },
+    "anvm_fabric_host_adaptor": {
+        "prefix": "anvm_fabric_host_adaptor",
+        "body": [
+            "anvm_fabric_host_adaptor  ${0:name_class};"
+        ],
+        "description": "class anvm_fabric_host_adaptor extends anvm_host_adaptor_base;\n"
+    },
+    "anvm_fabric_host_adaptor :: new": {
+        "prefix": [
+            "new",
+            "function:new -> anvm_fabric_host_adaptor"
+        ],
+        "body": [
+            "new(${1:instance_name});"
+        ],
+        "description": "[Class:anvm_fabric_host_adaptor]\n     function new(\nstring instance_name);    "
+    },
+    "anvm_fabric_host_adaptor :: get_nqn": {
+        "prefix": [
+            "get_nqn",
+            "function:get_nqn -> anvm_fabric_host_adaptor"
+        ],
+        "body": [
+            "get_nqn(${0:});"
+        ],
+        "description": "[Class:anvm_fabric_host_adaptor]\n     virtual function anvm_nqn get_nqn(\n);    "
+    },
+    "anvm_fabric_host_adaptor :: wait_discovery_ctrlers": {
+        "prefix": [
+            "wait_discovery_ctrlers",
+            "task:wait_discovery_ctrlers -> anvm_fabric_host_adaptor"
+        ],
+        "body": [
+            "wait_discovery_ctrlers(${1:ctrler_ids});"
+        ],
+        "description": "[Class:anvm_fabric_host_adaptor]\n     virtual task wait_discovery_ctrlers(\nref anvm_fab_ctrler_id ctrler_ids      );    "
+    },
+    "anvm_fabric_host_adaptor :: post_capsule": {
+        "prefix": [
+            "post_capsule",
+            "function:post_capsule -> anvm_fabric_host_adaptor"
+        ],
+        "body": [
+            "post_capsule(${1:cs});"
+        ],
+        "description": "[Class:anvm_fabric_host_adaptor]\n     virtual function void post_capsule(\nanvm_capsule cs);    "
+    },
+    "anvm_fabric_host_adaptor :: wait_rx_capsule": {
+        "prefix": [
+            "wait_rx_capsule",
+            "task:wait_rx_capsule -> anvm_fabric_host_adaptor"
+        ],
+        "body": [
+            "wait_rx_capsule(${1:cs});"
+        ],
+        "description": "[Class:anvm_fabric_host_adaptor]\n     virtual task wait_rx_capsule(\noutput anvm_capsule cs);    "
+    },
+    "anvm_fabric_host_adaptor :: get_admin_sq_capsule_size": {
+        "prefix": [
+            "get_admin_sq_capsule_size",
+            "function:get_admin_sq_capsule_size -> anvm_fabric_host_adaptor"
+        ],
+        "body": [
+            "get_admin_sq_capsule_size(${0:});"
+        ],
+        "description": "[Class:anvm_fabric_host_adaptor]\n     virtual function int get_admin_sq_capsule_size(\n);    "
+    },
+    "anvm_fabric_host_adaptor :: get_amdin_rsp_capsule_size": {
+        "prefix": [
+            "get_amdin_rsp_capsule_size",
+            "function:get_amdin_rsp_capsule_size -> anvm_fabric_host_adaptor"
+        ],
+        "body": [
+            "get_amdin_rsp_capsule_size(${0:});"
+        ],
+        "description": "[Class:anvm_fabric_host_adaptor]\n     virtual function int get_amdin_rsp_capsule_size(\n);    "
+    },
+    "anvm_fabric_host_adaptor :: get_host_memory_size": {
+        "prefix": [
+            "get_host_memory_size",
+            "function:get_host_memory_size -> anvm_fabric_host_adaptor"
+        ],
+        "body": [
+            "get_host_memory_size(${0:});"
+        ],
+        "description": "[Class:anvm_fabric_host_adaptor]\n     virtual function bit       get_host_memory_size(\n);    "
+    },
+    "anvm_fabric_host_adaptor :: write_dword_array": {
+        "prefix": [
+            "write_dword_array",
+            "task:write_dword_array -> anvm_fabric_host_adaptor"
+        ],
+        "body": [
+            "write_dword_array(${1:addr}, ${2:va}, ${3:first_be}, ${4:last_be}, ${5:flag}, ${6:dbg});"
+        ],
+        "description": "[Class:anvm_fabric_host_adaptor]\n     virtual task write_dword_array(\n            bit             addr    ,\n            bit             va          ,\n            bit              first_be = 'hf,\n            bit              last_be  = 'hf,\n            bit             flag     = 0,\n                   avery_data_base dbg      = null );    "
+    },
+    "anvm_fabric_host_adaptor :: read_dword_array": {
+        "prefix": [
+            "read_dword_array",
+            "task:read_dword_array -> anvm_fabric_host_adaptor"
+        ],
+        "body": [
+            "read_dword_array(${1:addr}, ${2:num_dwords}, ${3:va}, ${4:err}, ${5:first_be}, ${6:last_be}, ${7:flag}, ${8:dbg});"
+        ],
+        "description": "[Class:anvm_fabric_host_adaptor]\n     virtual task read_dword_array(\n            input  bit             addr      ,\n                   int             num_dwords,\n            output bit             va            ,\n            output bit             err       ,\n            input  bit              first_be   = 'hf,\n            input  bit              last_be    = 'hf,\n            input  bit             flag       = 0,\n               input  avery_data_base dbg        = null );    "
+    },
+    "anvm_fabric_host_adaptor :: wait_irq": {
+        "prefix": [
+            "wait_irq",
+            "task:wait_irq -> anvm_fabric_host_adaptor"
+        ],
+        "body": [
+            "wait_irq(${1:ctrler_id}, ${2:int_kind}, ${3:addr}, ${4:data});"
+        ],
+        "description": "[Class:anvm_fabric_host_adaptor]\n     virtual task wait_irq(\n output int              ctrler_id,\n          anvm_interrupt_e int_kind ,\n  bit              addr     ,\n                                  bit              data      );    "
+    },
+    "anvm_fabric_host_adaptor :: do_hot_reset": {
+        "prefix": [
+            "do_hot_reset",
+            "task:do_hot_reset -> anvm_fabric_host_adaptor"
+        ],
+        "body": [
+            "do_hot_reset(${1:ctrler_id});"
+        ],
+        "description": "[Class:anvm_fabric_host_adaptor]\n     virtual task do_hot_reset(\nbit       ctrler_id);    "
+    },
+    "anvm_fabric_host_adaptor :: do_warm_reset": {
+        "prefix": [
+            "do_warm_reset",
+            "task:do_warm_reset -> anvm_fabric_host_adaptor"
+        ],
+        "body": [
+            "do_warm_reset(${1:hold_time_in_ns});"
+        ],
+        "description": "[Class:anvm_fabric_host_adaptor]\n     virtual task do_warm_reset(\ntime hold_time_in_ns = 0);    "
+    },
+    "anvm_fabric_host_adaptor :: do_cold_reset": {
+        "prefix": [
+            "do_cold_reset",
+            "task:do_cold_reset -> anvm_fabric_host_adaptor"
+        ],
+        "body": [
+            "do_cold_reset(${1:hold_time_in_ns});"
+        ],
+        "description": "[Class:anvm_fabric_host_adaptor]\n     virtual task do_cold_reset(\ntime hold_time_in_ns = 0);    "
+    },
+    "anvm_fabric_host_adaptor :: do_subsystem_reset": {
+        "prefix": [
+            "do_subsystem_reset",
+            "task:do_subsystem_reset -> anvm_fabric_host_adaptor"
+        ],
+        "body": [
+            "do_subsystem_reset(${1:ctrler_id});"
+        ],
+        "description": "[Class:anvm_fabric_host_adaptor]\n     virtual task do_subsystem_reset(\nbit       ctrler_id);    "
+    },
+    "anvm_fabric_host_adaptor :: do_function_reset": {
+        "prefix": [
+            "do_function_reset",
+            "task:do_function_reset -> anvm_fabric_host_adaptor"
+        ],
+        "body": [
+            "do_function_reset(${1:ctrler_id}, ${2:flr_support});"
+        ],
+        "description": "[Class:anvm_fabric_host_adaptor]\n     virtual task do_function_reset(\nbit       ctrler_id,\n output bit flr_support);    "
+    },
+    "anvm_fabric_host_adaptor :: reset": {
+        "prefix": [
+            "reset",
+            "task:reset -> anvm_fabric_host_adaptor"
+        ],
+        "body": [
+            "reset(${0:});"
+        ],
+        "description": "[Class:anvm_fabric_host_adaptor]\n     virtual task reset(\n);    "
+    },
+    "anvm_fabric_host_adaptor :: get_port_number": {
+        "prefix": [
+            "get_port_number",
+            "function:get_port_number -> anvm_fabric_host_adaptor"
+        ],
+        "body": [
+            "get_port_number(${1:ctrler_id});"
+        ],
+        "description": "[Class:anvm_fabric_host_adaptor]\n     virtual function int get_port_number (\nbit       ctrler_id);    "
+    },
+    "anvm_fabric_host_adaptor :: free_host_mem": {
+        "prefix": [
+            "free_host_mem",
+            "function:free_host_mem -> anvm_fabric_host_adaptor"
+        ],
+        "body": [
+            "free_host_mem(${1:addr}, ${2:len}, ${3:src});"
+        ],
+        "description": "[Class:anvm_fabric_host_adaptor]\n     virtual function void free_host_mem(\nbit       addr,\n bit       len,\n anvm_data_base src);    "
+    },
+    "anvm_fabric_ctrler_adaptor": {
+        "prefix": "anvm_fabric_ctrler_adaptor",
+        "body": [
+            "anvm_fabric_ctrler_adaptor  ${0:name_class};"
+        ],
+        "description": "class anvm_fabric_ctrler_adaptor extends anvm_ctrler_adaptor_base;\n"
+    },
+    "anvm_fabric_ctrler_adaptor :: new": {
+        "prefix": [
+            "new",
+            "function:new -> anvm_fabric_ctrler_adaptor"
+        ],
+        "body": [
+            "new(${1:instance_name});"
+        ],
+        "description": "[Class:anvm_fabric_ctrler_adaptor]\n     function new(\nstring instance_name);    "
+    },
+    "anvm_fabric_ctrler_adaptor :: my_connect": {
+        "prefix": [
+            "my_connect",
+            "function:my_connect -> anvm_fabric_ctrler_adaptor"
+        ],
+        "body": [
+            "my_connect(${1:fab}, ${2:ctrler}, ${3:ctrler_id}, ${4:sub_nqn}, ${5:is_discovery});"
+        ],
+        "description": "[Class:anvm_fabric_ctrler_adaptor]\n     virtual function void my_connect(\n    anvm_fabric_fake fab,\n            anvm_controller  ctrler,\n    bit              ctrler_id,\n    anvm_nqn         sub_nqn,\n    bit              is_discovery);    "
+    },
+    "anvm_fabric_ctrler_adaptor :: post_capsule": {
+        "prefix": [
+            "post_capsule",
+            "function:post_capsule -> anvm_fabric_ctrler_adaptor"
+        ],
+        "body": [
+            "post_capsule(${1:cs});"
+        ],
+        "description": "[Class:anvm_fabric_ctrler_adaptor]\n     virtual function void post_capsule(\nanvm_capsule cs);    "
+    },
+    "anvm_fabric_ctrler_adaptor :: wait_rx_capsule": {
+        "prefix": [
+            "wait_rx_capsule",
+            "task:wait_rx_capsule -> anvm_fabric_ctrler_adaptor"
+        ],
+        "body": [
+            "wait_rx_capsule(${1:cs});"
+        ],
+        "description": "[Class:anvm_fabric_ctrler_adaptor]\n     virtual task wait_rx_capsule(\noutput anvm_capsule cs);    "
+    },
+    "anvm_fabric_ctrler_adaptor :: write_mem": {
+        "prefix": [
+            "write_mem",
+            "task:write_mem -> anvm_fabric_ctrler_adaptor"
+        ],
+        "body": [
+            "write_mem(${1:addr}, ${2:v}, ${3:be});"
+        ],
+        "description": "[Class:anvm_fabric_ctrler_adaptor]\n     virtual task write_mem(\nbit       addr,\n bit       v,\n bit       be);    "
+    },
+    "anvm_fabric_ctrler_adaptor :: read_mem": {
+        "prefix": [
+            "read_mem",
+            "task:read_mem -> anvm_fabric_ctrler_adaptor"
+        ],
+        "body": [
+            "read_mem(${1:addr}, ${2:v}, ${3:err});"
+        ],
+        "description": "[Class:anvm_fabric_ctrler_adaptor]\n     virtual task read_mem(\nbit       addr,\n output bit       v,\n output bit err);    "
+    },
+    "anvm_fabric_ctrler_adaptor :: write_mem_array": {
+        "prefix": [
+            "write_mem_array",
+            "task:write_mem_array -> anvm_fabric_ctrler_adaptor"
+        ],
+        "body": [
+            "write_mem_array(${1:addr}, ${2:va}, ${3:fbe}, ${4:lbe}, ${5:dbg});"
+        ],
+        "description": "[Class:anvm_fabric_ctrler_adaptor]\n     virtual task write_mem_array(\nbit       addr,\n ref bit       va      ,\n input bit       fbe,\n bit       lbe,\n string dbg=\"\");    "
+    },
+    "anvm_fabric_ctrler_adaptor :: read_mem_array": {
+        "prefix": [
+            "read_mem_array",
+            "task:read_mem_array -> anvm_fabric_ctrler_adaptor"
+        ],
+        "body": [
+            "read_mem_array(${1:addr}, ${2:num_dwords}, ${3:va}, ${4:err});"
+        ],
+        "description": "[Class:anvm_fabric_ctrler_adaptor]\n     virtual task read_mem_array(\nbit       addr,\n int num_dwords,\n output bit       va      ,\n output bit err);    "
+    },
+    "anvm_fabric_ctrler_adaptor :: reset": {
+        "prefix": [
+            "reset",
+            "task:reset -> anvm_fabric_ctrler_adaptor"
+        ],
+        "body": [
+            "reset(${0:});"
+        ],
+        "description": "[Class:anvm_fabric_ctrler_adaptor]\n     virtual task reset(\n);    "
+    },
+    "anvm_fabric_ctrler_adaptor :: wait_pcie_event": {
+        "prefix": [
+            "wait_pcie_event",
+            "task:wait_pcie_event -> anvm_fabric_ctrler_adaptor"
+        ],
+        "body": [
+            "wait_pcie_event(${1:entry});"
+        ],
+        "description": "[Class:anvm_fabric_ctrler_adaptor]\n     virtual task wait_pcie_event(\nstring entry);    "
+    },
+    "test_summary_register": {
+        "prefix": [
+            "test_summary_register",
+            "function:test_summary_register"
+        ],
+        "body": [
+            "test_summary_register(${1:c});"
+        ],
+        "description": "function void test_summary_register(\nanvm_component c);    "
+    },
+    "test_summary": {
+        "prefix": [
+            "test_summary",
+            "task:test_summary"
+        ],
+        "body": [
+            "test_summary(${1:s});"
+        ],
+        "description": "task test_summary(\n string s = \"UNKNOWN\");    "
+    },
+    "anvm_test_severity_register": {
+        "prefix": [
+            "anvm_test_severity_register",
+            "function:anvm_test_severity_register"
+        ],
+        "body": [
+            "anvm_test_severity_register(${1:l});"
+        ],
+        "description": "function void anvm_test_severity_register(\nanvm_log l);    "
+    },
+    "anvm_test_set_severity": {
+        "prefix": [
+            "anvm_test_set_severity",
+            "function:anvm_test_set_severity"
+        ],
+        "body": [
+            "anvm_test_set_severity(${1:id}, ${2:v});"
+        ],
+        "description": "function void anvm_test_set_severity(\nstring id,\n anvm_severity v);    "
+    },
+    "anvm_test_report_register": {
+        "prefix": [
+            "anvm_test_report_register",
+            "function:anvm_test_report_register"
+        ],
+        "body": [
+            "anvm_test_report_register(${1:b});"
+        ],
+        "description": "function void anvm_test_report_register(\nanvm_driver_base b);    "
+    },
+    "anvm_seq_report_register": {
+        "prefix": [
+            "anvm_seq_report_register",
+            "function:anvm_seq_report_register"
+        ],
+        "body": [
+            "anvm_seq_report_register(${1:b});"
+        ],
+        "description": "function void anvm_seq_report_register(\nanvm_seq_common b);    "
+    },
+    "anvm_test_report": {
+        "prefix": [
+            "anvm_test_report",
+            "task:anvm_test_report"
+        ],
+        "body": [
+            "anvm_test_report(${0:});"
+        ],
+        "description": "task anvm_test_report(\n);    "
+    },
+    "anvm_test_select": {
+        "prefix": [
+            "anvm_test_select",
+            "task:anvm_test_select"
+        ],
+        "body": [
+            "anvm_test_select(${1:test_name});"
+        ],
+        "description": "task automatic anvm_test_select(\n string test_name = \"\");    "
+    },
+    "anvm_test_select_check": {
+        "prefix": [
+            "anvm_test_select_check",
+            "task:anvm_test_select_check"
+        ],
+        "body": [
+            "anvm_test_select_check(${0:});"
+        ],
+        "description": "task anvm_test_select_check(\n);    "
+    },
+    "anvm_seq_common": {
+        "prefix": "anvm_seq_common",
+        "body": [
+            "anvm_seq_common  ${0:name_class};"
+        ],
+        "description": "class anvm_seq_common extends anvm_seq_base;\n"
+    },
+    "anvm_seq_common :: new": {
+        "prefix": [
+            "new",
+            "function:new -> anvm_seq_common"
+        ],
+        "body": [
+            "new(${1:bfm}, ${2:target}, ${3:scope});"
+        ],
+        "description": "[Class:anvm_seq_common]\n     function new (\nanvm_driver_base bfm = null,\n   anvm_driver_base target = null,\n   string scope = \"\");    "
+    },
+    "anvm_seq_common :: copy": {
+        "prefix": [
+            "copy",
+            "function:copy -> anvm_seq_common"
+        ],
+        "body": [
+            "copy(${1:to});"
+        ],
+        "description": "[Class:anvm_seq_common]\n     function anvm_seq_common copy (\nanvm_seq_common to = null);    "
+    },
+    "anvm_seq_common :: run": {
+        "prefix": [
+            "run",
+            "task:run -> anvm_seq_common"
+        ],
+        "body": [
+            "run(${0:});"
+        ],
+        "description": "[Class:anvm_seq_common]\n     virtual task run(\n);    "
+    },
+    "anvm_seq_common :: before_run": {
+        "prefix": [
+            "before_run",
+            "task:before_run -> anvm_seq_common"
+        ],
+        "body": [
+            "before_run(${0:});"
+        ],
+        "description": "[Class:anvm_seq_common]\n     virtual task before_run(\n);    "
+    },
+    "anvm_seq_common :: run_body": {
+        "prefix": [
+            "run_body",
+            "task:run_body -> anvm_seq_common"
+        ],
+        "body": [
+            "run_body(${0:});"
+        ],
+        "description": "[Class:anvm_seq_common]\n     virtual task run_body(\n);    "
+    },
+    "anvm_seq_common :: end_messages": {
+        "prefix": [
+            "end_messages",
+            "function:end_messages -> anvm_seq_common"
+        ],
+        "body": [
+            "end_messages(${1:s});"
+        ],
+        "description": "[Class:anvm_seq_common]\n     virtual function void end_messages(\noutput string s);    "
+    },
+    "anvm_seq_common :: after_run": {
+        "prefix": [
+            "after_run",
+            "task:after_run -> anvm_seq_common"
+        ],
+        "body": [
+            "after_run(${0:});"
+        ],
+        "description": "[Class:anvm_seq_common]\n     virtual task after_run(\n);    "
+    },
+    "anvm_seq_common :: seq_info": {
+        "prefix": [
+            "seq_info",
+            "function:seq_info -> anvm_seq_common"
+        ],
+        "body": [
+            "seq_info(${1:s});"
+        ],
+        "description": "[Class:anvm_seq_common]\n     function void seq_info(\nstring s);    "
+    },
+    "anvm_seq_common :: seq_error": {
+        "prefix": [
+            "seq_error",
+            "function:seq_error -> anvm_seq_common"
+        ],
+        "body": [
+            "seq_error(${1:s});"
+        ],
+        "description": "[Class:anvm_seq_common]\n     function void seq_error(\nstring s);    "
+    },
+    "anvm_seq_common :: seq_debug": {
+        "prefix": [
+            "seq_debug",
+            "function:seq_debug -> anvm_seq_common"
+        ],
+        "body": [
+            "seq_debug(${1:s});"
+        ],
+        "description": "[Class:anvm_seq_common]\n     function void seq_debug(\nstring s);    "
+    },
+    "anvm_seq_common :: seq_warn": {
+        "prefix": [
+            "seq_warn",
+            "function:seq_warn -> anvm_seq_common"
+        ],
+        "body": [
+            "seq_warn(${1:s});"
+        ],
+        "description": "[Class:anvm_seq_common]\n     function void seq_warn(\nstring s);    "
+    },
+    "anvm_seq_common :: seq_usage": {
+        "prefix": [
+            "seq_usage",
+            "function:seq_usage -> anvm_seq_common"
+        ],
+        "body": [
+            "seq_usage(${1:s});"
+        ],
+        "description": "[Class:anvm_seq_common]\n     function void seq_usage(\nstring s);    "
+    },
+    "anvm_seq_common :: seq_print_history": {
+        "prefix": [
+            "seq_print_history",
+            "function:seq_print_history -> anvm_seq_common"
+        ],
+        "body": [
+            "seq_print_history(${0:});"
+        ],
+        "description": "[Class:anvm_seq_common]\n     function void seq_print_history(\n);    "
+    },
+    "anvm_testcase_base": {
+        "prefix": "anvm_testcase_base",
+        "body": [
+            "anvm_testcase_base  ${0:name_class};"
+        ],
+        "description": "class anvm_testcase_base;\n"
+    },
+    "anvm_testcase_base :: new": {
+        "prefix": [
+            "new",
+            "function:new -> anvm_testcase_base"
+        ],
+        "body": [
+            "new(${1:test_name});"
+        ],
+        "description": "[Class:anvm_testcase_base]\n     function new(\nstring test_name);    "
+    },
+    "anvm_testcase_base :: add_host": {
+        "prefix": [
+            "add_host",
+            "function:add_host -> anvm_testcase_base"
+        ],
+        "body": [
+            "add_host(${1:h});"
+        ],
+        "description": "[Class:anvm_testcase_base]\n     function void add_host(\nanvm_host_software h);    "
+    },
+    "anvm_testcase_base :: add_controller0": {
+        "prefix": [
+            "add_controller0",
+            "function:add_controller0 -> anvm_testcase_base"
+        ],
+        "body": [
+            "add_controller0(${1:c});"
+        ],
+        "description": "[Class:anvm_testcase_base]\n     function void add_controller0(\nanvm_controller c);    "
+    },
+    "anvm_testcase_base :: add_controller1": {
+        "prefix": [
+            "add_controller1",
+            "function:add_controller1 -> anvm_testcase_base"
+        ],
+        "body": [
+            "add_controller1(${1:c});"
+        ],
+        "description": "[Class:anvm_testcase_base]\n     function void add_controller1(\nanvm_controller c);    "
+    },
+    "anvm_testcase_base :: add_controller": {
+        "prefix": [
+            "add_controller",
+            "function:add_controller -> anvm_testcase_base"
+        ],
+        "body": [
+            "add_controller(${1:c});"
+        ],
+        "description": "[Class:anvm_testcase_base]\n     function void add_controller(\nanvm_controller c);    "
+    },
+    "anvm_testcase_base :: pre_bfm_started": {
+        "prefix": [
+            "pre_bfm_started",
+            "task:pre_bfm_started -> anvm_testcase_base"
+        ],
+        "body": [
+            "pre_bfm_started(${0:});"
+        ],
+        "description": "[Class:anvm_testcase_base]\n     virtual task pre_bfm_started(\n);    "
+    },
+    "anvm_testcase_base :: run": {
+        "prefix": [
+            "run",
+            "task:run -> anvm_testcase_base"
+        ],
+        "body": [
+            "run(${0:});"
+        ],
+        "description": "[Class:anvm_testcase_base]\n     virtual task run(\n);    "
+    },
+    "anvm_testcase_base :: wait_ctrlers0": {
+        "prefix": [
+            "wait_ctrlers0",
+            "task:wait_ctrlers0 -> anvm_testcase_base"
+        ],
+        "body": [
+            "wait_ctrlers0(${1:configured}, ${2:how_many});"
+        ],
+        "description": "[Class:anvm_testcase_base]\n     virtual task wait_ctrlers0(\nbit configured = 0,\n                          int how_many = 0);    "
+    },
+    "anvm_testcase_base :: wait_ctrlers1": {
+        "prefix": [
+            "wait_ctrlers1",
+            "task:wait_ctrlers1 -> anvm_testcase_base"
+        ],
+        "body": [
+            "wait_ctrlers1(${1:configured}, ${2:how_many});"
+        ],
+        "description": "[Class:anvm_testcase_base]\n     virtual task wait_ctrlers1(\nbit configured = 0,\n                          int how_many = 0);    "
+    },
+    "anvm_testcase_base :: wait_ctrlers": {
+        "prefix": [
+            "wait_ctrlers",
+            "task:wait_ctrlers -> anvm_testcase_base"
+        ],
+        "body": [
+            "wait_ctrlers(${1:configured}, ${2:how_many});"
+        ],
+        "description": "[Class:anvm_testcase_base]\n     virtual task wait_ctrlers(\nbit configured = 0,\n                          int how_many = 0);    "
+    },
+    "anvm_testcase_base :: test_body": {
+        "prefix": [
+            "test_body",
+            "task:test_body -> anvm_testcase_base"
+        ],
+        "body": [
+            "test_body(${0:});"
+        ],
+        "description": "[Class:anvm_testcase_base]\n     virtual task test_body(\n);    "
+    },
+    "anvm_testcase_base :: collect_coverage": {
+        "prefix": [
+            "collect_coverage",
+            "task:collect_coverage -> anvm_testcase_base"
+        ],
+        "body": [
+            "collect_coverage(${0:});"
+        ],
+        "description": "[Class:anvm_testcase_base]\n     virtual task collect_coverage(\n);    "
+    },
+    "anvm_testcase_base :: wrapup": {
+        "prefix": [
+            "wrapup",
+            "task:wrapup -> anvm_testcase_base"
+        ],
+        "body": [
+            "wrapup(${0:});"
+        ],
+        "description": "[Class:anvm_testcase_base]\n     virtual task wrapup(\n);    "
+    },
+    "anvm_testcase_base :: find_controller_bfm0": {
+        "prefix": [
+            "find_controller_bfm0",
+            "function:find_controller_bfm0 -> anvm_testcase_base"
+        ],
+        "body": [
+            "find_controller_bfm0(${1:ctrler_id});"
+        ],
+        "description": "[Class:anvm_testcase_base]\n     virtual function anvm_controller find_controller_bfm0(\nint ctrler_id);    "
+    },
+    "anvm_testcase_base :: find_controller_bfm1": {
+        "prefix": [
+            "find_controller_bfm1",
+            "function:find_controller_bfm1 -> anvm_testcase_base"
+        ],
+        "body": [
+            "find_controller_bfm1(${1:ctrler_id});"
+        ],
+        "description": "[Class:anvm_testcase_base]\n     virtual function anvm_controller find_controller_bfm1(\nint ctrler_id);    "
+    },
+    "anvm_testcase_base :: find_controller_bfm": {
+        "prefix": [
+            "find_controller_bfm",
+            "function:find_controller_bfm -> anvm_testcase_base"
+        ],
+        "body": [
+            "find_controller_bfm(${1:ctrler_id});"
+        ],
+        "description": "[Class:anvm_testcase_base]\n     virtual function anvm_controller find_controller_bfm(\nint ctrler_id);    "
+    },
+    "anvm_coverage": {
+        "prefix": "anvm_coverage",
+        "body": [
+            "anvm_coverage  ${0:name_class};"
+        ],
+        "description": "class anvm_coverage extends anvm_data_base;\n"
+    },
+    "anvm_coverage :: new": {
+        "prefix": [
+            "new",
+            "function:new -> anvm_coverage"
+        ],
+        "body": [
+            "new(${1:name});"
+        ],
+        "description": "[Class:anvm_coverage]\n     function new(\nstring name = \"anvm_coverage\");    "
+    },
+    "anvm_coverage :: sample_cmd": {
+        "prefix": [
+            "sample_cmd",
+            "function:sample_cmd -> anvm_coverage"
+        ],
+        "body": [
+            "sample_cmd(${1:cmd});"
+        ],
+        "description": "[Class:anvm_coverage]\n     virtual function void sample_cmd(\nanvm_cmd_entry cmd);    "
+    },
+    "anvm_coverage :: sample_cpl": {
+        "prefix": [
+            "sample_cpl",
+            "function:sample_cpl -> anvm_coverage"
+        ],
+        "body": [
+            "sample_cpl(${1:cpl});"
+        ],
+        "description": "[Class:anvm_coverage]\n     virtual function void sample_cpl(\nanvm_cpl_entry cpl);    "
+    },
+    "anvm_coverage :: sample_ctrler_struct": {
+        "prefix": [
+            "sample_ctrler_struct",
+            "function:sample_ctrler_struct -> anvm_coverage"
+        ],
+        "body": [
+            "sample_ctrler_struct(${1:ct});"
+        ],
+        "description": "[Class:anvm_coverage]\n     virtual function void sample_ctrler_struct(\nanvm_istruct_ct ct);    "
+    },
+    "anvm_coverage :: sample_namespace_struct": {
+        "prefix": [
+            "sample_namespace_struct",
+            "function:sample_namespace_struct -> anvm_coverage"
+        ],
+        "body": [
+            "sample_namespace_struct(${1:ns});"
+        ],
+        "description": "[Class:anvm_coverage]\n     virtual function void sample_namespace_struct(\nanvm_istruct_ns ns);    "
+    },
+    "anvm_fabric_ctrler_adaptor_fake": {
+        "prefix": "anvm_fabric_ctrler_adaptor_fake",
+        "body": [
+            "anvm_fabric_ctrler_adaptor_fake  ${0:name_class};"
+        ],
+        "description": "class anvm_fabric_ctrler_adaptor_fake extends anvm_fabric_ctrler_adaptor;\n"
+    },
+    "anvm_fabric_ctrler_adaptor_fake :: new": {
+        "prefix": [
+            "new",
+            "function:new -> anvm_fabric_ctrler_adaptor_fake"
+        ],
+        "body": [
+            "new(${1:instance_name});"
+        ],
+        "description": "[Class:anvm_fabric_ctrler_adaptor_fake]\n     function new(\nstring instance_name);    "
+    },
+    "anvm_fabric_ctrler_adaptor_fake :: my_connect": {
+        "prefix": [
+            "my_connect",
+            "function:my_connect -> anvm_fabric_ctrler_adaptor_fake"
+        ],
+        "body": [
+            "my_connect(${1:fab}, ${2:ctrler}, ${3:ctrler_id}, ${4:sub_nqn}, ${5:is_discovery});"
+        ],
+        "description": "[Class:anvm_fabric_ctrler_adaptor_fake]\n     virtual function void my_connect(\n    anvm_fabric_fake fab,\n            anvm_controller  ctrler,\n    bit              ctrler_id,\n    anvm_nqn         sub_nqn,\n    bit              is_discovery);    "
+    },
+    "anvm_fabric_ctrler_adaptor_fake :: set_nvme_cap": {
+        "prefix": [
+            "set_nvme_cap",
+            "function:set_nvme_cap -> anvm_fabric_ctrler_adaptor_fake"
+        ],
+        "body": [
+            "set_nvme_cap(${1:nvme_cap});"
+        ],
+        "description": "[Class:anvm_fabric_ctrler_adaptor_fake]\n     virtual function void set_nvme_cap(\nanvm_ctrler_registers nvme_cap);    "
+    },
+    "anvm_fabric_ctrler_adaptor_fake :: post_capsule": {
+        "prefix": [
+            "post_capsule",
+            "function:post_capsule -> anvm_fabric_ctrler_adaptor_fake"
+        ],
+        "body": [
+            "post_capsule(${1:cs});"
+        ],
+        "description": "[Class:anvm_fabric_ctrler_adaptor_fake]\n     virtual function void post_capsule(\nanvm_capsule cs);    "
+    },
+    "anvm_fabric_ctrler_adaptor_fake :: wait_rx_capsule": {
+        "prefix": [
+            "wait_rx_capsule",
+            "task:wait_rx_capsule -> anvm_fabric_ctrler_adaptor_fake"
+        ],
+        "body": [
+            "wait_rx_capsule(${1:cs});"
+        ],
+        "description": "[Class:anvm_fabric_ctrler_adaptor_fake]\n     virtual task wait_rx_capsule(\noutput anvm_capsule cs);    "
+    },
+    "anvm_fabric_ctrler_adaptor_fake :: wait_pcie_event": {
+        "prefix": [
+            "wait_pcie_event",
+            "task:wait_pcie_event -> anvm_fabric_ctrler_adaptor_fake"
+        ],
+        "body": [
+            "wait_pcie_event(${1:entry});"
+        ],
+        "description": "[Class:anvm_fabric_ctrler_adaptor_fake]\n     virtual task wait_pcie_event(\nstring entry);                                                                                                                                                                        "
+    },
+    "anvm_fabric_ctrler_adaptor_fake :: write_mem": {
+        "prefix": [
+            "write_mem",
+            "task:write_mem -> anvm_fabric_ctrler_adaptor_fake"
+        ],
+        "body": [
+            "write_mem(${1:addr}, ${2:v}, ${3:be});"
+        ],
+        "description": "[Class:anvm_fabric_ctrler_adaptor_fake]\n     virtual task write_mem(\nbit       addr,\n bit       v,\n bit       be);    "
+    },
+    "anvm_fabric_ctrler_adaptor_fake :: read_mem": {
+        "prefix": [
+            "read_mem",
+            "task:read_mem -> anvm_fabric_ctrler_adaptor_fake"
+        ],
+        "body": [
+            "read_mem(${1:addr}, ${2:v}, ${3:err});"
+        ],
+        "description": "[Class:anvm_fabric_ctrler_adaptor_fake]\n     virtual task read_mem(\nbit       addr,\n output bit       v,\n output bit err);    "
+    },
+    "anvm_fabric_ctrler_adaptor_fake :: write_mem_array": {
+        "prefix": [
+            "write_mem_array",
+            "task:write_mem_array -> anvm_fabric_ctrler_adaptor_fake"
+        ],
+        "body": [
+            "write_mem_array(${1:addr}, ${2:va}, ${3:fbe}, ${4:lbe}, ${5:dbg});"
+        ],
+        "description": "[Class:anvm_fabric_ctrler_adaptor_fake]\n     virtual task write_mem_array(\nbit       addr,\n ref bit       va      ,\n input bit       fbe,\n bit       lbe,\n string dbg=\"\");    "
+    },
+    "anvm_fabric_ctrler_adaptor_fake :: read_mem_array": {
+        "prefix": [
+            "read_mem_array",
+            "task:read_mem_array -> anvm_fabric_ctrler_adaptor_fake"
+        ],
+        "body": [
+            "read_mem_array(${1:addr}, ${2:num_dwords}, ${3:va}, ${4:err});"
+        ],
+        "description": "[Class:anvm_fabric_ctrler_adaptor_fake]\n     virtual task read_mem_array(\nbit       addr,\n int num_dwords,\n output bit       va      ,\n output bit err);    "
+    },
+    "anvm_fabric_ctrler_adaptor_fake :: check_dword_aligned": {
+        "prefix": [
+            "check_dword_aligned",
+            "function:check_dword_aligned -> anvm_fabric_ctrler_adaptor_fake"
+        ],
+        "body": [
+            "check_dword_aligned(${1:s}, ${2:addr});"
+        ],
+        "description": "[Class:anvm_fabric_ctrler_adaptor_fake]\n     local function void check_dword_aligned(\nstring s,\n bit       addr);    "
+    },
+    "anvm_fabric_ctrler_adaptor_fake :: reset": {
+        "prefix": [
+            "reset",
+            "task:reset -> anvm_fabric_ctrler_adaptor_fake"
+        ],
+        "body": [
+            "reset(${0:});"
+        ],
+        "description": "[Class:anvm_fabric_ctrler_adaptor_fake]\n     virtual task reset(\n);    "
+    },
+    "anvm_ctrler_callbacks": {
+        "prefix": "anvm_ctrler_callbacks",
+        "body": [
+            "anvm_ctrler_callbacks  ${0:name_class};"
+        ],
+        "description": "virtual class anvm_ctrler_callbacks;\n"
+    },
+    "anvm_ctrler_callbacks :: after_created_capability": {
+        "prefix": [
+            "after_created_capability",
+            "function:after_created_capability -> anvm_ctrler_callbacks"
+        ],
+        "body": [
+            "after_created_capability(${1:bfm}, ${2:nvme_cap});"
+        ],
+        "description": "[Class:anvm_ctrler_callbacks]\n     virtual function void after_created_capability(\n    anvm_controller       bfm,\n    anvm_ctrler_registers nvme_cap);return;    "
+    },
+    "anvm_ctrler_callbacks :: after_created_identify_ctrler": {
+        "prefix": [
+            "after_created_identify_ctrler",
+            "function:after_created_identify_ctrler -> anvm_ctrler_callbacks"
+        ],
+        "body": [
+            "after_created_identify_ctrler(${1:bfm}, ${2:ctrler_struct});"
+        ],
+        "description": "[Class:anvm_ctrler_callbacks]\n     virtual function void after_created_identify_ctrler(\n    anvm_controller     bfm,\n    anvm_istruct_ct     ctrler_struct);return;    "
+    },
+    "anvm_ctrler_callbacks :: after_created_identify_namespace": {
+        "prefix": [
+            "after_created_identify_namespace",
+            "function:after_created_identify_namespace -> anvm_ctrler_callbacks"
+        ],
+        "body": [
+            "after_created_identify_namespace(${1:bfm}, ${2:ns_structs});"
+        ],
+        "description": "[Class:anvm_ctrler_callbacks]\n     virtual function void after_created_identify_namespace(\n    anvm_controller     bfm,\n    ref anvm_istruct_ns ns_structs      );return;    "
+    },
+    "anvm_ctrler_callbacks :: after_created_identify_namespace_csi0": {
+        "prefix": [
+            "after_created_identify_namespace_csi0",
+            "function:after_created_identify_namespace_csi0 -> anvm_ctrler_callbacks"
+        ],
+        "body": [
+            "after_created_identify_namespace_csi0(${1:bfm}, ${2:ns_csi0_structs});"
+        ],
+        "description": "[Class:anvm_ctrler_callbacks]\n     virtual function void after_created_identify_namespace_csi0(\n    anvm_controller          bfm,\n    ref anvm_istruct_ns_csi0 ns_csi0_structs      );return;    "
+    },
+    "anvm_ctrler_callbacks :: after_created_identify_namespace_csi1": {
+        "prefix": [
+            "after_created_identify_namespace_csi1",
+            "function:after_created_identify_namespace_csi1 -> anvm_ctrler_callbacks"
+        ],
+        "body": [
+            "after_created_identify_namespace_csi1(${1:bfm}, ${2:ns_csi1_structs});"
+        ],
+        "description": "[Class:anvm_ctrler_callbacks]\n     virtual function void after_created_identify_namespace_csi1(\n    anvm_controller          bfm,\n    ref anvm_istruct_ns_csi1 ns_csi1_structs      );return;    "
+    },
+    "anvm_ctrler_callbacks :: after_created_identify_namespace_csi2": {
+        "prefix": [
+            "after_created_identify_namespace_csi2",
+            "function:after_created_identify_namespace_csi2 -> anvm_ctrler_callbacks"
+        ],
+        "body": [
+            "after_created_identify_namespace_csi2(${1:bfm}, ${2:ns_csi2_structs});"
+        ],
+        "description": "[Class:anvm_ctrler_callbacks]\n     virtual function void after_created_identify_namespace_csi2(\n    anvm_controller          bfm,\n    ref anvm_istruct_ns_csi2 ns_csi2_structs      );return;    "
+    },
+    "anvm_ctrler_callbacks :: after_created_zone_report": {
+        "prefix": [
+            "after_created_zone_report",
+            "function:after_created_zone_report -> anvm_ctrler_callbacks"
+        ],
+        "body": [
+            "after_created_zone_report(${1:bfm}, ${2:zone_report});"
+        ],
+        "description": "[Class:anvm_ctrler_callbacks]\n     virtual function void after_created_zone_report(\n    anvm_controller          bfm,\n    ref anvm_report_zone_data zone_report      );return;    "
+    },
+    "anvm_ctrler_callbacks :: after_created_oc_geo_st": {
+        "prefix": [
+            "after_created_oc_geo_st",
+            "function:after_created_oc_geo_st -> anvm_ctrler_callbacks"
+        ],
+        "body": [
+            "after_created_oc_geo_st(${1:bfm}, ${2:geo_st});"
+        ],
+        "description": "[Class:anvm_ctrler_callbacks]\n     virtual function void after_created_oc_geo_st(\n    anvm_controller          bfm,\n    ref anvm_oc_st_geometry geo_st      );return;    "
+    },
+    "anvm_ctrler_callbacks :: after_created_features": {
+        "prefix": [
+            "after_created_features",
+            "function:after_created_features -> anvm_ctrler_callbacks"
+        ],
+        "body": [
+            "after_created_features(${1:bfm}, ${2:features});"
+        ],
+        "description": "[Class:anvm_ctrler_callbacks]\n     virtual function void after_created_features(\n    anvm_controller     bfm,\n    ref anvm_ctrler_features features);return;    "
+    },
+    "anvm_ctrler_callbacks :: after_created_subsys_stream": {
+        "prefix": [
+            "after_created_subsys_stream",
+            "function:after_created_subsys_stream -> anvm_ctrler_callbacks"
+        ],
+        "body": [
+            "after_created_subsys_stream(${1:bfm}, ${2:subsys_stream_param});"
+        ],
+        "description": "[Class:anvm_ctrler_callbacks]\n     virtual function void after_created_subsys_stream(\n    anvm_controller     bfm,\n    ref anvm_directive_param_stream subsys_stream_param);return;    "
+    },
+    "anvm_ctrler_callbacks :: after_created_identify_pcc": {
+        "prefix": [
+            "after_created_identify_pcc",
+            "function:after_created_identify_pcc -> anvm_ctrler_callbacks"
+        ],
+        "body": [
+            "after_created_identify_pcc(${1:bfm}, ${2:pcc});"
+        ],
+        "description": "[Class:anvm_ctrler_callbacks]\n     virtual function void after_created_identify_pcc(\n    anvm_controller      bfm,\n    ref anvm_istruct_pcc pcc);    "
+    },
+    "anvm_ctrler_callbacks :: after_created_logpage_discovery": {
+        "prefix": [
+            "after_created_logpage_discovery",
+            "function:after_created_logpage_discovery -> anvm_ctrler_callbacks"
+        ],
+        "body": [
+            "after_created_logpage_discovery(${1:bfm}, ${2:logpage});"
+        ],
+        "description": "[Class:anvm_ctrler_callbacks]\n     virtual function void after_created_logpage_discovery(\n    anvm_controller              bfm,\n    ref anvm_logpage_discovery   logpage);return;    "
+    },
+    "anvm_ctrler_callbacks :: rx_cmd_fetched": {
+        "prefix": [
+            "rx_cmd_fetched",
+            "function:rx_cmd_fetched -> anvm_ctrler_callbacks"
+        ],
+        "body": [
+            "rx_cmd_fetched(${1:bfm}, ${2:cmd});"
+        ],
+        "description": "[Class:anvm_ctrler_callbacks]\n     virtual function void rx_cmd_fetched(\n    anvm_controller  bfm,\n    anvm_cmd_entry   cmd);return;    "
+    },
+    "anvm_ctrler_callbacks :: tx_cpl_before_sent": {
+        "prefix": [
+            "tx_cpl_before_sent",
+            "function:tx_cpl_before_sent -> anvm_ctrler_callbacks"
+        ],
+        "body": [
+            "tx_cpl_before_sent(${1:bfm}, ${2:cpl});"
+        ],
+        "description": "[Class:anvm_ctrler_callbacks]\n     virtual function void tx_cpl_before_sent(\n    anvm_controller  bfm,\n    anvm_cpl_entry   cpl );return;    "
+    },
+    "anvm_ctrler_callbacks :: rx_nvm_vendor_spec": {
+        "prefix": [
+            "rx_nvm_vendor_spec",
+            "task:rx_nvm_vendor_spec -> anvm_ctrler_callbacks"
+        ],
+        "body": [
+            "rx_nvm_vendor_spec(${1:bfm}, ${2:cmd}, ${3:cpl});"
+        ],
+        "description": "[Class:anvm_ctrler_callbacks]\n     virtual task rx_nvm_vendor_spec(\n    anvm_controller  bfm,\n    anvm_cmd_entry   cmd,\n    anvm_cpl_entry   cpl );return;    "
+    },
+    "anvm_ctrler_callbacks :: before_mem_access": {
+        "prefix": [
+            "before_mem_access",
+            "function:before_mem_access -> anvm_ctrler_callbacks"
+        ],
+        "body": [
+            "before_mem_access(${1:bfm}, ${2:mtr});"
+        ],
+        "description": "[Class:anvm_ctrler_callbacks]\n     virtual function void before_mem_access(\n    anvm_controller      bfm,\n    anvm_mem_access_tr   mtr); return;    "
+    },
+    "anvm_ctrler_callbacks :: sq_arbitration": {
+        "prefix": [
+            "sq_arbitration",
+            "function:sq_arbitration -> anvm_ctrler_callbacks"
+        ],
+        "body": [
+            "sq_arbitration(${1:bfm}, ${2:sq}, ${3:burst_size});"
+        ],
+        "description": "[Class:anvm_ctrler_callbacks]\n     virtual function void sq_arbitration(\n    anvm_controller  bfm,\n    anvm_subq        sq,\n    ref int          burst_size);  return;    "
+    },
+    "anvm_uvm_port": {
+        "prefix": "anvm_uvm_port",
+        "body": [
+            "anvm_uvm_port  ${0:name_class};"
+        ],
+        "description": "virtual class anvm_uvm_port;\n"
+    },
+    "anvm_ap_pre_setup_controller_phase0": {
+        "prefix": "anvm_ap_pre_setup_controller_phase0",
+        "body": [
+            "anvm_ap_pre_setup_controller_phase0  ${0:name_class};"
+        ],
+        "description": "class anvm_ap_pre_setup_controller_phase0 extends anvm_uvm_port;\n"
+    },
+    "anvm_ap_pre_setup_controller_phase0 :: new": {
+        "prefix": [
+            "new",
+            "function:new -> anvm_ap_pre_setup_controller_phase0"
+        ],
+        "body": [
+            "new(${1:ctrler_id});"
+        ],
+        "description": "[Class:anvm_ap_pre_setup_controller_phase0]\n     function new(\nbit       ctrler_id);    "
+    },
+    "anvm_ap_pre_setup_controller_phase1": {
+        "prefix": "anvm_ap_pre_setup_controller_phase1",
+        "body": [
+            "anvm_ap_pre_setup_controller_phase1  ${0:name_class};"
+        ],
+        "description": "class anvm_ap_pre_setup_controller_phase1 extends anvm_uvm_port;\n"
+    },
+    "anvm_ap_pre_setup_controller_phase2": {
+        "prefix": "anvm_ap_pre_setup_controller_phase2",
+        "body": [
+            "anvm_ap_pre_setup_controller_phase2  ${0:name_class};"
+        ],
+        "description": "class anvm_ap_pre_setup_controller_phase2 extends anvm_uvm_port;\n"
+    },
+    "anvm_ap_tx_cmd_arbitrated": {
+        "prefix": "anvm_ap_tx_cmd_arbitrated",
+        "body": [
+            "anvm_ap_tx_cmd_arbitrated  ${0:name_class};"
+        ],
+        "description": "class anvm_ap_tx_cmd_arbitrated extends anvm_uvm_port;\n"
+    },
+    "anvm_ap_tx_cmd_before_pack": {
+        "prefix": "anvm_ap_tx_cmd_before_pack",
+        "body": [
+            "anvm_ap_tx_cmd_before_pack  ${0:name_class};"
+        ],
+        "description": "class anvm_ap_tx_cmd_before_pack extends anvm_uvm_port;\n"
+    },
+    "anvm_ap_tx_cmd_after_pack": {
+        "prefix": "anvm_ap_tx_cmd_after_pack",
+        "body": [
+            "anvm_ap_tx_cmd_after_pack  ${0:name_class};"
+        ],
+        "description": "class anvm_ap_tx_cmd_after_pack extends anvm_uvm_port;\n"
+    },
+    "anvm_ap_rx_cpl_enter_hsw": {
+        "prefix": "anvm_ap_rx_cpl_enter_hsw",
+        "body": [
+            "anvm_ap_rx_cpl_enter_hsw  ${0:name_class};"
+        ],
+        "description": "class anvm_ap_rx_cpl_enter_hsw extends anvm_uvm_port;\n"
+    },
+    "anvm_ap_tx_cmd_done": {
+        "prefix": "anvm_ap_tx_cmd_done",
+        "body": [
+            "anvm_ap_tx_cmd_done  ${0:name_class};"
+        ],
+        "description": "class anvm_ap_tx_cmd_done extends anvm_uvm_port;\n"
+    },
+    "anvm_ap_pre_ring_sq_doorbell": {
+        "prefix": "anvm_ap_pre_ring_sq_doorbell",
+        "body": [
+            "anvm_ap_pre_ring_sq_doorbell  ${0:name_class};"
+        ],
+        "description": "class anvm_ap_pre_ring_sq_doorbell extends anvm_uvm_port;\n"
+    },
+    "anvm_ap_pre_ring_cq_doorbell": {
+        "prefix": "anvm_ap_pre_ring_cq_doorbell",
+        "body": [
+            "anvm_ap_pre_ring_cq_doorbell  ${0:name_class};"
+        ],
+        "description": "class anvm_ap_pre_ring_cq_doorbell extends anvm_uvm_port;\n"
+    },
+    "anvm_ap_after_ring_sq_doorbell": {
+        "prefix": "anvm_ap_after_ring_sq_doorbell",
+        "body": [
+            "anvm_ap_after_ring_sq_doorbell  ${0:name_class};"
+        ],
+        "description": "class anvm_ap_after_ring_sq_doorbell extends anvm_uvm_port;\n"
+    },
+    "anvm_ap_after_ring_cq_doorbell": {
+        "prefix": "anvm_ap_after_ring_cq_doorbell",
+        "body": [
+            "anvm_ap_after_ring_cq_doorbell  ${0:name_class};"
+        ],
+        "description": "class anvm_ap_after_ring_cq_doorbell extends anvm_uvm_port;\n"
+    },
+    "anvm_ap_post_read_nvme_cap": {
+        "prefix": "anvm_ap_post_read_nvme_cap",
+        "body": [
+            "anvm_ap_post_read_nvme_cap  ${0:name_class};"
+        ],
+        "description": "class anvm_ap_post_read_nvme_cap extends anvm_uvm_port;\n"
+    },
+    "anvm_controller_agent": {
+        "prefix": "anvm_controller_agent",
+        "body": [
+            "anvm_controller_agent  ${0:name_class};"
+        ],
+        "description": "class anvm_controller_agent extends uvm_agent;\n"
+    },
+    "anvm_controller_agent :: new": {
+        "prefix": [
+            "new",
+            "function:new -> anvm_controller_agent"
+        ],
+        "body": [
+            "new(${1:name}, ${2:parent});"
+        ],
+        "description": "[Class:anvm_controller_agent]\n     function new(\nstring name = \"anvm_controller_agent\",\n uvm_component parent = null);    "
+    },
+    "anvm_controller_agent :: build_phase": {
+        "prefix": [
+            "build_phase",
+            "function:build_phase -> anvm_controller_agent"
+        ],
+        "body": [
+            "build_phase(${1:phase});"
+        ],
+        "description": "[Class:anvm_controller_agent]\n     virtual function void build_phase(\nuvm_phase phase);    "
+    },
+    "anvm_controller_agent :: connect_phase": {
+        "prefix": [
+            "connect_phase",
+            "function:connect_phase -> anvm_controller_agent"
+        ],
+        "body": [
+            "connect_phase(${1:phase});"
+        ],
+        "description": "[Class:anvm_controller_agent]\n     virtual function void connect_phase(\nuvm_phase phase);    "
+    },
+    "anvm_host_adaptor": {
+        "prefix": "anvm_host_adaptor",
+        "body": [
+            "anvm_host_adaptor  ${0:name_class};"
+        ],
+        "description": "class anvm_host_adaptor extends anvm_host_adaptor_base;\n"
+    },
+    "anvm_host_adaptor :: new": {
+        "prefix": [
+            "new",
+            "function:new -> anvm_host_adaptor"
+        ],
+        "body": [
+            "new(${1:instance_name});"
+        ],
+        "description": "[Class:anvm_host_adaptor]\n     function new(\nstring instance_name);    "
+    },
+    "anvm_host_adaptor :: my_connect": {
+        "prefix": [
+            "my_connect",
+            "function:my_connect -> anvm_host_adaptor"
+        ],
+        "body": [
+            "my_connect(${1:fake_rc}, ${2:hsw});"
+        ],
+        "description": "[Class:anvm_host_adaptor]\n     function void my_connect(\nanvm_pcie_fake fake_rc,\n anvm_host_software hsw);    "
+    },
+    "anvm_host_adaptor :: wait_host_ready": {
+        "prefix": [
+            "wait_host_ready",
+            "task:wait_host_ready -> anvm_host_adaptor"
+        ],
+        "body": [
+            "wait_host_ready(${1:ctrler_ids});"
+        ],
+        "description": "[Class:anvm_host_adaptor]\n     virtual task wait_host_ready(\noutput bit       ctrler_ids      );    "
+    },
+    "anvm_host_adaptor :: get_pcie_ranges": {
+        "prefix": [
+            "get_pcie_ranges",
+            "function:get_pcie_ranges -> anvm_host_adaptor"
+        ],
+        "body": [
+            "get_pcie_ranges(${1:base}, ${2:limit});"
+        ],
+        "description": "[Class:anvm_host_adaptor]\n     function void get_pcie_ranges(\n output bit       base      ,\n    output bit       limit      );    "
+    },
+    "anvm_host_adaptor :: get_host_memory_size": {
+        "prefix": [
+            "get_host_memory_size",
+            "function:get_host_memory_size -> anvm_host_adaptor"
+        ],
+        "body": [
+            "get_host_memory_size(${0:});"
+        ],
+        "description": "[Class:anvm_host_adaptor]\n     function bit       get_host_memory_size(\n);    "
+    },
+    "anvm_host_adaptor :: get_pcie_bar": {
+        "prefix": [
+            "get_pcie_bar",
+            "function:get_pcie_bar -> anvm_host_adaptor"
+        ],
+        "body": [
+            "get_pcie_bar(${1:ctrler_id}, ${2:bar_id}, ${3:base}, ${4:limit}, ${5:prefetchable});"
+        ],
+        "description": "[Class:anvm_host_adaptor]\n     virtual function void get_pcie_bar(\n input  int       ctrler_id   ,\n                                        input  int       bar_id      ,\n                                        output avery_u64 base        ,\n                                        output avery_u64 limit       ,\n                                        output bit       prefetchable );    "
+    },
+    "anvm_host_adaptor :: write_dword": {
+        "prefix": [
+            "write_dword",
+            "task:write_dword -> anvm_host_adaptor"
+        ],
+        "body": [
+            "write_dword(${1:addr}, ${2:v}, ${3:flag}, ${4:dbg});"
+        ],
+        "description": "[Class:anvm_host_adaptor]\n     virtual task write_dword(\n                  bit              addr,\n                  bit              v   ,\n  bit              flag = 0,\n                  avery_data_base  dbg  = null );    "
+    },
+    "anvm_host_adaptor :: read_dword": {
+        "prefix": [
+            "read_dword",
+            "task:read_dword -> anvm_host_adaptor"
+        ],
+        "body": [
+            "read_dword(${1:addr}, ${2:v}, ${3:err}, ${4:flag}, ${5:dbg});"
+        ],
+        "description": "[Class:anvm_host_adaptor]\n     virtual task read_dword(\n                   bit              addr,\n            output bit              v   ,\n            output bit              err ,\n            input  bit              flag = 0,\n            input  avery_data_base  dbg  = null );    "
+    },
+    "anvm_host_adaptor :: write_dword_array": {
+        "prefix": [
+            "write_dword_array",
+            "task:write_dword_array -> anvm_host_adaptor"
+        ],
+        "body": [
+            "write_dword_array(${1:addr}, ${2:va}, ${3:first_be}, ${4:last_be}, ${5:flag}, ${6:dbg});"
+        ],
+        "description": "[Class:anvm_host_adaptor]\n     virtual task write_dword_array(\n            bit             addr    ,\n            bit             va          ,\n            bit              first_be = 'hf,\n            bit              last_be  = 'hf,\n            bit             flag     = 0,\n            avery_data_base dbg      = null );    "
+    },
+    "anvm_host_adaptor :: read_dword_array": {
+        "prefix": [
+            "read_dword_array",
+            "task:read_dword_array -> anvm_host_adaptor"
+        ],
+        "body": [
+            "read_dword_array(${1:addr}, ${2:num_dwords}, ${3:va}, ${4:err}, ${5:first_be}, ${6:last_be}, ${7:flag}, ${8:dbg});"
+        ],
+        "description": "[Class:anvm_host_adaptor]\n     virtual task read_dword_array(\n            input  bit             addr      ,\n                   int             num_dwords,\n            output bit             va            ,\n            output bit             err       ,\n            input  bit              first_be   = 'hf,\n            input  bit              last_be    = 'hf,\n            input  bit             flag       = 0,\n            input  avery_data_base dbg        = null );    "
+    },
+    "anvm_host_adaptor :: get_pcie_cap": {
+        "prefix": [
+            "get_pcie_cap",
+            "task:get_pcie_cap -> anvm_host_adaptor"
+        ],
+        "body": [
+            "get_pcie_cap(${1:ctrler_id}, ${2:cid}, ${3:offset}, ${4:dword}, ${5:err});"
+        ],
+        "description": "[Class:anvm_host_adaptor]\n     virtual task get_pcie_cap(\n            input  bit       ctrler_id,\n                   bit        cid      ,\n                   bit        offset   ,\n            output bit       dword    ,\n                   bit       err       );    "
+    },
+    "anvm_host_adaptor :: get_nvme_cap_range": {
+        "prefix": [
+            "get_nvme_cap_range",
+            "function:get_nvme_cap_range -> anvm_host_adaptor"
+        ],
+        "body": [
+            "get_nvme_cap_range(${1:nvme_device_id}, ${2:base}, ${3:limit}, ${4:prefetchable});"
+        ],
+        "description": "[Class:anvm_host_adaptor]\n     virtual function void get_nvme_cap_range(\nint nvme_device_id = 0,\n output avery_u64 base,\n avery_u64 limit,\n bit prefetchable);    "
+    },
+    "anvm_host_adaptor :: check_dword_aligned": {
+        "prefix": [
+            "check_dword_aligned",
+            "function:check_dword_aligned -> anvm_host_adaptor"
+        ],
+        "body": [
+            "check_dword_aligned(${1:s}, ${2:addr});"
+        ],
+        "description": "[Class:anvm_host_adaptor]\n     local function void check_dword_aligned(\nstring s,\n avery_u64 addr);    "
+    },
+    "anvm_host_adaptor :: wait_irq": {
+        "prefix": [
+            "wait_irq",
+            "task:wait_irq -> anvm_host_adaptor"
+        ],
+        "body": [
+            "wait_irq(${1:ctrler_id}, ${2:int_kind}, ${3:addr}, ${4:data});"
+        ],
+        "description": "[Class:anvm_host_adaptor]\n     virtual task wait_irq(\noutput int ctrler_id,\n anvm_interrupt_e int_kind,\n bit       addr,\n bit        data);    "
+    },
+    "anvm_host_adaptor :: check_interrupt_support": {
+        "prefix": [
+            "check_interrupt_support",
+            "task:check_interrupt_support -> anvm_host_adaptor"
+        ],
+        "body": [
+            "check_interrupt_support(${1:ctrler_id}, ${2:int_pin_reg}, ${3:msi_sup}, ${4:msix_sup});"
+        ],
+        "description": "[Class:anvm_host_adaptor]\n     virtual task check_interrupt_support(\n        bit       ctrler_id  ,\n                                          output byte      int_pin_reg,\n                                             output bit       msi_sup    ,\n                                          output bit       msix_sup    );    "
+    },
+    "anvm_host_adaptor :: msix_setup": {
+        "prefix": [
+            "msix_setup",
+            "task:msix_setup -> anvm_host_adaptor"
+        ],
+        "body": [
+            "msix_setup(${1:ctrler_id}, ${2:msg_address}, ${3:msg_data}, ${4:vector}, ${5:success});"
+        ],
+        "description": "[Class:anvm_host_adaptor]\n     virtual task msix_setup(\n            input  bit       ctrler_id   ,\n                   bit       msg_address ,\n                   bit       msg_data    ,\n                   bit       vector      ,\n            output bit       success      );    "
+    },
+    "anvm_host_adaptor :: msi_setup": {
+        "prefix": [
+            "msi_setup",
+            "task:msi_setup -> anvm_host_adaptor"
+        ],
+        "body": [
+            "msi_setup(${1:ctrler_id}, ${2:msg_address}, ${3:msg_data}, ${4:multi_msg_enable}, ${5:success});"
+        ],
+        "description": "[Class:anvm_host_adaptor]\n     virtual task msi_setup(\n            input  bit       ctrler_id        ,\n                   bit       msg_address      ,\n                   bit       msg_data         ,\n                   bit        multi_msg_enable ,\n            output bit       success           );    "
+    },
+    "anvm_host_adaptor :: enable_or_disable_interrupt": {
+        "prefix": [
+            "enable_or_disable_interrupt",
+            "task:enable_or_disable_interrupt -> anvm_host_adaptor"
+        ],
+        "body": [
+            "enable_or_disable_interrupt(${1:ctrler_id}, ${2:int_kind}, ${3:is_enable});"
+        ],
+        "description": "[Class:anvm_host_adaptor]\n     virtual task enable_or_disable_interrupt(\nbit       ctrler_id,\n anvm_interrupt_e int_kind,\n bit is_enable);    "
+    },
+    "anvm_host_adaptor :: mask_interrupt": {
+        "prefix": [
+            "mask_interrupt",
+            "task:mask_interrupt -> anvm_host_adaptor"
+        ],
+        "body": [
+            "mask_interrupt(${1:ctrler_id}, ${2:int_vector}, ${3:int_kind});"
+        ],
+        "description": "[Class:anvm_host_adaptor]\n     virtual task mask_interrupt(\nbit       ctrler_id,\n int int_vector,\n anvm_interrupt_e int_kind);    "
+    },
+    "anvm_host_adaptor :: unmask_interrupt": {
+        "prefix": [
+            "unmask_interrupt",
+            "task:unmask_interrupt -> anvm_host_adaptor"
+        ],
+        "body": [
+            "unmask_interrupt(${1:ctrler_id}, ${2:int_vector}, ${3:int_kind});"
+        ],
+        "description": "[Class:anvm_host_adaptor]\n     virtual task unmask_interrupt(\nbit       ctrler_id,\n int int_vector,\n anvm_interrupt_e int_kind);    "
+    },
+    "anvm_host_adaptor :: get_msix_mem_base": {
+        "prefix": [
+            "get_msix_mem_base",
+            "function:get_msix_mem_base -> anvm_host_adaptor"
+        ],
+        "body": [
+            "get_msix_mem_base(${1:ctrler_id});"
+        ],
+        "description": "[Class:anvm_host_adaptor]\n     virtual function bit       get_msix_mem_base(\nbit       ctrler_id);    "
+    },
+    "anvm_host_adaptor :: get_msi_mem_base": {
+        "prefix": [
+            "get_msi_mem_base",
+            "function:get_msi_mem_base -> anvm_host_adaptor"
+        ],
+        "body": [
+            "get_msi_mem_base(${1:ctrler_id});"
+        ],
+        "description": "[Class:anvm_host_adaptor]\n     virtual function bit       get_msi_mem_base(\nbit       ctrler_id);    "
+    },
+    "anvm_host_adaptor :: get_msi_multi_msg_en": {
+        "prefix": [
+            "get_msi_multi_msg_en",
+            "task:get_msi_multi_msg_en -> anvm_host_adaptor"
+        ],
+        "body": [
+            "get_msi_multi_msg_en(${1:ctrler_id}, ${2:mme});"
+        ],
+        "description": "[Class:anvm_host_adaptor]\n     virtual task get_msi_multi_msg_en(\nbit       ctrler_id,\n output bit       mme);    "
+    },
+    "anvm_host_adaptor :: get_msix_table_size": {
+        "prefix": [
+            "get_msix_table_size",
+            "task:get_msix_table_size -> anvm_host_adaptor"
+        ],
+        "body": [
+            "get_msix_table_size(${1:ctrler_id}, ${2:table_size});"
+        ],
+        "description": "[Class:anvm_host_adaptor]\n     virtual task get_msix_table_size(\nbit       ctrler_id,\n output bit       table_size);    "
+    },
+    "anvm_host_adaptor :: do_hot_reset": {
+        "prefix": [
+            "do_hot_reset",
+            "task:do_hot_reset -> anvm_host_adaptor"
+        ],
+        "body": [
+            "do_hot_reset(${1:ctrler_id});"
+        ],
+        "description": "[Class:anvm_host_adaptor]\n     virtual task do_hot_reset(\nbit        ctrler_id);    "
+    },
+    "anvm_host_adaptor :: do_warm_reset": {
+        "prefix": [
+            "do_warm_reset",
+            "task:do_warm_reset -> anvm_host_adaptor"
+        ],
+        "body": [
+            "do_warm_reset(${1:hold_time_in_ns});"
+        ],
+        "description": "[Class:anvm_host_adaptor]\n     virtual task do_warm_reset(\ntime hold_time_in_ns = 0);    "
+    },
+    "anvm_host_adaptor :: do_cold_reset": {
+        "prefix": [
+            "do_cold_reset",
+            "task:do_cold_reset -> anvm_host_adaptor"
+        ],
+        "body": [
+            "do_cold_reset(${1:hold_time_in_ns});"
+        ],
+        "description": "[Class:anvm_host_adaptor]\n     virtual task do_cold_reset(\ntime hold_time_in_ns = 0);    "
+    },
+    "anvm_host_adaptor :: do_function_reset": {
+        "prefix": [
+            "do_function_reset",
+            "task:do_function_reset -> anvm_host_adaptor"
+        ],
+        "body": [
+            "do_function_reset(${1:ctrler_id}, ${2:flr_support});"
+        ],
+        "description": "[Class:anvm_host_adaptor]\n     virtual task do_function_reset(\nbit       ctrler_id,\n output bit flr_support);    "
+    },
+    "anvm_host_adaptor :: do_subsystem_reset": {
+        "prefix": [
+            "do_subsystem_reset",
+            "task:do_subsystem_reset -> anvm_host_adaptor"
+        ],
+        "body": [
+            "do_subsystem_reset(${1:ctrler_id});"
+        ],
+        "description": "[Class:anvm_host_adaptor]\n     virtual task do_subsystem_reset(\nbit       ctrler_id);    "
+    },
+    "anvm_host_adaptor :: enable_pcie_function": {
+        "prefix": [
+            "enable_pcie_function",
+            "task:enable_pcie_function -> anvm_host_adaptor"
+        ],
+        "body": [
+            "enable_pcie_function(${1:ctrler_id});"
+        ],
+        "description": "[Class:anvm_host_adaptor]\n     virtual task enable_pcie_function(\nbit       ctrler_id);    "
+    },
+    "anvm_host_adaptor :: reset": {
+        "prefix": [
+            "reset",
+            "task:reset -> anvm_host_adaptor"
+        ],
+        "body": [
+            "reset(${0:});"
+        ],
+        "description": "[Class:anvm_host_adaptor]\n     virtual task reset(\n);    "
+    },
+    "anvm_host_adaptor :: get_port_number": {
+        "prefix": [
+            "get_port_number",
+            "function:get_port_number -> anvm_host_adaptor"
+        ],
+        "body": [
+            "get_port_number(${1:ctrler_id});"
+        ],
+        "description": "[Class:anvm_host_adaptor]\n     virtual function int get_port_number (\nbit       ctrler_id);    "
+    },
+    "anvm_host_adaptor :: pcie_operation": {
+        "prefix": [
+            "pcie_operation",
+            "task:pcie_operation -> anvm_host_adaptor"
+        ],
+        "body": [
+            "pcie_operation(${1:ctrler_id}, ${2:kind}, ${3:err}, ${4:extra}, ${5:blocking});"
+        ],
+        "description": "[Class:anvm_host_adaptor]\n     virtual task pcie_operation(\n            input  bit            ctrler_id,\n            input  string         kind     ,\n            output bit            err      ,\n            input  anvm_data_base extra     = null,\n            input  bit            blocking  = 1);    "
+    },
+    "anvm_host_adaptor_base": {
+        "prefix": "anvm_host_adaptor_base",
+        "body": [
+            "anvm_host_adaptor_base  ${0:name_class};"
+        ],
+        "description": "class anvm_host_adaptor_base;\n"
+    },
+    "anvm_host_adaptor_base :: new": {
+        "prefix": [
+            "new",
+            "function:new -> anvm_host_adaptor_base"
+        ],
+        "body": [
+            "new(${1:instance_name});"
+        ],
+        "description": "[Class:anvm_host_adaptor_base]\n     function new(\nstring instance_name);    "
+    },
+    "anvm_host_adaptor_base :: sprint": {
+        "prefix": [
+            "sprint",
+            "function:sprint -> anvm_host_adaptor_base"
+        ],
+        "body": [
+            "sprint(${1:verbosity});"
+        ],
+        "description": "[Class:anvm_host_adaptor_base]\n     function string sprint(\nint verbosity = 0);    "
+    },
+    "anvm_host_adaptor_base :: wait_host_ready": {
+        "prefix": [
+            "wait_host_ready",
+            "task:wait_host_ready -> anvm_host_adaptor_base"
+        ],
+        "body": [
+            "wait_host_ready(${1:ctrler_ids});"
+        ],
+        "description": "[Class:anvm_host_adaptor_base]\n     virtual task wait_host_ready(\noutput bit       ctrler_ids      );    "
+    },
+    "anvm_host_adaptor_base :: wait_ctrlers_resetted": {
+        "prefix": [
+            "wait_ctrlers_resetted",
+            "task:wait_ctrlers_resetted -> anvm_host_adaptor_base"
+        ],
+        "body": [
+            "wait_ctrlers_resetted(${1:ctrler_ids});"
+        ],
+        "description": "[Class:anvm_host_adaptor_base]\n     virtual task wait_ctrlers_resetted(\noutput bit       ctrler_ids      );    "
+    },
+    "anvm_host_adaptor_base :: get_pcie_ranges": {
+        "prefix": [
+            "get_pcie_ranges",
+            "function:get_pcie_ranges -> anvm_host_adaptor_base"
+        ],
+        "body": [
+            "get_pcie_ranges(${1:base}, ${2:limit});"
+        ],
+        "description": "[Class:anvm_host_adaptor_base]\n     virtual function void get_pcie_ranges(\n output bit       base      ,\n limit      );    "
+    },
+    "anvm_host_adaptor_base :: get_host_memory_size": {
+        "prefix": [
+            "get_host_memory_size",
+            "function:get_host_memory_size -> anvm_host_adaptor_base"
+        ],
+        "body": [
+            "get_host_memory_size(${0:});"
+        ],
+        "description": "[Class:anvm_host_adaptor_base]\n     virtual function bit       get_host_memory_size(\n);    "
+    },
+    "anvm_host_adaptor_base :: write_dword": {
+        "prefix": [
+            "write_dword",
+            "task:write_dword -> anvm_host_adaptor_base"
+        ],
+        "body": [
+            "write_dword(${1:addr}, ${2:v}, ${3:flag}, ${4:dbg});"
+        ],
+        "description": "[Class:anvm_host_adaptor_base]\n     virtual task write_dword(\n            input bit             addr,\n            input bit             v   ,\n            input bit             flag = 0,\n               input avery_data_base dbg  = null );    "
+    },
+    "anvm_host_adaptor_base :: read_dword": {
+        "prefix": [
+            "read_dword",
+            "task:read_dword -> anvm_host_adaptor_base"
+        ],
+        "body": [
+            "read_dword(${1:addr}, ${2:v}, ${3:err}, ${4:flag}, ${5:dbg});"
+        ],
+        "description": "[Class:anvm_host_adaptor_base]\n     virtual task read_dword(\n                   bit              addr,\n            output bit              v   ,\n            output bit              err ,\n            input  bit              flag = 0,\n               input  avery_data_base  dbg  = null );    "
+    },
+    "anvm_host_adaptor_base :: write_dword_array": {
+        "prefix": [
+            "write_dword_array",
+            "task:write_dword_array -> anvm_host_adaptor_base"
+        ],
+        "body": [
+            "write_dword_array(${1:addr}, ${2:va}, ${3:first_be}, ${4:last_be}, ${5:flag}, ${6:dbg});"
+        ],
+        "description": "[Class:anvm_host_adaptor_base]\n     virtual task write_dword_array(\n            bit             addr    ,\n            bit             va          ,\n            bit              first_be = 'hf,\n            bit              last_be  = 'hf,\n            bit             flag     = 0,\n                   avery_data_base dbg      = null );    "
+    },
+    "anvm_host_adaptor_base :: read_dword_array": {
+        "prefix": [
+            "read_dword_array",
+            "task:read_dword_array -> anvm_host_adaptor_base"
+        ],
+        "body": [
+            "read_dword_array(${1:addr}, ${2:num_dwords}, ${3:va}, ${4:err}, ${5:first_be}, ${6:last_be}, ${7:flag}, ${8:dbg});"
+        ],
+        "description": "[Class:anvm_host_adaptor_base]\n     virtual task read_dword_array(\n            input  bit             addr      ,\n                   int             num_dwords,\n            output bit             va            ,\n            output bit             err       ,\n            input  bit              first_be   = 'hf,\n            input  bit              last_be    = 'hf,\n            input  bit             flag       = 0,\n               input  avery_data_base dbg        = null );    "
+    },
+    "anvm_host_adaptor_base :: get_pcie_cap": {
+        "prefix": [
+            "get_pcie_cap",
+            "task:get_pcie_cap -> anvm_host_adaptor_base"
+        ],
+        "body": [
+            "get_pcie_cap(${1:ctrler_id}, ${2:cid}, ${3:offset}, ${4:dword}, ${5:err});"
+        ],
+        "description": "[Class:anvm_host_adaptor_base]\n     virtual task get_pcie_cap(\ninput  bit       ctrler_id,\n        bit       cid,\n        bit       offset,\n output bit       dword,\n        bit err);    "
+    },
+    "anvm_host_adaptor_base :: get_nvme_cap_range": {
+        "prefix": [
+            "get_nvme_cap_range",
+            "function:get_nvme_cap_range -> anvm_host_adaptor_base"
+        ],
+        "body": [
+            "get_nvme_cap_range(${1:nvme_device_id}, ${2:base}, ${3:limit}, ${4:prefetchable});"
+        ],
+        "description": "[Class:anvm_host_adaptor_base]\n     virtual function void get_nvme_cap_range(\nint nvme_device_id = 0,\n output avery_u64 base,\n avery_u64 limit,\n bit prefetchable);    "
+    },
+    "anvm_host_adaptor_base :: get_pcie_bar": {
+        "prefix": [
+            "get_pcie_bar",
+            "function:get_pcie_bar -> anvm_host_adaptor_base"
+        ],
+        "body": [
+            "get_pcie_bar(${1:ctrler_id}, ${2:bar_id}, ${3:base}, ${4:limit}, ${5:prefetchable});"
+        ],
+        "description": "[Class:anvm_host_adaptor_base]\n     virtual function void get_pcie_bar(\n input  int       ctrler_id   ,\n                                        input  int       bar_id      ,\n                                        output avery_u64 base        ,\n                                        output avery_u64 limit       ,\n                                        output bit       prefetchable );    "
+    },
+    "anvm_host_adaptor_base :: wait_irq": {
+        "prefix": [
+            "wait_irq",
+            "task:wait_irq -> anvm_host_adaptor_base"
+        ],
+        "body": [
+            "wait_irq(${1:ctrler_id}, ${2:int_kind}, ${3:addr}, ${4:data});"
+        ],
+        "description": "[Class:anvm_host_adaptor_base]\n     virtual task wait_irq(\n output int              ctrler_id,\n          anvm_interrupt_e int_kind ,\n  bit              addr     ,\n                                  bit              data      );    "
+    },
+    "anvm_host_adaptor_base :: check_interrupt_support": {
+        "prefix": [
+            "check_interrupt_support",
+            "task:check_interrupt_support -> anvm_host_adaptor_base"
+        ],
+        "body": [
+            "check_interrupt_support(${1:ctrler_id}, ${2:int_pin_reg}, ${3:msi_sup}, ${4:msix_sup});"
+        ],
+        "description": "[Class:anvm_host_adaptor_base]\n     virtual task check_interrupt_support(\n        bit       ctrler_id  ,\n                                          output byte      int_pin_reg,\n                                             output bit       msi_sup    ,\n                                          output bit       msix_sup    );    "
+    },
+    "anvm_host_adaptor_base :: enable_or_disable_interrupt": {
+        "prefix": [
+            "enable_or_disable_interrupt",
+            "task:enable_or_disable_interrupt -> anvm_host_adaptor_base"
+        ],
+        "body": [
+            "enable_or_disable_interrupt(${1:ctrler_id}, ${2:int_kind}, ${3:is_enable});"
+        ],
+        "description": "[Class:anvm_host_adaptor_base]\n     virtual task enable_or_disable_interrupt(\n bit              ctrler_id,\n                                              anvm_interrupt_e int_kind ,\n                                              bit              is_enable );    "
+    },
+    "anvm_host_adaptor_base :: mask_interrupt": {
+        "prefix": [
+            "mask_interrupt",
+            "task:mask_interrupt -> anvm_host_adaptor_base"
+        ],
+        "body": [
+            "mask_interrupt(${1:ctrler_id}, ${2:int_vector}, ${3:int_kind});"
+        ],
+        "description": "[Class:anvm_host_adaptor_base]\n     virtual task mask_interrupt(\nbit       ctrler_id,\n int int_vector,\n anvm_interrupt_e int_kind);    "
+    },
+    "anvm_host_adaptor_base :: unmask_interrupt": {
+        "prefix": [
+            "unmask_interrupt",
+            "task:unmask_interrupt -> anvm_host_adaptor_base"
+        ],
+        "body": [
+            "unmask_interrupt(${1:ctrler_id}, ${2:int_vector}, ${3:int_kind});"
+        ],
+        "description": "[Class:anvm_host_adaptor_base]\n     virtual task unmask_interrupt(\nbit       ctrler_id,\n int int_vector,\n anvm_interrupt_e int_kind);    "
+    },
+    "anvm_host_adaptor_base :: msix_setup": {
+        "prefix": [
+            "msix_setup",
+            "task:msix_setup -> anvm_host_adaptor_base"
+        ],
+        "body": [
+            "msix_setup(${1:ctrler_id}, ${2:msg_address}, ${3:msg_data}, ${4:vector}, ${5:success});"
+        ],
+        "description": "[Class:anvm_host_adaptor_base]\n     virtual task msix_setup(\n            input  bit       ctrler_id,\n                   bit       msg_address,\n                   bit       msg_data   ,\n                   bit       vector     ,\n            output bit       success      );    "
+    },
+    "anvm_host_adaptor_base :: msi_setup": {
+        "prefix": [
+            "msi_setup",
+            "task:msi_setup -> anvm_host_adaptor_base"
+        ],
+        "body": [
+            "msi_setup(${1:ctrler_id}, ${2:msg_address}, ${3:msg_data}, ${4:multi_msg_enable}, ${5:success});"
+        ],
+        "description": "[Class:anvm_host_adaptor_base]\n     virtual task msi_setup(\n            input  bit       ctrler_id,\n                   bit       msg_address     ,\n                   bit       msg_data        ,\n                   bit        multi_msg_enable,\n            output bit       success           );    "
+    },
+    "anvm_host_adaptor_base :: get_msi_mem_base": {
+        "prefix": [
+            "get_msi_mem_base",
+            "function:get_msi_mem_base -> anvm_host_adaptor_base"
+        ],
+        "body": [
+            "get_msi_mem_base(${1:ctrler_id});"
+        ],
+        "description": "[Class:anvm_host_adaptor_base]\n     virtual function bit       get_msi_mem_base(\nbit       ctrler_id);    "
+    },
+    "anvm_host_adaptor_base :: get_msix_mem_base": {
+        "prefix": [
+            "get_msix_mem_base",
+            "function:get_msix_mem_base -> anvm_host_adaptor_base"
+        ],
+        "body": [
+            "get_msix_mem_base(${1:ctrler_id});"
+        ],
+        "description": "[Class:anvm_host_adaptor_base]\n     virtual function bit       get_msix_mem_base(\nbit       ctrler_id);    "
+    },
+    "anvm_host_adaptor_base :: get_msi_multi_msg_en": {
+        "prefix": [
+            "get_msi_multi_msg_en",
+            "task:get_msi_multi_msg_en -> anvm_host_adaptor_base"
+        ],
+        "body": [
+            "get_msi_multi_msg_en(${1:ctrler_id}, ${2:mme});"
+        ],
+        "description": "[Class:anvm_host_adaptor_base]\n     virtual task get_msi_multi_msg_en(\nbit       ctrler_id,\n output bit       mme);    "
+    },
+    "anvm_host_adaptor_base :: get_msix_table_size": {
+        "prefix": [
+            "get_msix_table_size",
+            "task:get_msix_table_size -> anvm_host_adaptor_base"
+        ],
+        "body": [
+            "get_msix_table_size(${1:ctrler_id}, ${2:table_size});"
+        ],
+        "description": "[Class:anvm_host_adaptor_base]\n     virtual task get_msix_table_size(\nbit       ctrler_id,\n output bit       table_size);    "
+    },
+    "anvm_host_adaptor_base :: do_hot_reset": {
+        "prefix": [
+            "do_hot_reset",
+            "task:do_hot_reset -> anvm_host_adaptor_base"
+        ],
+        "body": [
+            "do_hot_reset(${1:ctrler_id});"
+        ],
+        "description": "[Class:anvm_host_adaptor_base]\n     virtual task do_hot_reset(\nbit       ctrler_id);    "
+    },
+    "anvm_host_adaptor_base :: do_warm_reset": {
+        "prefix": [
+            "do_warm_reset",
+            "task:do_warm_reset -> anvm_host_adaptor_base"
+        ],
+        "body": [
+            "do_warm_reset(${1:hold_time_in_ns});"
+        ],
+        "description": "[Class:anvm_host_adaptor_base]\n     virtual task do_warm_reset(\ntime hold_time_in_ns = 0);    "
+    },
+    "anvm_host_adaptor_base :: do_cold_reset": {
+        "prefix": [
+            "do_cold_reset",
+            "task:do_cold_reset -> anvm_host_adaptor_base"
+        ],
+        "body": [
+            "do_cold_reset(${1:hold_time_in_ns});"
+        ],
+        "description": "[Class:anvm_host_adaptor_base]\n     virtual task do_cold_reset(\ntime hold_time_in_ns = 0);    "
+    },
+    "anvm_host_adaptor_base :: do_subsystem_reset": {
+        "prefix": [
+            "do_subsystem_reset",
+            "task:do_subsystem_reset -> anvm_host_adaptor_base"
+        ],
+        "body": [
+            "do_subsystem_reset(${1:ctrler_id});"
+        ],
+        "description": "[Class:anvm_host_adaptor_base]\n     virtual task do_subsystem_reset(\nbit       ctrler_id);    "
+    },
+    "anvm_host_adaptor_base :: do_function_reset": {
+        "prefix": [
+            "do_function_reset",
+            "task:do_function_reset -> anvm_host_adaptor_base"
+        ],
+        "body": [
+            "do_function_reset(${1:ctrler_id}, ${2:flr_support});"
+        ],
+        "description": "[Class:anvm_host_adaptor_base]\n     virtual task do_function_reset(\nbit       ctrler_id,\n output bit flr_support);    "
+    },
+    "anvm_host_adaptor_base :: enable_pcie_function": {
+        "prefix": [
+            "enable_pcie_function",
+            "task:enable_pcie_function -> anvm_host_adaptor_base"
+        ],
+        "body": [
+            "enable_pcie_function(${1:ctrler_id});"
+        ],
+        "description": "[Class:anvm_host_adaptor_base]\n     virtual task enable_pcie_function(\nbit       ctrler_id);    "
+    },
+    "anvm_host_adaptor_base :: reset": {
+        "prefix": [
+            "reset",
+            "task:reset -> anvm_host_adaptor_base"
+        ],
+        "body": [
+            "reset(${0:});"
+        ],
+        "description": "[Class:anvm_host_adaptor_base]\n     virtual task reset(\n);    "
+    },
+    "anvm_host_adaptor_base :: get_port_number": {
+        "prefix": [
+            "get_port_number",
+            "function:get_port_number -> anvm_host_adaptor_base"
+        ],
+        "body": [
+            "get_port_number(${1:ctrler_id});"
+        ],
+        "description": "[Class:anvm_host_adaptor_base]\n     virtual function int get_port_number (\nbit       ctrler_id);    "
+    },
+    "anvm_host_adaptor_base :: free_host_mem": {
+        "prefix": [
+            "free_host_mem",
+            "function:free_host_mem -> anvm_host_adaptor_base"
+        ],
+        "body": [
+            "free_host_mem(${1:addr}, ${2:len}, ${3:src});"
+        ],
+        "description": "[Class:anvm_host_adaptor_base]\n     virtual function void free_host_mem(\nbit       addr,\n bit       len,\n anvm_data_base src);    "
+    },
+    "anvm_host_adaptor_base :: dump_pcie_lecroy": {
+        "prefix": [
+            "dump_pcie_lecroy",
+            "task:dump_pcie_lecroy -> anvm_host_adaptor_base"
+        ],
+        "body": [
+            "dump_pcie_lecroy(${0:});"
+        ],
+        "description": "[Class:anvm_host_adaptor_base]\n     virtual task dump_pcie_lecroy(\n);    "
+    },
+    "anvm_host_adaptor_base :: print_pcie_lecroy": {
+        "prefix": [
+            "print_pcie_lecroy",
+            "function:print_pcie_lecroy -> anvm_host_adaptor_base"
+        ],
+        "body": [
+            "print_pcie_lecroy(${1:s});"
+        ],
+        "description": "[Class:anvm_host_adaptor_base]\n     virtual function void print_pcie_lecroy(\nstring s);    "
+    },
+    "anvm_host_adaptor_base :: print_lecroy_wait_tlp": {
+        "prefix": [
+            "print_lecroy_wait_tlp",
+            "function:print_lecroy_wait_tlp -> anvm_host_adaptor_base"
+        ],
+        "body": [
+            "print_lecroy_wait_tlp(${0:});"
+        ],
+        "description": "[Class:anvm_host_adaptor_base]\n     virtual function void print_lecroy_wait_tlp(\n);    "
+    },
+    "anvm_host_adaptor_base :: pcie_operation": {
+        "prefix": [
+            "pcie_operation",
+            "task:pcie_operation -> anvm_host_adaptor_base"
+        ],
+        "body": [
+            "pcie_operation(${1:ctrler_id}, ${2:kind}, ${3:err}, ${4:extra}, ${5:blocking});"
+        ],
+        "description": "[Class:anvm_host_adaptor_base]\n     virtual task pcie_operation(\n            input  bit            ctrler_id,\n            input  string         kind     ,\n            output bit            err      ,\n            input  anvm_data_base extra     = null,\n            input  bit            blocking  = 1);    "
+    },
+    "anvm_driver_base": {
+        "prefix": "anvm_driver_base",
+        "body": [
+            "anvm_driver_base  ${0:name_class};"
+        ],
+        "description": "class anvm_driver_base\n    `ifdef ANVM_UVM\n\textends uvm_driver #(anvm_data_base)\n    `endif\n    ;\n"
+    },
+    "anvm_driver_base :: new": {
+        "prefix": [
+            "new",
+            "function:new -> anvm_driver_base"
+        ],
+        "body": [
+            "new(${1:name}, ${2:stream_id});"
+        ],
+        "description": "[Class:anvm_driver_base]\n     function new(\n string name,\n int stream_id );    "
+    },
+    "anvm_driver_base :: build": {
+        "prefix": [
+            "build",
+            "function:build -> anvm_driver_base"
+        ],
+        "body": [
+            "build(${0:});"
+        ],
+        "description": "[Class:anvm_driver_base]\n     virtual function void build(\n);    "
+    },
+    "anvm_driver_base :: run": {
+        "prefix": [
+            "run",
+            "task:run -> anvm_driver_base"
+        ],
+        "body": [
+            "run(${0:});"
+        ],
+        "description": "[Class:anvm_driver_base]\n     virtual task run(\n);    "
+    },
+    "anvm_driver_base :: send_item": {
+        "prefix": [
+            "send_item",
+            "task:send_item -> anvm_driver_base"
+        ],
+        "body": [
+            "send_item(${1:pbase}, ${2:isw});"
+        ],
+        "description": "[Class:anvm_driver_base]\n     local task send_item(\n anvm_data_base pbase,\n int isw = 0);    "
+    },
+    "anvm_driver_base :: wait_event": {
+        "prefix": [
+            "wait_event",
+            "task:wait_event -> anvm_driver_base"
+        ],
+        "body": [
+            "wait_event(${1:entry}, ${2:timer}, ${3:timeout_msg});"
+        ],
+        "description": "[Class:anvm_driver_base]\n     virtual task wait_event(\n string entry,\n time   timer = 0,\n string timeout_msg = \"\");    "
+    },
+    "anvm_driver_base :: post_command": {
+        "prefix": [
+            "post_command",
+            "function:post_command -> anvm_driver_base"
+        ],
+        "body": [
+            "post_command(${1:cmd}, ${2:mgr});"
+        ],
+        "description": "[Class:anvm_driver_base]\n     virtual function void post_command(\nanvm_cmd_entry cmd,\n anvm_controller_mgr mgr = null);    "
+    },
+    "anvm_driver_base :: get": {
+        "prefix": [
+            "get",
+            "function:get -> anvm_driver_base"
+        ],
+        "body": [
+            "get(${1:entry}, ${2:sub_entry});"
+        ],
+        "description": "[Class:anvm_driver_base]\n     virtual function bit       get(\ninput string entry,\n input string sub_entry = \"\");    "
+    },
+    "anvm_driver_base :: sprint": {
+        "prefix": [
+            "sprint",
+            "function:sprint -> anvm_driver_base"
+        ],
+        "body": [
+            "sprint(${1:verbosity}, ${2:prefix});"
+        ],
+        "description": "[Class:anvm_driver_base]\n     virtual function string sprint(\nint verbosity = 0,\n string prefix = \"\");    "
+    },
+    "anvm_kv_pair": {
+        "prefix": "anvm_kv_pair",
+        "body": [
+            "anvm_kv_pair  ${0:name_class};"
+        ],
+        "description": "class anvm_kv_pair;\n"
+    },
+    "anvm_kv_pair :: new": {
+        "prefix": [
+            "new",
+            "function:new -> anvm_kv_pair"
+        ],
+        "body": [
+            "new(${1:value_size}, ${2:key_length}, ${3:log});"
+        ],
+        "description": "[Class:anvm_kv_pair]\n     function new(\nint value_size = 0,\n int key_length,\n anvm_log log = null);    "
+    },
+    "anvm_kv_pair :: fill_data": {
+        "prefix": [
+            "fill_data",
+            "function:fill_data -> anvm_kv_pair"
+        ],
+        "body": [
+            "fill_data(${1:pattern}, ${2:exp_value});"
+        ],
+        "description": "[Class:anvm_kv_pair]\n     virtual function void fill_data(\nint pattern = 0,\n int exp_value = 0);    "
+    },
+    "anvm_kv_pair :: pack_to": {
+        "prefix": [
+            "pack_to",
+            "function:pack_to -> anvm_kv_pair"
+        ],
+        "body": [
+            "pack_to(${1:cmd});"
+        ],
+        "description": "[Class:anvm_kv_pair]\n     virtual function void pack_to(\nanvm_cmd_entry cmd);     "
+    },
+    "anvm_kv_pair :: unpack_from": {
+        "prefix": [
+            "unpack_from",
+            "function:unpack_from -> anvm_kv_pair"
+        ],
+        "body": [
+            "unpack_from(${1:cmd});"
+        ],
+        "description": "[Class:anvm_kv_pair]\n     virtual function void unpack_from(\nanvm_cmd_entry cmd);    "
+    },
+    "anvm_kv_pair :: get_key_size": {
+        "prefix": [
+            "get_key_size",
+            "function:get_key_size -> anvm_kv_pair"
+        ],
+        "body": [
+            "get_key_size(${0:});"
+        ],
+        "description": "[Class:anvm_kv_pair]\n     function int get_key_size(\n);    "
+    },
+    "anvm_seq_base": {
+        "prefix": "anvm_seq_base",
+        "body": [
+            "anvm_seq_base  ${0:name_class};"
+        ],
+        "description": "class anvm_seq_base extends anvm_data_base;\n"
+    },
+    "anvm_seq_base :: run": {
+        "prefix": [
+            "run",
+            "task:run -> anvm_seq_base"
+        ],
+        "body": [
+            "run(${0:});"
+        ],
+        "description": "[Class:anvm_seq_base]\n     virtual task run(\n);    "
+    },
+    "anvm_callbacks": {
+        "prefix": "anvm_callbacks",
+        "body": [
+            "anvm_callbacks  ${0:name_class};"
+        ],
+        "description": "virtual class anvm_callbacks; \n"
+    },
+    "anvm_callbacks :: pre_setup_controller_phase0": {
+        "prefix": [
+            "pre_setup_controller_phase0",
+            "function:pre_setup_controller_phase0 -> anvm_callbacks"
+        ],
+        "body": [
+            "pre_setup_controller_phase0(${1:hsw}, ${2:mgr}, ${3:skip_setup});"
+        ],
+        "description": "[Class:anvm_callbacks]\n     virtual function void pre_setup_controller_phase0(\n        input anvm_host_software  hsw,\ninput anvm_controller_mgr mgr,\n        inout bit                 skip_setup);return;    "
+    },
+    "anvm_callbacks :: pre_setup_controller_phase1": {
+        "prefix": [
+            "pre_setup_controller_phase1",
+            "function:pre_setup_controller_phase1 -> anvm_callbacks"
+        ],
+        "body": [
+            "pre_setup_controller_phase1(${1:hsw}, ${2:mgr});"
+        ],
+        "description": "[Class:anvm_callbacks]\n     virtual function void pre_setup_controller_phase1(\n    anvm_host_software hsw,\n    anvm_controller_mgr mgr);return;    "
+    },
+    "anvm_callbacks :: pre_setup_controller_phase2": {
+        "prefix": [
+            "pre_setup_controller_phase2",
+            "function:pre_setup_controller_phase2 -> anvm_callbacks"
+        ],
+        "body": [
+            "pre_setup_controller_phase2(${1:hsw}, ${2:mgr});"
+        ],
+        "description": "[Class:anvm_callbacks]\n     virtual function void pre_setup_controller_phase2(\n    anvm_host_software hsw,\n    anvm_controller_mgr mgr);return;    "
+    },
+    "anvm_callbacks :: pre_allocate_msix_vector": {
+        "prefix": [
+            "pre_allocate_msix_vector",
+            "function:pre_allocate_msix_vector -> anvm_callbacks"
+        ],
+        "body": [
+            "pre_allocate_msix_vector(${1:hsw}, ${2:mgr}, ${3:vector}, ${4:msg_addr}, ${5:msg_data});"
+        ],
+        "description": "[Class:anvm_callbacks]\n     virtual function void pre_allocate_msix_vector(\n    anvm_host_software   hsw,\n    anvm_controller_mgr  mgr,\n    input int            vector,\n    inout bit            msg_addr,\n        inout bit            msg_data);return;    "
+    },
+    "anvm_callbacks :: tx_cmd_arbitrated": {
+        "prefix": [
+            "tx_cmd_arbitrated",
+            "function:tx_cmd_arbitrated -> anvm_callbacks"
+        ],
+        "body": [
+            "tx_cmd_arbitrated(${1:hsw}, ${2:cmd});"
+        ],
+        "description": "[Class:anvm_callbacks]\n     virtual function void tx_cmd_arbitrated(\n    anvm_host_software hsw,\n    anvm_cmd_entry     cmd);return;    "
+    },
+    "anvm_callbacks :: pre_allocate_sgl": {
+        "prefix": [
+            "pre_allocate_sgl",
+            "function:pre_allocate_sgl -> anvm_callbacks"
+        ],
+        "body": [
+            "pre_allocate_sgl(${1:hsw}, ${2:cmd}, ${3:sgl});"
+        ],
+        "description": "[Class:anvm_callbacks]\n     virtual function void pre_allocate_sgl(\n    anvm_host_software hsw,\n    anvm_cmd_entry     cmd,\n    ref anvm_sgl       sgl);return;    "
+    },
+    "anvm_callbacks :: tx_cmd_before_pack": {
+        "prefix": [
+            "tx_cmd_before_pack",
+            "function:tx_cmd_before_pack -> anvm_callbacks"
+        ],
+        "body": [
+            "tx_cmd_before_pack(${1:hsw}, ${2:cmd});"
+        ],
+        "description": "[Class:anvm_callbacks]\n     virtual function void tx_cmd_before_pack(\n    anvm_host_software hsw,\n    anvm_cmd_entry     cmd);return;    "
+    },
+    "anvm_callbacks :: tx_cmd_after_pack": {
+        "prefix": [
+            "tx_cmd_after_pack",
+            "function:tx_cmd_after_pack -> anvm_callbacks"
+        ],
+        "body": [
+            "tx_cmd_after_pack(${1:hsw}, ${2:cmd});"
+        ],
+        "description": "[Class:anvm_callbacks]\n     virtual function void tx_cmd_after_pack(\n    anvm_host_software hsw,\n    anvm_cmd_entry     cmd);return;    "
+    },
+    "anvm_callbacks :: rx_cpl_enter_hsw": {
+        "prefix": [
+            "rx_cpl_enter_hsw",
+            "function:rx_cpl_enter_hsw -> anvm_callbacks"
+        ],
+        "body": [
+            "rx_cpl_enter_hsw(${1:hsw}, ${2:cpl});"
+        ],
+        "description": "[Class:anvm_callbacks]\n     virtual function void rx_cpl_enter_hsw(\n    anvm_host_software hsw,\n    anvm_cpl_entry     cpl );return;    "
+    },
+    "anvm_callbacks :: rx_mpbqe_enter_hsw": {
+        "prefix": [
+            "rx_mpbqe_enter_hsw",
+            "function:rx_mpbqe_enter_hsw -> anvm_callbacks"
+        ],
+        "body": [
+            "rx_mpbqe_enter_hsw(${1:hsw}, ${2:bqe});"
+        ],
+        "description": "[Class:anvm_callbacks]\n     virtual function void rx_mpbqe_enter_hsw(\n    anvm_host_software hsw,\n    anvm_cpl_entry     bqe );return;    "
+    },
+    "anvm_callbacks :: rx_data_fetched": {
+        "prefix": [
+            "rx_data_fetched",
+            "function:rx_data_fetched -> anvm_callbacks"
+        ],
+        "body": [
+            "rx_data_fetched(${1:hsw}, ${2:cmd});"
+        ],
+        "description": "[Class:anvm_callbacks]\n     virtual function void rx_data_fetched(\n    anvm_host_software hsw,\n    anvm_cmd_entry     cmd);return;    "
+    },
+    "anvm_callbacks :: tx_cmd_done": {
+        "prefix": [
+            "tx_cmd_done",
+            "function:tx_cmd_done -> anvm_callbacks"
+        ],
+        "body": [
+            "tx_cmd_done(${1:hsw}, ${2:cmd});"
+        ],
+        "description": "[Class:anvm_callbacks]\n     virtual function void tx_cmd_done(\n    anvm_host_software hsw,\n    anvm_cmd_entry     cmd);return;    "
+    },
+    "anvm_callbacks :: pre_ring_sq_doorbell": {
+        "prefix": [
+            "pre_ring_sq_doorbell",
+            "function:pre_ring_sq_doorbell -> anvm_callbacks"
+        ],
+        "body": [
+            "pre_ring_sq_doorbell(${1:hsw}, ${2:mgr}, ${3:qid}, ${4:tail}, ${5:is_skip});"
+        ],
+        "description": "[Class:anvm_callbacks]\n     virtual function void pre_ring_sq_doorbell(\n    anvm_host_software  hsw,\n    anvm_controller_mgr mgr,\n    int                 qid,\n     inout bit           tail,\n      inout bit           is_skip);return;    "
+    },
+    "anvm_callbacks :: pre_ring_cq_doorbell": {
+        "prefix": [
+            "pre_ring_cq_doorbell",
+            "function:pre_ring_cq_doorbell -> anvm_callbacks"
+        ],
+        "body": [
+            "pre_ring_cq_doorbell(${1:hsw}, ${2:mgr}, ${3:qid}, ${4:head}, ${5:is_skip});"
+        ],
+        "description": "[Class:anvm_callbacks]\n     virtual function void pre_ring_cq_doorbell(\n    anvm_host_software  hsw,\n    anvm_controller_mgr mgr,\n    int                 qid,\n    inout bit           head,\n    inout bit           is_skip);return;    "
+    },
+    "anvm_callbacks :: after_ring_sq_doorbell": {
+        "prefix": [
+            "after_ring_sq_doorbell",
+            "function:after_ring_sq_doorbell -> anvm_callbacks"
+        ],
+        "body": [
+            "after_ring_sq_doorbell(${1:hsw}, ${2:mgr}, ${3:qid}, ${4:tail});"
+        ],
+        "description": "[Class:anvm_callbacks]\n     virtual function void after_ring_sq_doorbell(\n    anvm_host_software  hsw,\n    anvm_controller_mgr mgr,\n    int                 qid,\n    bit                 tail);return;    "
+    },
+    "anvm_callbacks :: after_ring_cq_doorbell": {
+        "prefix": [
+            "after_ring_cq_doorbell",
+            "function:after_ring_cq_doorbell -> anvm_callbacks"
+        ],
+        "body": [
+            "after_ring_cq_doorbell(${1:hsw}, ${2:mgr}, ${3:qid}, ${4:head});"
+        ],
+        "description": "[Class:anvm_callbacks]\n     virtual function void after_ring_cq_doorbell(\n    anvm_host_software  hsw,\n    anvm_controller_mgr mgr,\n    int                 qid,\n     bit                 head );return;    "
+    },
+    "anvm_callbacks :: before_write_nvme_cap": {
+        "prefix": [
+            "before_write_nvme_cap",
+            "function:before_write_nvme_cap -> anvm_callbacks"
+        ],
+        "body": [
+            "before_write_nvme_cap(${1:hsw}, ${2:mgr}, ${3:byte_offset}, ${4:data_array});"
+        ],
+        "description": "[Class:anvm_callbacks]\n     virtual function void before_write_nvme_cap(\n    anvm_host_software  hsw,\n    anvm_controller_mgr mgr,\n    avery_u32           byte_offset,\n     ref avery_u32       data_array      );    "
+    },
+    "anvm_callbacks :: post_read_nvme_cap": {
+        "prefix": [
+            "post_read_nvme_cap",
+            "function:post_read_nvme_cap -> anvm_callbacks"
+        ],
+        "body": [
+            "post_read_nvme_cap(${1:hsw}, ${2:mgr}, ${3:byte_offset}, ${4:data_array});"
+        ],
+        "description": "[Class:anvm_callbacks]\n     virtual function void post_read_nvme_cap(\n    anvm_host_software  hsw,\n    anvm_controller_mgr mgr,\n    avery_u32           byte_offset,\n    ref   avery_u32     data_array      );return;    "
+    },
+    "anvm_callbacks :: before_setup_cmb": {
+        "prefix": [
+            "before_setup_cmb",
+            "function:before_setup_cmb -> anvm_callbacks"
+        ],
+        "body": [
+            "before_setup_cmb(${1:hsw}, ${2:mgr}, ${3:cba});"
+        ],
+        "description": "[Class:anvm_callbacks]\n     virtual function void before_setup_cmb(\n    anvm_host_software  hsw,\n    anvm_controller_mgr mgr,\n    ref  avery_u64      cba     );    "
+    },
+    "anvm_callbacks :: before_setup_pmr": {
+        "prefix": [
+            "before_setup_pmr",
+            "function:before_setup_pmr -> anvm_callbacks"
+        ],
+        "body": [
+            "before_setup_pmr(${1:hsw}, ${2:mgr}, ${3:cba});"
+        ],
+        "description": "[Class:anvm_callbacks]\n     virtual function void before_setup_pmr(\n    anvm_host_software  hsw,\n    anvm_controller_mgr mgr,\n    ref  avery_u64      cba     );    "
+    },
+    "anvm_host_software_agent": {
+        "prefix": "anvm_host_software_agent",
+        "body": [
+            "anvm_host_software_agent  ${0:name_class};"
+        ],
+        "description": "class anvm_host_software_agent extends uvm_agent;\n"
+    },
+    "anvm_host_software_agent :: new": {
+        "prefix": [
+            "new",
+            "function:new -> anvm_host_software_agent"
+        ],
+        "body": [
+            "new(${1:name}, ${2:parent});"
+        ],
+        "description": "[Class:anvm_host_software_agent]\n     function new(\nstring name = \"anvm_host_software_agent\",\n uvm_component parent = null);    "
+    },
+    "anvm_host_software_agent :: build": {
+        "prefix": [
+            "build",
+            "function:build -> anvm_host_software_agent"
+        ],
+        "body": [
+            "build(${0:});"
+        ],
+        "description": "[Class:anvm_host_software_agent]\n     virtual function void build(\n);    "
+    },
+    "anvm_host_software_agent :: connect": {
+        "prefix": [
+            "connect",
+            "function:connect -> anvm_host_software_agent"
+        ],
+        "body": [
+            "connect(${0:});"
+        ],
+        "description": "[Class:anvm_host_software_agent]\n     virtual function void connect(\n);    "
+    },
+    "anvm_ctrler_adaptor_base": {
+        "prefix": "anvm_ctrler_adaptor_base",
+        "body": [
+            "anvm_ctrler_adaptor_base  ${0:name_class};"
+        ],
+        "description": "class anvm_ctrler_adaptor_base;\n"
+    },
+    "anvm_ctrler_adaptor_base :: new": {
+        "prefix": [
+            "new",
+            "function:new -> anvm_ctrler_adaptor_base"
+        ],
+        "body": [
+            "new(${1:instance_name});"
+        ],
+        "description": "[Class:anvm_ctrler_adaptor_base]\n     function new(\nstring instance_name);    "
+    },
+    "anvm_ctrler_adaptor_base :: sprint": {
+        "prefix": [
+            "sprint",
+            "function:sprint -> anvm_ctrler_adaptor_base"
+        ],
+        "body": [
+            "sprint(${1:verbosity});"
+        ],
+        "description": "[Class:anvm_ctrler_adaptor_base]\n     function string sprint(\nint verbosity = 0);    "
+    },
+    "anvm_ctrler_adaptor_base :: write_mem": {
+        "prefix": [
+            "write_mem",
+            "task:write_mem -> anvm_ctrler_adaptor_base"
+        ],
+        "body": [
+            "write_mem(${1:addr}, ${2:v}, ${3:be});"
+        ],
+        "description": "[Class:anvm_ctrler_adaptor_base]\n     virtual task write_mem(\nbit       addr,\n bit       v,\n bit       be);    "
+    },
+    "anvm_ctrler_adaptor_base :: read_mem": {
+        "prefix": [
+            "read_mem",
+            "task:read_mem -> anvm_ctrler_adaptor_base"
+        ],
+        "body": [
+            "read_mem(${1:addr}, ${2:v}, ${3:err});"
+        ],
+        "description": "[Class:anvm_ctrler_adaptor_base]\n     virtual task read_mem(\nbit       addr,\n output bit       v,\n output bit err);    "
+    },
+    "anvm_ctrler_adaptor_base :: write_mem_array": {
+        "prefix": [
+            "write_mem_array",
+            "task:write_mem_array -> anvm_ctrler_adaptor_base"
+        ],
+        "body": [
+            "write_mem_array(${1:addr}, ${2:va}, ${3:fbe}, ${4:lbe}, ${5:dbg});"
+        ],
+        "description": "[Class:anvm_ctrler_adaptor_base]\n     virtual task write_mem_array(\nbit       addr,\n ref bit       va      ,\n input bit       fbe,\n bit       lbe,\n string dbg=\"\");    "
+    },
+    "anvm_ctrler_adaptor_base :: read_mem_array": {
+        "prefix": [
+            "read_mem_array",
+            "task:read_mem_array -> anvm_ctrler_adaptor_base"
+        ],
+        "body": [
+            "read_mem_array(${1:addr}, ${2:num_dwords}, ${3:va}, ${4:err});"
+        ],
+        "description": "[Class:anvm_ctrler_adaptor_base]\n     virtual task read_mem_array(\nbit       addr,\n int num_dwords,\n output bit       va      ,\n output bit err);    "
+    },
+    "anvm_ctrler_adaptor_base :: do_warm_reset": {
+        "prefix": [
+            "do_warm_reset",
+            "task:do_warm_reset -> anvm_ctrler_adaptor_base"
+        ],
+        "body": [
+            "do_warm_reset(${1:hold_time_in_ns});"
+        ],
+        "description": "[Class:anvm_ctrler_adaptor_base]\n     virtual task do_warm_reset(\ntime hold_time_in_ns = 0);    "
+    },
+    "anvm_ctrler_adaptor_base :: do_cold_reset": {
+        "prefix": [
+            "do_cold_reset",
+            "task:do_cold_reset -> anvm_ctrler_adaptor_base"
+        ],
+        "body": [
+            "do_cold_reset(${1:hold_time_in_ns});"
+        ],
+        "description": "[Class:anvm_ctrler_adaptor_base]\n     virtual task do_cold_reset(\ntime hold_time_in_ns = 0);    "
+    },
+    "anvm_ctrler_adaptor_base :: reset": {
+        "prefix": [
+            "reset",
+            "task:reset -> anvm_ctrler_adaptor_base"
+        ],
+        "body": [
+            "reset(${0:});"
+        ],
+        "description": "[Class:anvm_ctrler_adaptor_base]\n     virtual task reset(\n);    "
+    },
+    "anvm_ctrler_adaptor_base :: check_interrupt": {
+        "prefix": [
+            "check_interrupt",
+            "task:check_interrupt -> anvm_ctrler_adaptor_base"
+        ],
+        "body": [
+            "check_interrupt(${1:func}, ${2:pin_enabled}, ${3:msi_enabled}, ${4:msix_enabled});"
+        ],
+        "description": "[Class:anvm_ctrler_adaptor_base]\n     virtual task check_interrupt(\n input  int func        ,\n                                  output bit pin_enabled ,\n                                  output bit msi_enabled ,\n                                  output bit msix_enabled );    "
+    },
+    "anvm_ctrler_adaptor_base :: signal_interrupt": {
+        "prefix": [
+            "signal_interrupt",
+            "task:signal_interrupt -> anvm_ctrler_adaptor_base"
+        ],
+        "body": [
+            "signal_interrupt(${1:func}, ${2:int_vector}, ${3:int_status});"
+        ],
+        "description": "[Class:anvm_ctrler_adaptor_base]\n     virtual task signal_interrupt(\n    input  int  func,\n    input  int  int_vector,\n    output int  int_status    );    "
+    },
+    "anvm_ctrler_adaptor_base :: clear_interrupt": {
+        "prefix": [
+            "clear_interrupt",
+            "task:clear_interrupt -> anvm_ctrler_adaptor_base"
+        ],
+        "body": [
+            "clear_interrupt(${1:func}, ${2:int_vector});"
+        ],
+        "description": "[Class:anvm_ctrler_adaptor_base]\n     virtual task clear_interrupt(\nint func,\n int int_vector);    "
+    },
+    "anvm_ctrler_adaptor_base :: set_nvme_cap": {
+        "prefix": [
+            "set_nvme_cap",
+            "function:set_nvme_cap -> anvm_ctrler_adaptor_base"
+        ],
+        "body": [
+            "set_nvme_cap(${1:nvme_cap});"
+        ],
+        "description": "[Class:anvm_ctrler_adaptor_base]\n     virtual function void set_nvme_cap(\nanvm_ctrler_registers nvme_cap);    "
+    },
+    "anvm_ctrler_adaptor_base :: get_port_id": {
+        "prefix": [
+            "get_port_id",
+            "function:get_port_id -> anvm_ctrler_adaptor_base"
+        ],
+        "body": [
+            "get_port_id(${0:});"
+        ],
+        "description": "[Class:anvm_ctrler_adaptor_base]\n     virtual function int get_port_id(\n);    "
+    },
+    "anvm_ctrler_adaptor_base :: sync_bus_num": {
+        "prefix": [
+            "sync_bus_num",
+            "task:sync_bus_num -> anvm_ctrler_adaptor_base"
+        ],
+        "body": [
+            "sync_bus_num(${1:bus_num});"
+        ],
+        "description": "[Class:anvm_ctrler_adaptor_base]\n     virtual task sync_bus_num(\ninout bit       bus_num);    "
+    },
+    "anvm_ctrler_adaptor_base :: get_bus_num": {
+        "prefix": [
+            "get_bus_num",
+            "function:get_bus_num -> anvm_ctrler_adaptor_base"
+        ],
+        "body": [
+            "get_bus_num(${0:});"
+        ],
+        "description": "[Class:anvm_ctrler_adaptor_base]\n     virtual function bit       get_bus_num(\n);    "
+    },
+    "anvm_ctrler_adaptor_base :: wait_pcie_event": {
+        "prefix": [
+            "wait_pcie_event",
+            "task:wait_pcie_event -> anvm_ctrler_adaptor_base"
+        ],
+        "body": [
+            "wait_pcie_event(${1:entry});"
+        ],
+        "description": "[Class:anvm_ctrler_adaptor_base]\n     virtual task wait_pcie_event(\nstring entry);                                                                                                                  "
+    },
+    "anvm_ctrler_adaptor_base :: get_msi_multi_msg_en": {
+        "prefix": [
+            "get_msi_multi_msg_en",
+            "function:get_msi_multi_msg_en -> anvm_ctrler_adaptor_base"
+        ],
+        "body": [
+            "get_msi_multi_msg_en(${0:});"
+        ],
+        "description": "[Class:anvm_ctrler_adaptor_base]\n     virtual function int get_msi_multi_msg_en(\n);    "
+    },
+    "anvm_ctrler_adaptor_base :: set_msix_table_size": {
+        "prefix": [
+            "set_msix_table_size",
+            "function:set_msix_table_size -> anvm_ctrler_adaptor_base"
+        ],
+        "body": [
+            "set_msix_table_size(${1:n_vector});"
+        ],
+        "description": "[Class:anvm_ctrler_adaptor_base]\n     virtual function void set_msix_table_size(\nint n_vector);    "
+    },
+    "anvm_ctrler_adaptor_base :: get_msix_table_size": {
+        "prefix": [
+            "get_msix_table_size",
+            "function:get_msix_table_size -> anvm_ctrler_adaptor_base"
+        ],
+        "body": [
+            "get_msix_table_size(${0:});"
+        ],
+        "description": "[Class:anvm_ctrler_adaptor_base]\n     virtual function int get_msix_table_size(\n);    "
+    },
+    "anvm_ctrler_adaptor_base :: get_bar": {
+        "prefix": [
+            "get_bar",
+            "function:get_bar -> anvm_ctrler_adaptor_base"
+        ],
+        "body": [
+            "get_bar(${1:bar_id}, ${2:base}, ${3:len}, ${4:bar_kind});"
+        ],
+        "description": "[Class:anvm_ctrler_adaptor_base]\n     virtual function bit get_bar(\n input  int       bar_id  ,\n                                  output bit       base    ,\n                                  output bit       len     ,\n                                  output int       bar_kind );    "
+    },
+    "anvm_ctrler_adaptor": {
+        "prefix": "anvm_ctrler_adaptor",
+        "body": [
+            "anvm_ctrler_adaptor  ${0:name_class};"
+        ],
+        "description": "class anvm_ctrler_adaptor extends anvm_ctrler_adaptor_base;\n"
+    },
+    "anvm_ctrler_adaptor :: new": {
+        "prefix": [
+            "new",
+            "function:new -> anvm_ctrler_adaptor"
+        ],
+        "body": [
+            "new(${1:instance_name});"
+        ],
+        "description": "[Class:anvm_ctrler_adaptor]\n     function new(\nstring instance_name);    "
+    },
+    "anvm_ctrler_adaptor :: my_connect": {
+        "prefix": [
+            "my_connect",
+            "function:my_connect -> anvm_ctrler_adaptor"
+        ],
+        "body": [
+            "my_connect(${1:fake_ep}, ${2:ctrler}, ${3:func_num});"
+        ],
+        "description": "[Class:anvm_ctrler_adaptor]\n     function void my_connect(\n            anvm_pcie_fake  fake_ep,\n            anvm_controller ctrler,\n            bit              func_num);    "
+    },
+    "anvm_ctrler_adaptor :: write_mem": {
+        "prefix": [
+            "write_mem",
+            "task:write_mem -> anvm_ctrler_adaptor"
+        ],
+        "body": [
+            "write_mem(${1:addr}, ${2:v}, ${3:be});"
+        ],
+        "description": "[Class:anvm_ctrler_adaptor]\n     virtual task write_mem(\nbit       addr,\n bit       v,\n bit       be);    "
+    },
+    "anvm_ctrler_adaptor :: read_mem": {
+        "prefix": [
+            "read_mem",
+            "task:read_mem -> anvm_ctrler_adaptor"
+        ],
+        "body": [
+            "read_mem(${1:addr}, ${2:v}, ${3:err});"
+        ],
+        "description": "[Class:anvm_ctrler_adaptor]\n     virtual task read_mem(\nbit       addr,\n output bit       v,\n output bit err);    "
+    },
+    "anvm_ctrler_adaptor :: write_mem_array": {
+        "prefix": [
+            "write_mem_array",
+            "task:write_mem_array -> anvm_ctrler_adaptor"
+        ],
+        "body": [
+            "write_mem_array(${1:addr}, ${2:va}, ${3:fbe}, ${4:lbe}, ${5:dbg});"
+        ],
+        "description": "[Class:anvm_ctrler_adaptor]\n     virtual task write_mem_array(\nbit       addr,\n ref bit       va      ,\n input bit       fbe,\n bit       lbe,\n string dbg=\"\");    "
+    },
+    "anvm_ctrler_adaptor :: read_mem_array": {
+        "prefix": [
+            "read_mem_array",
+            "task:read_mem_array -> anvm_ctrler_adaptor"
+        ],
+        "body": [
+            "read_mem_array(${1:addr}, ${2:num_dwords}, ${3:va}, ${4:err});"
+        ],
+        "description": "[Class:anvm_ctrler_adaptor]\n     virtual task read_mem_array(\nbit       addr,\n int num_dwords,\n output bit       va      ,\n output bit err);    "
+    },
+    "anvm_ctrler_adaptor :: set_nvme_cap": {
+        "prefix": [
+            "set_nvme_cap",
+            "function:set_nvme_cap -> anvm_ctrler_adaptor"
+        ],
+        "body": [
+            "set_nvme_cap(${1:nvme_cap});"
+        ],
+        "description": "[Class:anvm_ctrler_adaptor]\n     virtual function void set_nvme_cap(\nanvm_ctrler_registers nvme_cap);    "
+    },
+    "anvm_ctrler_adaptor :: write_nvme_cap": {
+        "prefix": [
+            "write_nvme_cap",
+            "task:write_nvme_cap -> anvm_ctrler_adaptor"
+        ],
+        "body": [
+            "write_nvme_cap(${1:offset}, ${2:v});"
+        ],
+        "description": "[Class:anvm_ctrler_adaptor]\n     task write_nvme_cap(\nbit       offset,\n  bit       v);    "
+    },
+    "anvm_ctrler_adaptor :: read_nvme_cap": {
+        "prefix": [
+            "read_nvme_cap",
+            "task:read_nvme_cap -> anvm_ctrler_adaptor"
+        ],
+        "body": [
+            "read_nvme_cap(${1:offset}, ${2:v});"
+        ],
+        "description": "[Class:anvm_ctrler_adaptor]\n     task read_nvme_cap(\nbit       offset,\n output bit       v);    "
+    },
+    "anvm_ctrler_adaptor :: check_dword_aligned": {
+        "prefix": [
+            "check_dword_aligned",
+            "function:check_dword_aligned -> anvm_ctrler_adaptor"
+        ],
+        "body": [
+            "check_dword_aligned(${1:s}, ${2:addr});"
+        ],
+        "description": "[Class:anvm_ctrler_adaptor]\n     local function void check_dword_aligned(\nstring s,\n bit       addr);    "
+    },
+    "anvm_ctrler_adaptor :: check_interrupt": {
+        "prefix": [
+            "check_interrupt",
+            "task:check_interrupt -> anvm_ctrler_adaptor"
+        ],
+        "body": [
+            "check_interrupt(${1:func}, ${2:pin_enabled}, ${3:msi_enabled}, ${4:msix_enabled});"
+        ],
+        "description": "[Class:anvm_ctrler_adaptor]\n     virtual task check_interrupt(\n input  int func        ,\n                                  output bit pin_enabled ,\n                                  output bit msi_enabled ,\n                                  output bit msix_enabled );    "
+    },
+    "anvm_ctrler_adaptor :: signal_interrupt": {
+        "prefix": [
+            "signal_interrupt",
+            "task:signal_interrupt -> anvm_ctrler_adaptor"
+        ],
+        "body": [
+            "signal_interrupt(${1:func}, ${2:int_vector}, ${3:int_status});"
+        ],
+        "description": "[Class:anvm_ctrler_adaptor]\n     virtual task signal_interrupt(\nint func,\n int int_vector,\n output int int_status);    "
+    },
+    "anvm_ctrler_adaptor :: do_warm_reset": {
+        "prefix": [
+            "do_warm_reset",
+            "task:do_warm_reset -> anvm_ctrler_adaptor"
+        ],
+        "body": [
+            "do_warm_reset(${1:hold_time_in_ns});"
+        ],
+        "description": "[Class:anvm_ctrler_adaptor]\n     virtual task do_warm_reset(\ntime hold_time_in_ns = 0);    "
+    },
+    "anvm_ctrler_adaptor :: do_cold_reset": {
+        "prefix": [
+            "do_cold_reset",
+            "task:do_cold_reset -> anvm_ctrler_adaptor"
+        ],
+        "body": [
+            "do_cold_reset(${1:hold_time_in_ns});"
+        ],
+        "description": "[Class:anvm_ctrler_adaptor]\n     virtual task do_cold_reset(\ntime hold_time_in_ns = 0);    "
+    },
+    "anvm_ctrler_adaptor :: reset": {
+        "prefix": [
+            "reset",
+            "task:reset -> anvm_ctrler_adaptor"
+        ],
+        "body": [
+            "reset(${0:});"
+        ],
+        "description": "[Class:anvm_ctrler_adaptor]\n     virtual task reset(\n);    "
+    },
+    "anvm_ctrler_adaptor :: wait_pcie_event": {
+        "prefix": [
+            "wait_pcie_event",
+            "task:wait_pcie_event -> anvm_ctrler_adaptor"
+        ],
+        "body": [
+            "wait_pcie_event(${1:entry});"
+        ],
+        "description": "[Class:anvm_ctrler_adaptor]\n     virtual task wait_pcie_event(\nstring entry);    "
+    },
+    "anvm_ctrler_adaptor :: sync_bus_num": {
+        "prefix": [
+            "sync_bus_num",
+            "task:sync_bus_num -> anvm_ctrler_adaptor"
+        ],
+        "body": [
+            "sync_bus_num(${1:bus_num});"
+        ],
+        "description": "[Class:anvm_ctrler_adaptor]\n     virtual task sync_bus_num(\ninout bit       bus_num);    "
+    },
+    "anvm_ctrler_adaptor :: get_bus_num": {
+        "prefix": [
+            "get_bus_num",
+            "function:get_bus_num -> anvm_ctrler_adaptor"
+        ],
+        "body": [
+            "get_bus_num(${0:});"
+        ],
+        "description": "[Class:anvm_ctrler_adaptor]\n     virtual function bit       get_bus_num(\n);    "
+    },
+    "anvm_ctrler_adaptor :: get_msi_multi_msg_en": {
+        "prefix": [
+            "get_msi_multi_msg_en",
+            "function:get_msi_multi_msg_en -> anvm_ctrler_adaptor"
+        ],
+        "body": [
+            "get_msi_multi_msg_en(${0:});"
+        ],
+        "description": "[Class:anvm_ctrler_adaptor]\n     virtual function int get_msi_multi_msg_en(\n);    "
+    },
+    "anvm_ctrler_adaptor :: set_msix_table_size": {
+        "prefix": [
+            "set_msix_table_size",
+            "function:set_msix_table_size -> anvm_ctrler_adaptor"
+        ],
+        "body": [
+            "set_msix_table_size(${1:n_vector});"
+        ],
+        "description": "[Class:anvm_ctrler_adaptor]\n     virtual function void set_msix_table_size(\nint n_vector);    "
+    },
+    "anvm_ctrler_adaptor :: get_msix_table_size": {
+        "prefix": [
+            "get_msix_table_size",
+            "function:get_msix_table_size -> anvm_ctrler_adaptor"
+        ],
+        "body": [
+            "get_msix_table_size(${0:});"
+        ],
+        "description": "[Class:anvm_ctrler_adaptor]\n     virtual function int get_msix_table_size(\n);    "
+    },
+    "anvm_ctrler_adaptor :: get_bar": {
+        "prefix": [
+            "get_bar",
+            "function:get_bar -> anvm_ctrler_adaptor"
+        ],
+        "body": [
+            "get_bar(${1:bar_id}, ${2:base}, ${3:len}, ${4:bar_kind});"
+        ],
+        "description": "[Class:anvm_ctrler_adaptor]\n     virtual function bit get_bar(\n input  int       bar_id  ,\n                                  output bit       base    ,\n                                  output bit       len     ,\n                                  output int       bar_kind );    "
+    },
+    "anvm_fabric_host_adaptor_fake": {
+        "prefix": "anvm_fabric_host_adaptor_fake",
+        "body": [
+            "anvm_fabric_host_adaptor_fake  ${0:name_class};"
+        ],
+        "description": "class anvm_fabric_host_adaptor_fake extends anvm_fabric_host_adaptor;\n"
+    },
+    "anvm_fabric_host_adaptor_fake :: new": {
+        "prefix": [
+            "new",
+            "function:new -> anvm_fabric_host_adaptor_fake"
+        ],
+        "body": [
+            "new(${1:instance_name});"
+        ],
+        "description": "[Class:anvm_fabric_host_adaptor_fake]\n     function new(\nstring instance_name);    "
+    },
+    "anvm_fabric_host_adaptor_fake :: my_connect": {
+        "prefix": [
+            "my_connect",
+            "function:my_connect -> anvm_fabric_host_adaptor_fake"
+        ],
+        "body": [
+            "my_connect(${1:fab}, ${2:sw}, ${3:host_nqn});"
+        ],
+        "description": "[Class:anvm_fabric_host_adaptor_fake]\n     function void my_connect(\nanvm_fabric_fake fab,\n anvm_host_software sw,\n anvm_nqn host_nqn);    "
+    },
+    "anvm_fabric_host_adaptor_fake :: get_nqn": {
+        "prefix": [
+            "get_nqn",
+            "function:get_nqn -> anvm_fabric_host_adaptor_fake"
+        ],
+        "body": [
+            "get_nqn(${0:});"
+        ],
+        "description": "[Class:anvm_fabric_host_adaptor_fake]\n     virtual function anvm_nqn get_nqn(\n);    "
+    },
+    "anvm_fabric_host_adaptor_fake :: wait_discovery_ctrlers": {
+        "prefix": [
+            "wait_discovery_ctrlers",
+            "task:wait_discovery_ctrlers -> anvm_fabric_host_adaptor_fake"
+        ],
+        "body": [
+            "wait_discovery_ctrlers(${1:ctrler_ids});"
+        ],
+        "description": "[Class:anvm_fabric_host_adaptor_fake]\n     virtual task wait_discovery_ctrlers(\nref anvm_fab_ctrler_id ctrler_ids      );    "
+    },
+    "anvm_fabric_host_adaptor_fake :: get_admin_sq_capsule_size": {
+        "prefix": [
+            "get_admin_sq_capsule_size",
+            "function:get_admin_sq_capsule_size -> anvm_fabric_host_adaptor_fake"
+        ],
+        "body": [
+            "get_admin_sq_capsule_size(${0:});"
+        ],
+        "description": "[Class:anvm_fabric_host_adaptor_fake]\n     virtual function int get_admin_sq_capsule_size(\n);    "
+    },
+    "anvm_fabric_host_adaptor_fake :: get_amdin_rsp_capsule_size": {
+        "prefix": [
+            "get_amdin_rsp_capsule_size",
+            "function:get_amdin_rsp_capsule_size -> anvm_fabric_host_adaptor_fake"
+        ],
+        "body": [
+            "get_amdin_rsp_capsule_size(${0:});"
+        ],
+        "description": "[Class:anvm_fabric_host_adaptor_fake]\n     virtual function int get_amdin_rsp_capsule_size(\n);    "
+    },
+    "anvm_fabric_host_adaptor_fake :: post_capsule": {
+        "prefix": [
+            "post_capsule",
+            "function:post_capsule -> anvm_fabric_host_adaptor_fake"
+        ],
+        "body": [
+            "post_capsule(${1:cs});"
+        ],
+        "description": "[Class:anvm_fabric_host_adaptor_fake]\n     virtual function void post_capsule(\nanvm_capsule cs);    "
+    },
+    "anvm_fabric_host_adaptor_fake :: wait_rx_capsule": {
+        "prefix": [
+            "wait_rx_capsule",
+            "task:wait_rx_capsule -> anvm_fabric_host_adaptor_fake"
+        ],
+        "body": [
+            "wait_rx_capsule(${1:cs});"
+        ],
+        "description": "[Class:anvm_fabric_host_adaptor_fake]\n     virtual task wait_rx_capsule(\noutput anvm_capsule cs);    "
+    },
+    "anvm_fabric_host_adaptor_fake :: get_host_memory_size": {
+        "prefix": [
+            "get_host_memory_size",
+            "function:get_host_memory_size -> anvm_fabric_host_adaptor_fake"
+        ],
+        "body": [
+            "get_host_memory_size(${0:});"
+        ],
+        "description": "[Class:anvm_fabric_host_adaptor_fake]\n     virtual function bit       get_host_memory_size(\n);    "
+    },
+    "anvm_fabric_host_adaptor_fake :: write_dword_array": {
+        "prefix": [
+            "write_dword_array",
+            "task:write_dword_array -> anvm_fabric_host_adaptor_fake"
+        ],
+        "body": [
+            "write_dword_array(${1:addr}, ${2:va}, ${3:first_be}, ${4:last_be}, ${5:flag}, ${6:dbg});"
+        ],
+        "description": "[Class:anvm_fabric_host_adaptor_fake]\n     virtual task write_dword_array(\n            bit             addr    ,\n            bit             va          ,\n            bit              first_be = 'hf,\n            bit              last_be  = 'hf,\n            bit             flag     = 0,\n                   avery_data_base dbg      = null );    "
+    },
+    "anvm_fabric_host_adaptor_fake :: read_dword_array": {
+        "prefix": [
+            "read_dword_array",
+            "task:read_dword_array -> anvm_fabric_host_adaptor_fake"
+        ],
+        "body": [
+            "read_dword_array(${1:addr}, ${2:num_dwords}, ${3:va}, ${4:err}, ${5:first_be}, ${6:last_be}, ${7:flag}, ${8:dbg});"
+        ],
+        "description": "[Class:anvm_fabric_host_adaptor_fake]\n     virtual task read_dword_array(\n            input  bit             addr      ,\n                   int             num_dwords,\n            output bit             va            ,\n            output bit             err       ,\n            input  bit              first_be   = 'hf,\n            input  bit              last_be    = 'hf,\n            input  bit             flag       = 0,\n               input  avery_data_base dbg        = null );    "
+    },
+    "anvm_fabric_host_adaptor_fake :: wait_irq": {
+        "prefix": [
+            "wait_irq",
+            "task:wait_irq -> anvm_fabric_host_adaptor_fake"
+        ],
+        "body": [
+            "wait_irq(${1:ctrler_id}, ${2:int_kind}, ${3:addr}, ${4:data});"
+        ],
+        "description": "[Class:anvm_fabric_host_adaptor_fake]\n     virtual task wait_irq(\n output int              ctrler_id,\n          anvm_interrupt_e int_kind ,\n  bit              addr     ,\n                                  bit              data      );    "
+    },
+    "anvm_fabric_host_adaptor_fake :: do_subsystem_reset": {
+        "prefix": [
+            "do_subsystem_reset",
+            "task:do_subsystem_reset -> anvm_fabric_host_adaptor_fake"
+        ],
+        "body": [
+            "do_subsystem_reset(${1:ctrler_id});"
+        ],
+        "description": "[Class:anvm_fabric_host_adaptor_fake]\n     virtual task do_subsystem_reset(\nbit       ctrler_id);    "
+    },
+    "anvm_fabric_host_adaptor_fake :: do_function_reset": {
+        "prefix": [
+            "do_function_reset",
+            "task:do_function_reset -> anvm_fabric_host_adaptor_fake"
+        ],
+        "body": [
+            "do_function_reset(${1:ctrler_id}, ${2:flr_support});"
+        ],
+        "description": "[Class:anvm_fabric_host_adaptor_fake]\n     virtual task do_function_reset(\nbit       ctrler_id,\n output bit flr_support);    "
+    },
+    "anvm_fabric_host_adaptor_fake :: get_port_number": {
+        "prefix": [
+            "get_port_number",
+            "function:get_port_number -> anvm_fabric_host_adaptor_fake"
+        ],
+        "body": [
+            "get_port_number(${1:ctrler_id});"
+        ],
+        "description": "[Class:anvm_fabric_host_adaptor_fake]\n     virtual function int get_port_number (\nbit       ctrler_id);    "
+    },
+    "anvm_fabric_host_adaptor_fake :: free_host_mem": {
+        "prefix": [
+            "free_host_mem",
+            "function:free_host_mem -> anvm_fabric_host_adaptor_fake"
+        ],
+        "body": [
+            "free_host_mem(${1:addr}, ${2:len}, ${3:src});"
+        ],
+        "description": "[Class:anvm_fabric_host_adaptor_fake]\n     virtual function void free_host_mem(\nbit       addr,\n bit       len,\n anvm_data_base src);    "
+    },
+    "anvm_get_device_id": {
+        "prefix": [
+            "anvm_get_device_id",
+            "function:anvm_get_device_id"
+        ],
+        "body": [
+            "anvm_get_device_id(${0:});"
+        ],
+        "description": "function int anvm_get_device_id(\n);    "
+    },
+    "anvm_get_nvm_id": {
+        "prefix": [
+            "anvm_get_nvm_id",
+            "function:anvm_get_nvm_id"
+        ],
+        "body": [
+            "anvm_get_nvm_id(${0:});"
+        ],
+        "description": "function int anvm_get_nvm_id(\n);    "
+    },
+    "anvm_power_of_two": {
+        "prefix": [
+            "anvm_power_of_two",
+            "function:anvm_power_of_two"
+        ],
+        "body": [
+            "anvm_power_of_two(${1:v});"
+        ],
+        "description": "function int anvm_power_of_two(\nbit       v);    "
+    },
+    "anvm_offset_mask": {
+        "prefix": [
+            "anvm_offset_mask",
+            "function:anvm_offset_mask"
+        ],
+        "body": [
+            "anvm_offset_mask(${1:page_size});"
+        ],
+        "description": "function bit       anvm_offset_mask(\nbit       page_size);    "
+    },
+    "anvm_page_offset": {
+        "prefix": [
+            "anvm_page_offset",
+            "function:anvm_page_offset"
+        ],
+        "body": [
+            "anvm_page_offset(${1:page_size}, ${2:addr});"
+        ],
+        "description": "function bit       anvm_page_offset(\nbit       page_size,\n bit       addr);    "
+    },
+    "anvm_page_mask": {
+        "prefix": [
+            "anvm_page_mask",
+            "function:anvm_page_mask"
+        ],
+        "body": [
+            "anvm_page_mask(${1:page_size});"
+        ],
+        "description": "function bit       anvm_page_mask(\nbit       page_size);    "
+    },
+    "anvm_bytes_2_dwords": {
+        "prefix": [
+            "anvm_bytes_2_dwords",
+            "function:anvm_bytes_2_dwords"
+        ],
+        "body": [
+            "anvm_bytes_2_dwords(${1:ba}, ${2:da});"
+        ],
+        "description": "function automatic void anvm_bytes_2_dwords(\nref byte ba      ,\n ref bit       da      );    "
+    },
+    "anvm_page_dwords": {
+        "prefix": [
+            "anvm_page_dwords",
+            "function:anvm_page_dwords"
+        ],
+        "body": [
+            "anvm_page_dwords(${1:offset}, ${2:page_size});"
+        ],
+        "description": "function bit       anvm_page_dwords(\nbit       offset,\n bit       page_size);    "
+    },
+    "anvm_page_qwords": {
+        "prefix": [
+            "anvm_page_qwords",
+            "function:anvm_page_qwords"
+        ],
+        "body": [
+            "anvm_page_qwords(${1:offset}, ${2:page_size});"
+        ],
+        "description": "function bit       anvm_page_qwords(\nbit       offset,\n bit       page_size);    "
+    },
+    "anvm_get_byte_enable": {
+        "prefix": [
+            "anvm_get_byte_enable",
+            "function:anvm_get_byte_enable"
+        ],
+        "body": [
+            "anvm_get_byte_enable(${1:addr}, ${2:n_bytes}, ${3:fbe}, ${4:lbe});"
+        ],
+        "description": "function void anvm_get_byte_enable(\nbit       addr,\n bit       n_bytes,\n output bit       fbe,\n output bit       lbe);    "
+    },
+    "anvm_data_base": {
+        "prefix": "anvm_data_base",
+        "body": [
+            "anvm_data_base  ${0:name_class};"
+        ],
+        "description": "class anvm_data_base extends avery_data_base;\n"
+    },
+    "anvm_data_base :: new": {
+        "prefix": [
+            "new",
+            "function:new -> anvm_data_base"
+        ],
+        "body": [
+            "new(${1:name});"
+        ],
+        "description": "[Class:anvm_data_base]\n     function new(\nstring name = \"anvm_data_base\");     "
+    },
+    "anvm_data_base :: sprint": {
+        "prefix": [
+            "sprint",
+            "function:sprint -> anvm_data_base"
+        ],
+        "body": [
+            "sprint(${1:verbosity}, ${2:prefix});"
+        ],
+        "description": "[Class:anvm_data_base]\n     virtual function string sprint(\nint verbosity = 0,\n string prefix = \"\");    "
+    },
+    "anvm_data_base :: copy": {
+        "prefix": [
+            "copy",
+            "function:copy -> anvm_data_base"
+        ],
+        "body": [
+            "copy(${1:to});"
+        ],
+        "description": "[Class:anvm_data_base]\n     function anvm_data_base copy(\nanvm_data_base to = null);    "
+    },
+    "anvm_seq_util": {
+        "prefix": "anvm_seq_util",
+        "body": [
+            "anvm_seq_util  ${0:name_class};"
+        ],
+        "description": "class anvm_seq_util extends anvm_seq_common;\n"
+    },
+    "anvm_seq_util :: new": {
+        "prefix": [
+            "new",
+            "function:new -> anvm_seq_util"
+        ],
+        "body": [
+            "new(${1:hsw});"
+        ],
+        "description": "[Class:anvm_seq_util]\n     function new(\nanvm_host_software hsw);    "
+    },
+    "anvm_seq_util :: wait_cpl": {
+        "prefix": [
+            "wait_cpl",
+            "task:wait_cpl -> anvm_seq_util"
+        ],
+        "body": [
+            "wait_cpl(${1:entry}, ${2:cpl}, ${3:timer}, ${4:timeout_msg});"
+        ],
+        "description": "[Class:anvm_seq_util]\n     virtual task wait_cpl(\nstring entry,\n output anvm_cpl_entry cpl,\n input time timer = 0,\n string timeout_msg=\"\");    "
+    },
+    "anvm_seq_util :: cmd_not_supported": {
+        "prefix": [
+            "cmd_not_supported",
+            "function:cmd_not_supported -> anvm_seq_util"
+        ],
+        "body": [
+            "cmd_not_supported(${1:mgr}, ${2:kind});"
+        ],
+        "description": "[Class:anvm_seq_util]\n     static function bit cmd_not_supported(\nanvm_controller_mgr mgr,\n anvm_cmd_e kind);    "
+    },
+    "anvm_seq_util :: feature_is_ns_specific": {
+        "prefix": [
+            "feature_is_ns_specific",
+            "function:feature_is_ns_specific -> anvm_seq_util"
+        ],
+        "body": [
+            "feature_is_ns_specific(${1:feat_kinds});"
+        ],
+        "description": "[Class:anvm_seq_util]\n     function bit feature_is_ns_specific(\nanvm_feature_e feat_kinds);    "
+    },
+    "anvm_seq_util :: create_nvm_write_reaq_pair": {
+        "prefix": [
+            "create_nvm_write_reaq_pair",
+            "function:create_nvm_write_reaq_pair -> anvm_seq_util"
+        ],
+        "body": [
+            "create_nvm_write_reaq_pair(${1:mgr}, ${2:ns}, ${3:num_lba}, ${4:no_lba_overlap}, ${5:wr}, ${6:rd});"
+        ],
+        "description": "[Class:anvm_seq_util]\n     function void create_nvm_write_reaq_pair(\n                   anvm_controller_mgr mgr           ,\n                   anvm_istruct_ns     ns            ,\n                   avery_u16           num_lba       ,\n                   bit                 no_lba_overlap = 0,\n            output anvm_cmd_entry      wr            ,\n            output anvm_cmd_entry      rd             );    "
+    },
+    "anvm_seq_util :: create_nvm_write": {
+        "prefix": [
+            "create_nvm_write",
+            "function:create_nvm_write -> anvm_seq_util"
+        ],
+        "body": [
+            "create_nvm_write(${1:mgr}, ${2:ns}, ${3:num_lba}, ${4:no_lba_overlap}, ${5:over_mdts});"
+        ],
+        "description": "[Class:anvm_seq_util]\n     static function anvm_cmd_entry create_nvm_write(\n            anvm_controller_mgr mgr               ,\n            anvm_istruct_ns     ns                ,\n               avery_u16           num_lba        = 0,\n               bit                 no_lba_overlap = 0,\n               bit                 over_mdts      = 0    );    "
+    },
+    "anvm_seq_util :: create_nvm_verify": {
+        "prefix": [
+            "create_nvm_verify",
+            "function:create_nvm_verify -> anvm_seq_util"
+        ],
+        "body": [
+            "create_nvm_verify(${1:mgr}, ${2:ns}, ${3:num_lba}, ${4:no_lba_overlap}, ${5:over_mdts}, ${6:starting_lba});"
+        ],
+        "description": "[Class:anvm_seq_util]\n     static function anvm_cmd_entry create_nvm_verify(\n    anvm_controller_mgr mgr,\n    anvm_istruct_ns     ns,\n                avery_u16           num_lba = 0,\n       bit                 no_lba_overlap = 0,\n                                           bit                 over_mdts  = 0,\n          avery_u64           starting_lba = -1);    "
+    },
+    "anvm_seq_util :: create_nvm_read": {
+        "prefix": [
+            "create_nvm_read",
+            "function:create_nvm_read -> anvm_seq_util"
+        ],
+        "body": [
+            "create_nvm_read(${1:mgr}, ${2:ns}, ${3:num_lba}, ${4:no_lba_overlap}, ${5:over_mdts}, ${6:starting_lba});"
+        ],
+        "description": "[Class:anvm_seq_util]\n     static function anvm_cmd_entry create_nvm_read(\n    anvm_controller_mgr mgr,\n    anvm_istruct_ns     ns,\n                avery_u16           num_lba = 0,\n       bit                 no_lba_overlap = 0,\n                                           bit                 over_mdts  = 0,\n          avery_u64           starting_lba = -1);    "
+    },
+    "anvm_seq_util :: create_nvm_compare": {
+        "prefix": [
+            "create_nvm_compare",
+            "function:create_nvm_compare -> anvm_seq_util"
+        ],
+        "body": [
+            "create_nvm_compare(${1:mgr}, ${2:ns}, ${3:num_lba}, ${4:starting_lba}, ${5:over_mdts});"
+        ],
+        "description": "[Class:anvm_seq_util]\n     static function anvm_cmd_entry create_nvm_compare(\n    anvm_controller_mgr mgr,\n    anvm_istruct_nsns,\n          avery_u16num_lba = 0,\n      avery_u64           starting_lba = 0,\n            bit                 over_mdts    = 0    );    "
+    },
+    "anvm_seq_util :: create_download_fw": {
+        "prefix": [
+            "create_download_fw",
+            "function:create_download_fw -> anvm_seq_util"
+        ],
+        "body": [
+            "create_download_fw(${1:mgr}, ${2:image});"
+        ],
+        "description": "[Class:anvm_seq_util]\n     static function anvm_cmd_entry create_download_fw(\n    anvm_controller_mgr mgr,\n    avery_u32           image      );    "
+    },
+    "anvm_seq_util :: create_security_send": {
+        "prefix": [
+            "create_security_send",
+            "function:create_security_send -> anvm_seq_util"
+        ],
+        "body": [
+            "create_security_send(${1:mgr}, ${2:protocol});"
+        ],
+        "description": "[Class:anvm_seq_util]\n     static function anvm_cmd_entry create_security_send(\n    anvm_controller_mgr mgr,\n    int                 protocol = -1);    "
+    },
+    "anvm_seq_util :: create_security_receive": {
+        "prefix": [
+            "create_security_receive",
+            "function:create_security_receive -> anvm_seq_util"
+        ],
+        "body": [
+            "create_security_receive(${1:mgr}, ${2:protocol});"
+        ],
+        "description": "[Class:anvm_seq_util]\n     static function anvm_cmd_entry create_security_receive(\n    anvm_controller_mgr mgr,\n    int                 protocol = -1);    "
+    },
+    "anvm_seq_util :: create_dataset_mng": {
+        "prefix": [
+            "create_dataset_mng",
+            "function:create_dataset_mng -> anvm_seq_util"
+        ],
+        "body": [
+            "create_dataset_mng(${1:mgr}, ${2:tgt_nsid}, ${3:num_ranges});"
+        ],
+        "description": "[Class:anvm_seq_util]\n     static function anvm_cmd_entry create_dataset_mng(\n    anvm_controller_mgr mgr,\n    int                 tgt_nsid = 1,\n    int                 num_ranges = -1);    "
+    },
+    "anvm_seq_util :: create_rsvt_register": {
+        "prefix": [
+            "create_rsvt_register",
+            "function:create_rsvt_register -> anvm_seq_util"
+        ],
+        "body": [
+            "create_rsvt_register(${1:mgr}, ${2:tgt_nsid}, ${3:rreg_action}, ${4:local_cur_key}, ${5:local_new_key});"
+        ],
+        "description": "[Class:anvm_seq_util]\n     static function anvm_cmd_entry create_rsvt_register(\nanvm_controller_mgr mgr,\nint                 tgt_nsid    = 1,\nanvm_rrega_e    rreg_action    = ANVM_RREGA_register_key,\navery_u64    local_cur_key   = -1,\navery_u64    local_new_key   = -1);    "
+    },
+    "anvm_seq_util :: create_rsvt_acquire": {
+        "prefix": [
+            "create_rsvt_acquire",
+            "function:create_rsvt_acquire -> anvm_seq_util"
+        ],
+        "body": [
+            "create_rsvt_acquire(${1:mgr}, ${2:tgt_nsid}, ${3:racq_type}, ${4:racq_action}, ${5:local_cur_key}, ${6:local_pre_key});"
+        ],
+        "description": "[Class:anvm_seq_util]\n     static function anvm_cmd_entry create_rsvt_acquire(\nanvm_controller_mgr mgr,\nint                 tgt_nsid    = 1,\nanvm_rsvt_type_e    racq_type    = ANVM_RSVT_TYPE_write_ex,\nanvm_racqa_e    racq_action    = ANVM_RACQA_acquire,\navery_u64    local_cur_key   = -1,\navery_u64    local_pre_key   = -1);    "
+    },
+    "anvm_seq_util :: create_rsvt_release": {
+        "prefix": [
+            "create_rsvt_release",
+            "function:create_rsvt_release -> anvm_seq_util"
+        ],
+        "body": [
+            "create_rsvt_release(${1:mgr}, ${2:tgt_nsid}, ${3:rrel_type}, ${4:rrel_action}, ${5:local_cur_key});"
+        ],
+        "description": "[Class:anvm_seq_util]\n     static function anvm_cmd_entry create_rsvt_release(\nanvm_controller_mgr mgr,\nint                 tgt_nsid    = 1,\nanvm_rsvt_type_e    rrel_type    = ANVM_RSVT_TYPE_write_ex,\nanvm_rrela_e    rrel_action    = ANVM_RRELA_release,\navery_u64    local_cur_key   = -1);    "
+    },
+    "anvm_seq_util :: create_rsvt_report": {
+        "prefix": [
+            "create_rsvt_report",
+            "function:create_rsvt_report -> anvm_seq_util"
+        ],
+        "body": [
+            "create_rsvt_report(${1:mgr}, ${2:tgt_nsid}, ${3:num_ctrl});"
+        ],
+        "description": "[Class:anvm_seq_util]\n     static function anvm_cmd_entry create_rsvt_report(\nanvm_controller_mgr mgr,\nint                 tgt_nsid = 1,\nint    num_ctrl);    "
+    },
+    "anvm_seq_util :: check_mdts": {
+        "prefix": [
+            "check_mdts",
+            "function:check_mdts -> anvm_seq_util"
+        ],
+        "body": [
+            "check_mdts(${1:mgr}, ${2:nsid});"
+        ],
+        "description": "[Class:anvm_seq_util]\n     static function void check_mdts(\nanvm_controller_mgr mgr,\n int nsid);    "
+    },
+    "anvm_seq_util :: rand_cmd": {
+        "prefix": [
+            "rand_cmd",
+            "function:rand_cmd -> anvm_seq_util"
+        ],
+        "body": [
+            "rand_cmd(${1:mgr}, ${2:nsid}, ${3:use_data_sgl});"
+        ],
+        "description": "[Class:anvm_seq_util]\n     static function anvm_cmd_entry rand_cmd(\nanvm_controller_mgr mgr,\nint        nsid,\nint                 use_data_sgl = -1        );    "
+    },
+    "anvm_seq_util :: insert_bit_buckets": {
+        "prefix": [
+            "insert_bit_buckets",
+            "function:insert_bit_buckets -> anvm_seq_util"
+        ],
+        "body": [
+            "insert_bit_buckets(${1:sgl}, ${2:mm}, ${3:num_bit_buckets});"
+        ],
+        "description": "[Class:anvm_seq_util]\n     static function void insert_bit_buckets(\nanvm_sgl sgl,\n anvm_memory_mgr mm,\n int num_bit_buckets);    "
+    },
+    "anvm_seq_util :: malloc_in_pmr_cmb": {
+        "prefix": [
+            "malloc_in_pmr_cmb",
+            "function:malloc_in_pmr_cmb -> anvm_seq_util"
+        ],
+        "body": [
+            "malloc_in_pmr_cmb(${1:hsw}, ${2:mgr}, ${3:use_pcie_buf}, ${4:page_size}, ${5:num_bytes}, ${6:base}, ${7:in_pcie_buf}, ${8:fatal_oom}, ${9:dbg_cmd});"
+        ],
+        "description": "[Class:anvm_seq_util]\n     function bit malloc_in_pmr_cmb(\nanvm_host_software  hsw,\n                        anvm_controller_mgr     mgr      ,\n                        bit                      use_pcie_buf,\n                           avery_u64               page_size,\n                        avery_u64               num_bytes,\n                        output avery_u64        base     ,\n                    output bit               in_pcie_buf,\n                        input  bit              fatal_oom=1,\n                        input  anvm_cmd_entry   dbg_cmd = null              );    "
+    },
+    "anvm_seq_util :: attach_detach_namespace": {
+        "prefix": [
+            "attach_detach_namespace",
+            "task:attach_detach_namespace -> anvm_seq_util"
+        ],
+        "body": [
+            "attach_detach_namespace(${1:is_detach}, ${2:target_nsid}, ${3:mgr}, ${4:err}, ${5:is_ei});"
+        ],
+        "description": "[Class:anvm_seq_util]\n     virtual task attach_detach_namespace(\n                   bit                 is_detach  ,\n                   bit                 target_nsid,\n                   anvm_controller_mgr mgr        ,\n            output bit                 err        ,\n    input  bit                 is_ei = 0);    "
+    },
+    "anvm_seq_util :: create_one_namespace": {
+        "prefix": [
+            "create_one_namespace",
+            "task:create_one_namespace -> anvm_seq_util"
+        ],
+        "body": [
+            "create_one_namespace(${1:mgr}, ${2:ns});"
+        ],
+        "description": "[Class:anvm_seq_util]\n     virtual task create_one_namespace(\n            input  anvm_controller_mgr mgr,\n            output anvm_istruct_ns     ns  );    "
+    },
+    "anvm_seq_util :: fetch_active_namespaces": {
+        "prefix": [
+            "fetch_active_namespaces",
+            "task:fetch_active_namespaces -> anvm_seq_util"
+        ],
+        "body": [
+            "fetch_active_namespaces(${1:mgr}, ${2:above_nsid}, ${3:nsid_q});"
+        ],
+        "description": "[Class:anvm_seq_util]\n     virtual task fetch_active_namespaces (\n            input anvm_controller_mgr mgr       ,\n            input bit                 above_nsid,\n            ref   bit                 nsid_q       );    "
+    },
+    "anvm_seq_util :: identify_ns_or_create": {
+        "prefix": [
+            "identify_ns_or_create",
+            "task:identify_ns_or_create -> anvm_seq_util"
+        ],
+        "body": [
+            "identify_ns_or_create(${1:mgr}, ${2:nsid}, ${3:ok});"
+        ],
+        "description": "[Class:anvm_seq_util]\n     virtual task identify_ns_or_create(\n            input  anvm_controller_mgr mgr ,\n            inout  bit                 nsid,\n            output bit                 ok   );    "
+    },
+    "anvm_seq_util :: fetch_all_active_nsid": {
+        "prefix": [
+            "fetch_all_active_nsid",
+            "task:fetch_all_active_nsid -> anvm_seq_util"
+        ],
+        "body": [
+            "fetch_all_active_nsid(${1:mgr}, ${2:all_ids});"
+        ],
+        "description": "[Class:anvm_seq_util]\n     virtual task fetch_all_active_nsid (\n    input anvm_controller_mgr mgr,\n    ref   bit all_ids       );       "
+    },
+    "anvm_seq_util :: prepare_secondary_ctrlers": {
+        "prefix": [
+            "prepare_secondary_ctrlers",
+            "task:prepare_secondary_ctrlers -> anvm_seq_util"
+        ],
+        "body": [
+            "prepare_secondary_ctrlers(${1:mgr}, ${2:skip_identify}, ${3:err});"
+        ],
+        "description": "[Class:anvm_seq_util]\n     virtual task prepare_secondary_ctrlers (\nanvm_controller_mgr mgr,\n bit skip_identify,\n output bit err);    "
+    },
+    "anvm_seq_util :: reset_secondary_ctrlers": {
+        "prefix": [
+            "reset_secondary_ctrlers",
+            "task:reset_secondary_ctrlers -> anvm_seq_util"
+        ],
+        "body": [
+            "reset_secondary_ctrlers(${1:mgr}, ${2:err});"
+        ],
+        "description": "[Class:anvm_seq_util]\n     virtual task reset_secondary_ctrlers (\nanvm_controller_mgr mgr,\n output bit err);    "
+    },
+    "anvm_seq_util :: identify_PCC": {
+        "prefix": [
+            "identify_PCC",
+            "task:identify_PCC -> anvm_seq_util"
+        ],
+        "body": [
+            "identify_PCC(${1:mgr}, ${2:err});"
+        ],
+        "description": "[Class:anvm_seq_util]\n     virtual task identify_PCC (\nanvm_controller_mgr mgr,\n output bit err);    "
+    },
+    "anvm_seq_util :: identify_SCL": {
+        "prefix": [
+            "identify_SCL",
+            "task:identify_SCL -> anvm_seq_util"
+        ],
+        "body": [
+            "identify_SCL(${1:mgr}, ${2:err});"
+        ],
+        "description": "[Class:anvm_seq_util]\n     virtual task identify_SCL (\nanvm_controller_mgr mgr,\n output bit err);    "
+    },
+    "anvm_seq_util :: change_sec_ctrler_state": {
+        "prefix": [
+            "change_sec_ctrler_state",
+            "task:change_sec_ctrler_state -> anvm_seq_util"
+        ],
+        "body": [
+            "change_sec_ctrler_state(${1:mgr}, ${2:is_online}, ${3:err});"
+        ],
+        "description": "[Class:anvm_seq_util]\n     virtual task change_sec_ctrler_state(\nanvm_controller_mgr mgr,\n bit is_online,\n output bit err);    "
+    },
+    "anvm_seq_util :: assign_sec_resource": {
+        "prefix": [
+            "assign_sec_resource",
+            "task:assign_sec_resource -> anvm_seq_util"
+        ],
+        "body": [
+            "assign_sec_resource(${1:mgr}, ${2:is_vq}, ${3:err});"
+        ],
+        "description": "[Class:anvm_seq_util]\n     virtual task assign_sec_resource(\n anvm_controller_mgr mgr,\n bit is_vq,\n output bit err);    "
+    },
+    "anvm_seq_util :: identify_csi_controller": {
+        "prefix": [
+            "identify_csi_controller",
+            "task:identify_csi_controller -> anvm_seq_util"
+        ],
+        "body": [
+            "identify_csi_controller(${1:mgr}, ${2:csi}, ${3:err});"
+        ],
+        "description": "[Class:anvm_seq_util]\n     virtual task identify_csi_controller(\n    anvm_controller_mgr mgr,\n    bit      csi,\n    output  biterr);    "
+    },
+    "anvm_seq_util :: collect_shared_ns_used_lbas": {
+        "prefix": [
+            "collect_shared_ns_used_lbas",
+            "function:collect_shared_ns_used_lbas -> anvm_seq_util"
+        ],
+        "body": [
+            "collect_shared_ns_used_lbas(${1:mgrs}, ${2:shared_nsid}, ${3:cmd});"
+        ],
+        "description": "[Class:anvm_seq_util]\n     virtual function void collect_shared_ns_used_lbas(\nanvm_controller_mgr mgrs      ,\n int shared_nsid,\n ref anvm_cmd_entry cmd);    "
+    },
+    "anvm_seq_util :: create_no_overlap_nvm_write": {
+        "prefix": [
+            "create_no_overlap_nvm_write",
+            "function:create_no_overlap_nvm_write -> anvm_seq_util"
+        ],
+        "body": [
+            "create_no_overlap_nvm_write(${1:mgr}, ${2:ns}, ${3:num_lba}, ${4:over_mdts});"
+        ],
+        "description": "[Class:anvm_seq_util]\n     function anvm_cmd_entry create_no_overlap_nvm_write(\n            anvm_controller_mgr mgr               ,\n            anvm_istruct_ns     ns                ,\n               avery_u16           num_lba        = 0,\n               bit                 over_mdts      = 0    );    "
+    },
+    "anvm_seq_del_q": {
+        "prefix": "anvm_seq_del_q",
+        "body": [
+            "anvm_seq_del_q  ${0:name_class};"
+        ],
+        "description": "class anvm_seq_del_q extends anvm_seq_common;\n"
+    },
+    "anvm_seq_del_q :: new": {
+        "prefix": [
+            "new",
+            "function:new -> anvm_seq_del_q"
+        ],
+        "body": [
+            "new(${1:hsw});"
+        ],
+        "description": "[Class:anvm_seq_del_q]\n     function new(\nanvm_host_software hsw);    "
+    },
+    "anvm_seq_del_q :: run_body": {
+        "prefix": [
+            "run_body",
+            "task:run_body -> anvm_seq_del_q"
+        ],
+        "body": [
+            "run_body(${0:});"
+        ],
+        "description": "[Class:anvm_seq_del_q]\n     task run_body(\n);    "
+    },
+    "anvm_seq_reset": {
+        "prefix": "anvm_seq_reset",
+        "body": [
+            "anvm_seq_reset  ${0:name_class};"
+        ],
+        "description": "class anvm_seq_reset extends anvm_seq_common;\n"
+    },
+    "anvm_seq_reset :: new": {
+        "prefix": [
+            "new",
+            "function:new -> anvm_seq_reset"
+        ],
+        "body": [
+            "new(${1:hsw});"
+        ],
+        "description": "[Class:anvm_seq_reset]\n     function new(\nanvm_host_software hsw);    "
+    },
+    "anvm_seq_reset :: run_body": {
+        "prefix": [
+            "run_body",
+            "task:run_body -> anvm_seq_reset"
+        ],
+        "body": [
+            "run_body(${0:});"
+        ],
+        "description": "[Class:anvm_seq_reset]\n     task run_body(\n);    "
+    },
+    "anvm_seq_reset :: sprint": {
+        "prefix": [
+            "sprint",
+            "function:sprint -> anvm_seq_reset"
+        ],
+        "body": [
+            "sprint(${1:verbosity}, ${2:prefix});"
+        ],
+        "description": "[Class:anvm_seq_reset]\n     virtual function string sprint(\nint verbosity = 0,\n string prefix = \"\");    "
+    },
+    "anvm_seq_async_err": {
+        "prefix": "anvm_seq_async_err",
+        "body": [
+            "anvm_seq_async_err  ${0:name_class};"
+        ],
+        "description": "class anvm_seq_async_err extends anvm_seq_common;\n"
+    },
+    "anvm_seq_async_err :: new": {
+        "prefix": [
+            "new",
+            "function:new -> anvm_seq_async_err"
+        ],
+        "body": [
+            "new(${1:hsw});"
+        ],
+        "description": "[Class:anvm_seq_async_err]\n     function new(\nanvm_host_software hsw);    "
+    },
+    "anvm_seq_async_err :: run_body": {
+        "prefix": [
+            "run_body",
+            "task:run_body -> anvm_seq_async_err"
+        ],
+        "body": [
+            "run_body(${0:});"
+        ],
+        "description": "[Class:anvm_seq_async_err]\n     task run_body(\n);    "
+    },
+    "anvm_seq_phase_bit": {
+        "prefix": "anvm_seq_phase_bit",
+        "body": [
+            "anvm_seq_phase_bit  ${0:name_class};"
+        ],
+        "description": "class anvm_seq_phase_bit extends anvm_seq_common;\n"
+    },
+    "anvm_seq_phase_bit :: new": {
+        "prefix": [
+            "new",
+            "function:new -> anvm_seq_phase_bit"
+        ],
+        "body": [
+            "new(${1:hsw});"
+        ],
+        "description": "[Class:anvm_seq_phase_bit]\n     function new(\nanvm_host_software hsw);    "
+    },
+    "anvm_seq_phase_bit :: run_body": {
+        "prefix": [
+            "run_body",
+            "task:run_body -> anvm_seq_phase_bit"
+        ],
+        "body": [
+            "run_body(${0:});"
+        ],
+        "description": "[Class:anvm_seq_phase_bit]\n     task run_body(\n);    "
+    },
+    "anvm_seq_coherent_access": {
+        "prefix": "anvm_seq_coherent_access",
+        "body": [
+            "anvm_seq_coherent_access  ${0:name_class};"
+        ],
+        "description": "class anvm_seq_coherent_access extends anvm_seq_common;\n"
+    },
+    "anvm_seq_coherent_access :: new": {
+        "prefix": [
+            "new",
+            "function:new -> anvm_seq_coherent_access"
+        ],
+        "body": [
+            "new(${1:hsw});"
+        ],
+        "description": "[Class:anvm_seq_coherent_access]\n     function new(\nanvm_host_software hsw);    "
+    },
+    "anvm_seq_coherent_access :: run_body": {
+        "prefix": [
+            "run_body",
+            "task:run_body -> anvm_seq_coherent_access"
+        ],
+        "body": [
+            "run_body(${0:});"
+        ],
+        "description": "[Class:anvm_seq_coherent_access]\n     task run_body(\n);    "
+    },
+    "anvm_seq_coherent_access :: pick_region": {
+        "prefix": [
+            "pick_region",
+            "task:pick_region -> anvm_seq_coherent_access"
+        ],
+        "body": [
+            "pick_region(${1:all_cmds}, ${2:r_});"
+        ],
+        "description": "[Class:anvm_seq_coherent_access]\n     local task pick_region(\ninput anvm_cmd_entry all_cmds      ,\n output lba_region_t r_);    "
+    },
+    "anvm_seq_coherent_access :: insert_merge": {
+        "prefix": [
+            "insert_merge",
+            "function:insert_merge -> anvm_seq_coherent_access"
+        ],
+        "body": [
+            "insert_merge(${1:region});"
+        ],
+        "description": "[Class:anvm_seq_coherent_access]\n     local function void insert_merge(\nlba_region_t  region);    "
+    },
+    "anvm_seq_coherent_access :: sprint": {
+        "prefix": [
+            "sprint",
+            "function:sprint -> anvm_seq_coherent_access"
+        ],
+        "body": [
+            "sprint(${1:verbosity}, ${2:prefix});"
+        ],
+        "description": "[Class:anvm_seq_coherent_access]\n     virtual function string sprint(\nint verbosity = 0,\n string prefix = \"\");    "
+    },
+    "anvm_seq_read_after_write_zeros": {
+        "prefix": "anvm_seq_read_after_write_zeros",
+        "body": [
+            "anvm_seq_read_after_write_zeros  ${0:name_class};"
+        ],
+        "description": "class anvm_seq_read_after_write_zeros extends anvm_seq_common;\n"
+    },
+    "anvm_seq_read_after_write_zeros :: new": {
+        "prefix": [
+            "new",
+            "function:new -> anvm_seq_read_after_write_zeros"
+        ],
+        "body": [
+            "new(${1:hsw}, ${2:mgr});"
+        ],
+        "description": "[Class:anvm_seq_read_after_write_zeros]\n     function new(\nanvm_host_software hsw,\n anvm_controller_mgr mgr);    "
+    },
+    "anvm_seq_read_after_write_zeros :: sprint": {
+        "prefix": [
+            "sprint",
+            "function:sprint -> anvm_seq_read_after_write_zeros"
+        ],
+        "body": [
+            "sprint(${1:verbosity}, ${2:prefix});"
+        ],
+        "description": "[Class:anvm_seq_read_after_write_zeros]\n     virtual function string sprint(\nint verbosity = 0,\n string prefix = \"\");    "
+    },
+    "anvm_seq_read_after_write_zeros :: run_body": {
+        "prefix": [
+            "run_body",
+            "task:run_body -> anvm_seq_read_after_write_zeros"
+        ],
+        "body": [
+            "run_body(${0:});"
+        ],
+        "description": "[Class:anvm_seq_read_after_write_zeros]\n     task run_body(\n);    "
+    },
+    "anvm_seq_rsvt_register": {
+        "prefix": "anvm_seq_rsvt_register",
+        "body": [
+            "anvm_seq_rsvt_register  ${0:name_class};"
+        ],
+        "description": "class anvm_seq_rsvt_register extends anvm_seq_common;\n"
+    },
+    "anvm_seq_rsvt_register :: new": {
+        "prefix": [
+            "new",
+            "function:new -> anvm_seq_rsvt_register"
+        ],
+        "body": [
+            "new(${1:hsw}, ${2:mgr});"
+        ],
+        "description": "[Class:anvm_seq_rsvt_register]\n     function new(\nanvm_host_software hsw,\n anvm_controller_mgr mgr);    "
+    },
+    "anvm_seq_rsvt_register :: sprint": {
+        "prefix": [
+            "sprint",
+            "function:sprint -> anvm_seq_rsvt_register"
+        ],
+        "body": [
+            "sprint(${1:verbosity}, ${2:prefix});"
+        ],
+        "description": "[Class:anvm_seq_rsvt_register]\n     virtual function string sprint(\nint verbosity = 0,\n string prefix = \"\");    "
+    },
+    "anvm_seq_rsvt_register :: run_body": {
+        "prefix": [
+            "run_body",
+            "task:run_body -> anvm_seq_rsvt_register"
+        ],
+        "body": [
+            "run_body(${0:});"
+        ],
+        "description": "[Class:anvm_seq_rsvt_register]\n     task run_body(\n);    "
+    },
+    "anvm_seq_sgl": {
+        "prefix": "anvm_seq_sgl",
+        "body": [
+            "anvm_seq_sgl  ${0:name_class};"
+        ],
+        "description": "class anvm_seq_sgl extends anvm_seq_common;\n"
+    },
+    "anvm_seq_sgl :: new": {
+        "prefix": [
+            "new",
+            "function:new -> anvm_seq_sgl"
+        ],
+        "body": [
+            "new(${1:hsw});"
+        ],
+        "description": "[Class:anvm_seq_sgl]\n     function new(\nanvm_host_software hsw);    "
+    },
+    "anvm_seq_sgl :: re_allocate_sgl": {
+        "prefix": [
+            "re_allocate_sgl",
+            "function:re_allocate_sgl -> anvm_seq_sgl"
+        ],
+        "body": [
+            "re_allocate_sgl(${1:mgr}, ${2:cmd}, ${3:max_seg_size}, ${4:max_data_blk_size}, ${5:max_seg_size_meta}, ${6:max_data_blk_size_meta}, ${7:use_mptr_one_sgl});"
+        ],
+        "description": "[Class:anvm_seq_sgl]\n     function void re_allocate_sgl (\nanvm_controller_mgr mgr,\nanvm_cmd_entry      cmd,\navery_u32           max_seg_size = -1,\navery_u32           max_data_blk_size = -1,\navery_u32           max_seg_size_meta = -1,\navery_u32           max_data_blk_size_meta = -1,\nbit                 use_mptr_one_sgl = 1    );    "
+    },
+    "anvm_seq_sgl :: generate_sgl": {
+        "prefix": [
+            "generate_sgl",
+            "function:generate_sgl -> anvm_seq_sgl"
+        ],
+        "body": [
+            "generate_sgl(${1:mgr}, ${2:ndw}, ${3:max_seg_size}, ${4:max_data_blk_size}, ${5:use_cmb}, ${6:is_destination_buf}, ${7:use_1_data_block}, ${8:dw_align});"
+        ],
+        "description": "[Class:anvm_seq_sgl]\n     function anvm_sgl generate_sgl (\nanvm_controller_mgr mgr,\navery_u32    ndw,\navery_u32           max_seg_size = -1,\navery_u32           max_data_blk_size = -1,\nbit          use_cmb = 0,\n   bit                 is_destination_buf = 1,\nbit                 use_1_data_block = 0,\n        bit                 dw_align = 1     );    "
+    },
+    "anvm_seq_sgl :: restore_sgl": {
+        "prefix": [
+            "restore_sgl",
+            "function:restore_sgl -> anvm_seq_sgl"
+        ],
+        "body": [
+            "restore_sgl(${1:sgl}, ${2:cmd}, ${3:is_ei});"
+        ],
+        "description": "[Class:anvm_seq_sgl]\n     static function void restore_sgl (\nanvm_sgl sgl,\n anvm_cmd_entry cmd,\n bit is_ei);    "
+    },
+    "anvm_seq_sgl :: restore_meta_sgl": {
+        "prefix": [
+            "restore_meta_sgl",
+            "function:restore_meta_sgl -> anvm_seq_sgl"
+        ],
+        "body": [
+            "restore_meta_sgl(${1:meta_sgl}, ${2:cmd}, ${3:is_ei});"
+        ],
+        "description": "[Class:anvm_seq_sgl]\n     static function void restore_meta_sgl (\nanvm_sgl meta_sgl,\n anvm_cmd_entry cmd,\n bit is_ei);    "
+    },
+    "anvm_seq_write_read": {
+        "prefix": "anvm_seq_write_read",
+        "body": [
+            "anvm_seq_write_read  ${0:name_class};"
+        ],
+        "description": "class anvm_seq_write_read extends anvm_seq_common;\n"
+    },
+    "anvm_seq_write_read :: new": {
+        "prefix": [
+            "new",
+            "function:new -> anvm_seq_write_read"
+        ],
+        "body": [
+            "new(${1:hsw}, ${2:mgr});"
+        ],
+        "description": "[Class:anvm_seq_write_read]\n     function new(\nanvm_host_software hsw,\n anvm_controller_mgr mgr);    "
+    },
+    "anvm_seq_write_read :: sprint": {
+        "prefix": [
+            "sprint",
+            "function:sprint -> anvm_seq_write_read"
+        ],
+        "body": [
+            "sprint(${1:verbosity}, ${2:prefix});"
+        ],
+        "description": "[Class:anvm_seq_write_read]\n     virtual function string sprint(\nint verbosity = 0,\n string prefix = \"\");    "
+    },
+    "anvm_seq_write_read :: run_body": {
+        "prefix": [
+            "run_body",
+            "task:run_body -> anvm_seq_write_read"
+        ],
+        "body": [
+            "run_body(${0:});"
+        ],
+        "description": "[Class:anvm_seq_write_read]\n     task run_body(\n);    "
+    },
+    "post_command": {
+        "prefix": [
+            "post_command",
+            "function:post_command"
+        ],
+        "body": [
+            "post_command(${1:cmd}, ${2:mgr});"
+        ],
+        "description": "extern function void post_command(\nanvm_cmd_entry cmd,\n anvm_controller_mgr mgr = null);    "
+    },
+    "set": {
+        "prefix": [
+            "set",
+            "function:set"
+        ],
+        "body": [
+            "set(${1:entry}, ${2:value}, ${3:sub_entry});"
+        ],
+        "description": "extern virtual function void set(\ninput string    entry,\ninput bit       value = 0,\ninput string    sub_entry = \"\");    "
+    },
+    "get": {
+        "prefix": [
+            "get",
+            "function:get"
+        ],
+        "body": [
+            "get(${1:entry}, ${2:sub_entry});"
+        ],
+        "description": "extern virtual function bit       get(\ninput string entry,\ninput string sub_entry = \"\");    "
+    },
+    "malloc": {
+        "prefix": [
+            "malloc",
+            "function:malloc"
+        ],
+        "body": [
+            "malloc(${1:page_size}, ${2:num_bytes}, ${3:address});"
+        ],
+        "description": "extern virtual function bit malloc(\navery_u64  page_size = 0,\navery_u64  num_bytes,\n   output avery_u64 address     );    "
+    },
+    "mfree": {
+        "prefix": [
+            "mfree",
+            "function:mfree"
+        ],
+        "body": [
+            "mfree(${1:address}, ${2:num_bytes});"
+        ],
+        "description": "extern virtual function bit mfree(\navery_u64  address,\navery_u64  num_bytes      );    "
+    },
+    "find_controller_by_id": {
+        "prefix": [
+            "find_controller_by_id",
+            "function:find_controller_by_id"
+        ],
+        "body": [
+            "find_controller_by_id(${1:ctrler_id}, ${2:fatal_if_not_found}, ${3:sub_nqn});"
+        ],
+        "description": "extern virtual function anvm_controller_mgr find_controller_by_id(\n        input int         ctrler_id          = -1,\n        input bit         fatal_if_not_found = 1,\n        input anvm_nqn  sub_nqn            = 0 );    "
+    },
+    "collect_controllers": {
+        "prefix": [
+            "collect_controllers",
+            "task:collect_controllers"
+        ],
+        "body": [
+            "collect_controllers(${1:num}, ${2:mgrs}, ${3:timer}, ${4:timeout_msg}, ${5:collect_discovery_ctrler});"
+        ],
+        "description": "extern task collect_controllers(\ninput  int                 num,\noutput anvm_controller_mgr mgrs      ,\ninput  time                timer = 0,\ninput  string              timeout_msg = \"\",\ninput  bit                 collect_discovery_ctrler = 0    );    "
+    },
+    "preload_lba": {
+        "prefix": [
+            "preload_lba",
+            "function:preload_lba"
+        ],
+        "body": [
+            "preload_lba(${1:ctrler_id}, ${2:nsid}, ${3:starting_lba}, ${4:value_array}, ${5:meta_value_array});"
+        ],
+        "description": "extern virtual function void preload_lba(\n    int        ctrler_id,\n     int        nsid,\n             avery_u64  starting_lba,\n ref avery_u32  value_array      ,\nref avery_u32  meta_value_array          );    "
+    },
+    "get_memory_mgr": {
+        "prefix": [
+            "get_memory_mgr",
+            "function:get_memory_mgr"
+        ],
+        "body": [
+            "get_memory_mgr(${0:});"
+        ],
+        "description": "extern virtual function anvm_memory_mgr get_memory_mgr(\n);    "
+    },
+    "replace_coverage_handle": {
+        "prefix": [
+            "replace_coverage_handle",
+            "function:replace_coverage_handle"
+        ],
+        "body": [
+            "replace_coverage_handle(${1:c});"
+        ],
+        "description": "extern virtual function void replace_coverage_handle (\nanvm_coverage c);    "
+    },
+    "share_namespace": {
+        "prefix": [
+            "share_namespace",
+            "function:share_namespace"
+        ],
+        "body": [
+            "share_namespace(${1:ctrler_id1}, ${2:nsid1}, ${3:ctrler_id2}, ${4:nsid2});"
+        ],
+        "description": "extern virtual function void share_namespace(\ninput int  ctrler_id1,\ninput int  nsid1,\ninput int  ctrler_id2,\ninput int  nsid2    );    "
+    },
+    "share_shadow_namespace": {
+        "prefix": [
+            "share_shadow_namespace",
+            "function:share_shadow_namespace"
+        ],
+        "body": [
+            "share_shadow_namespace(${1:nvm}, ${2:ctrler_id}, ${3:nsid});"
+        ],
+        "description": "extern virtual function void share_shadow_namespace(\n        anvm_ns_memory nvm,\n         int ctrler_id,\n         int nsid    );    "
+    },
+    "get_shadow_namespace": {
+        "prefix": [
+            "get_shadow_namespace",
+            "function:get_shadow_namespace"
+        ],
+        "body": [
+            "get_shadow_namespace(${1:ctrler_id}, ${2:nsid});"
+        ],
+        "description": "extern virtual function anvm_ns_memory get_shadow_namespace(\nint ctrler_id,\n int nsid );    "
+    },
+    "set_tracker": {
+        "prefix": [
+            "set_tracker",
+            "function:set_tracker"
+        ],
+        "body": [
+            "set_tracker(${1:entry}, ${2:enable}, ${3:file_name}, ${4:file_handle});"
+        ],
+        "description": "extern virtual function void set_tracker(\n         input string  entry,\n              input bit     enable,\n           input string  file_name = \"\",\n        input int     file_handle = 0);     "
+    },
+    "trace_addr": {
+        "prefix": [
+            "trace_addr",
+            "function:trace_addr"
+        ],
+        "body": [
+            "trace_addr(${1:s}, ${2:addr}, ${3:len}, ${4:flag});"
+        ],
+        "description": "extern function bit trace_addr(\n        ref   string    s   ,\n        input bit       addr,\n        input bit       len ,\n        input int       flag = 0 );    "
+    },
+    "get_adaptor": {
+        "prefix": [
+            "get_adaptor",
+            "function:get_adaptor"
+        ],
+        "body": [
+            "get_adaptor(${0:});"
+        ],
+        "description": "extern function anvm_host_adaptor_base get_adaptor(\n);    "
+    }
+}

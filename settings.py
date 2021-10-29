@@ -1,13 +1,22 @@
-#!/usr/bin/env python
-
-#Name of output snippets JSON file
-FILENAME = "releasename.json"
-
-#Environment path to main directory i.e $AVERY_VIP
-VIPPATH = "AVERY_VIP"
-
-#List of sub directories to process
+#!/usr/bin/env python                                                                                                                                                                                      
+  
+#Example:
+#FILENAME = "apciexactor-2.4a.cxl.json"
+#VIPPATH = "AVERY_PCIE"
+#PATHS = ["src", "src.VCS"]
+#FILTER = ["avery_defines.svh", "apci_phy_lane_rx.svh", "apci_phy_lane_tx.svh"]
+ 
+FILENAME = "anvmexactor-2.8.json"
+VIPPATH = "AVERY_NVME"
 PATHS = ["src", "src.VCS"]
+FILTER = ["avery_defines.svh"]
+ 
+#FILENAME = "apciexactor-2.4a.json"
+#VIPPATH = "AVERY_PCIE"
+#PATHS = ["src", "src.VCS"]
+#FILTER = ["avery_defines.svh", "apci_phy_lane_rx.svh", "apci_phy_lane_tx.svh"]
 
-#List of file name to filter (no need to provide the path)
-FILTER = ["file1.svh", "file2.svh", "file3.svh"]
+#FILENAME = "onfi_sim.json"
+#VIPPATH = "AVERY_ONFI"
+#PATHS = ["src"]
+#FILTER = ["avery_defines.svh", "apci_phy_lane_rx.svh", "apci_phy_lane_tx.svh"]

@@ -4,7 +4,7 @@ import os
 import re
 import glob
 import json
-import settings 
+import settings
 
 files_list = []
 for path in settings.PATHS:
@@ -12,11 +12,12 @@ for path in settings.PATHS:
     files_list.append(glob.glob(os.environ[settings.VIPPATH] + path+"/*.sv"))
     files_list.append(glob.glob(os.environ[settings.VIPPATH] + path+"/*.svh"))
 
-
+#global
 vtask = 'task'
 vfuntion = 'function'
+vec_struc_json = {} #dictionary top
 
-
+# remove various combinations of parentheses in the arguments
 def delete_parenthesis(string):
     string = string.replace('[', '   [   ')
     string = string.replace(']', '   ]   ')
@@ -34,7 +35,7 @@ def delete_parenthesis(string):
             string = temp2
     return string
 
-
+# to parse strings as vectors using special characters and words
 def separate(string):
     string = string.replace('=', '  =  ')
     string = string.replace(',', '   ,   ')
@@ -45,13 +46,15 @@ def separate(string):
     string = string[:end]
     return string.split()
 
-
+# We extract information from tasks and functions
 def data_task(sv, line, line_list, i, type_class):
+    #get file name
     cut2 = sv[::-1].find('/')
     name_file = sv[(len(sv) - cut2):]
-    remove_equal = []
     # we extract name and type of function and the arguments
+    remove_equal = []
     name = line_list[line_list.index('(') - 1]
+    # line_list at the end only contains the arguments, this part may be easier
     if line_list[0] == vfuntion:
         if (len(line_list) >= 4) and (line_list[3] == '('):
             line_list.pop(3)
@@ -61,7 +64,7 @@ def data_task(sv, line, line_list, i, type_class):
             line_list = line_list[2:]
         type_ = vfuntion
     else:
-        if line_list[0] != vtask:  # + f
+        if line_list[0] != vtask:
             line_list = line_list[4:]
         else:
             line_list = line_list[3:]
@@ -69,12 +72,10 @@ def data_task(sv, line, line_list, i, type_class):
 
     if '()' in line:
         print('Name: ', name, 'File: ', name_file, 'Line: ', i)
-        # print('paremeters: NONE')
-        struc_i = make_json(name, fix_argvs(remove_equal),
-                            type_, line, type_class)
+        struc_i = make_json(name, fix_argvs(remove_equal), type_, line, type_class)
     else:
         print('Name: ', name, 'File: ', name_file, 'Line: ', i)
-
+        # delete part "= value"
         while('=' in line_list):
             limit = line_list.index('=')
             line_list.pop(limit)
@@ -85,27 +86,24 @@ def data_task(sv, line, line_list, i, type_class):
         remove_equal = line_list
 
         struc_i = [0, 0]
-        struc_i[0], struc_i[1] = make_json(
-            name, fix_argvs(remove_equal), type_, line, type_class)
+        struc_i[0], struc_i[1] = make_json( name, fix_argvs(remove_equal), type_, line, type_class) #key end argument for top dictionary
     print(struc_i)
-    '''if name == 'wait_d2h_rsp_msg':
-        print('\n\n')
-        exit()'''
     return struc_i
 
 
-# we create the function that fixes the arguments
+# we create the function that fixes the arguments, extrct only names of arguments
 def fix_argvs(vec_arg):
     vec_arg_temp = []
     args_name = []
     if vec_arg != []:
         for arg in vec_arg:
             if arg == ',':
-                arg_name = vec_arg_temp[len(vec_arg_temp) - 1]
+                arg_name = vec_arg_temp[len(vec_arg_temp) - 1] #extract name
                 vec_arg_temp = []
                 args_name.append(arg_name)
             else:
-                vec_arg_temp.append(arg)
+                vec_arg_temp.append(arg) #temp vector for save information for a argument
+        #last argument
         arg_name = vec_arg_temp[len(vec_arg_temp) - 1]
         vec_arg_temp = []
         args_name.append(arg_name)
@@ -118,20 +116,33 @@ def fix_argvs(vec_arg):
         vec_arg_temp.append('${' + str(0) + ':' + '' + '}')
     return vec_arg_temp
 
-# we prepare the top dictionary arguments
-
-
+# we prepare key and argument for the top dictionary
 def make_json(name, arguments, type_, function, type_class):
-    name_t = type_class + ' :: ' + name  # mod
-    name_ = [name, type_ + ':' + name + ' -> ' + type_class]
+    # delete and accommodate line breaks \n
+    function = function.replace('\n', '')
+    function = function.replace('\t', '')
+    function = function.replace(',', ',\n')
+    function = function.replace('(', '(\n')
+    # we join the processed arguments with ${n:argv} for the body
     temp = ", ".join(arguments)
     body = [name + '(' + temp + ');']
-    dates = {"prefix": name_, "body": body,
-             "description": '[Class:' + type_class + ']\n' + function}
-    return name_t, dates
+    if type_class != '':
+        name_t = type_class + ' :: ' + name
+        name_ = [name, type_ + ':' + name + ' -> ' + type_class]
+        dates = {"prefix": name_, "body": body, "description": '[Class:' + type_class + ']\n ' + function}
+    else:               #if the function has no class
+        name_t = name
+        name_ = [name, type_ + ':' + name]
+        dates = {"prefix": name_, "body": body, "description": function}
+    return name_t, dates #key and argument for top dictionary
+
+def make_json_class(name, function):
+    body = [name + '  ${0:' + 'name_class' + '};']
+    dates = {"prefix": name, "body": body, "description": function}
+    return name, dates
 
 
-vec_struc_json = {}
+
 
 # Filter out uneeded files
 for files in files_list:
@@ -145,13 +156,19 @@ for files in files_list:
 
 for files in files_list:
    for filex in files:
-       i = 0
-       fix_line = ''
-       flag = 0
+       #initial values and flags
+       i, fix_line, line_class, flag, flag_comment = 0, '', '', 0, 0
        with open(filex, 'r') as fp:
-           flag_class = 0 # indicates when it passes through a class
+           flag_class, flag_ext_d_class, flag_one_time = 0, 0, 0
            for line in fp:
-               # delete comment
+               # We ignore long comments /* ... */
+               if '/*' in line:
+                   flag_comment = 1
+               if '*/' in line:
+                   flag_comment = 0
+               if flag_comment == 1:
+                   continue
+               # delete comment //
                vec_temp = []
                line_temp = line
                line_temp = line.replace('//', '  //  ')
@@ -161,25 +178,42 @@ for files in files_list:
 
                #we detect a class and extract its type
                list_extr_class = separate(line_temp)
-
                if ('class' in list_extr_class) and (('typedef' in list_extr_class) == False):
                    flag_class = 1
                if 'endclass' in list_extr_class:
                    flag_class = 0
                if flag_class == 1:
                    try:
-                       type_class = list_extr_class[list_extr_class.index('class') + 1]
+                       type_class = list_extr_class[list_extr_class.index('class') + 1] #extract class name
                    except:
                        type_class = type_class
                else:
                    type_class = ''
-
-               # We build a single row
-               if ((vtask in line_temp) or (vfuntion in line_temp)) and ('(' in line_temp):  # + f
+                #====================================================================
+               # We build a single row for the class and build json for class
+               line_temp_c = line_temp.replace(';', '  ;  ')
+               line_temp_c = line_temp_c.split()
+               if ('class' in line_temp_c) and (('typedef' in line_temp_c) == False):
+                   flag_ext_d_class = 1
+                   name_class = line_temp_c[line_temp_c.index('class') + 1]
+               if flag_ext_d_class == 1:
+                   line_class = line_class + line_temp
+               # add class to json
+               if flag_one_time == 1:
+                   name, body = make_json_class(name_class, line_class)
+                   vec_struc_json[name] = body
+                   flag_one_time = 0
+                   line_class = ''
+               if (';' in line_temp_c) and (flag_ext_d_class == 1):
+                   flag_ext_d_class = 0
+                   flag_one_time = 1
+                #=====================================================================
+               # We build a single row for the task and function
+               if ((vtask in line_temp) or (vfuntion in line_temp)) and ('(' in line_temp):
                    flag = 1
-               if (((vtask in fix_line) or (vfuntion in fix_line)) and ('(' in fix_line) and ((')' in fix_line) == False)) or flag:  # + f
+               if (((vtask in fix_line) or (vfuntion in fix_line)) and ('(' in fix_line) and ((')' in fix_line) == False)) or flag:
                    fix_line = fix_line + line_temp
-               if ((vtask in fix_line) or (vfuntion in fix_line)) and ((('(' in fix_line) and (')' in fix_line)) or ('()' in fix_line)):  # + f
+               if ((vtask in fix_line) or (vfuntion in fix_line)) and ((('(' in fix_line) and (')' in fix_line)) or ('()' in fix_line)):
                    print('\n\n')
                    print(fix_line)
                    # we invoke functions
@@ -195,20 +229,16 @@ for files in files_list:
                            temp_list.pop(0)
                    if (temp_list[0] == vtask) or (
                            len(temp_list) >= 2 and temp_list[1] == vtask) or (temp_list[0] == vfuntion):
-
+                        #We add each function and task to a long dictionary with json format
                        struc_json = data_task(filex, fix_line, temp_list, i, type_class)
-                       vec_struc_json[struc_json[0]] = struc_json[1]
+                       vec_struc_json[struc_json[0]] = struc_json[1] #key ang argument
                    fix_line = ''
                    flag = 0
                i = i + 1
 
 # we write in the file
 with open(settings.FILENAME, 'w') as f:
-    '''for struc_json_i in vec_struc_json:
-            f.write(struc_json_i)
-            f.write('\n')'''
-    json.dump(vec_struc_json, f)
+    json.dump(vec_struc_json, f, indent=4)
 
 
-'''Linea 167 del archivo acxl_seq_library: No aparece este task!
-task automatic read_full_line(bit[63:0] cline_addr, acxl_d2h_req_opcode_e code);'''
+
