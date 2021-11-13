@@ -1,0 +1,79 @@
+<snippet><class><name>apipe_msg_bus_transaction</name><description>class apipe_msg_bus_transaction</description></class><class><name>apci_mem_model</name><description>class apci_mem_model</description><function><body><name>new</name><arg>name</arg><arg>log</arg></body><description>[Class:apci_mem_model]
+     function new(string name = "apci_mem_model",
+ apci_log log);    </description></function><function><body><name>read</name><arg>offset</arg><arg>byte_enable</arg></body><description>[Class:apci_mem_model]
+     extern virtual function bit       read(bit       offset,
+                                              bit        byte_enable = 4'b1111 );    </description></function><function><body><name>write</name><arg>offset</arg><arg>byte_enable</arg><arg>val</arg><arg>dbg</arg></body><description>[Class:apci_mem_model]
+     extern virtual function void     write(bit       offset,
+                                              bit        byte_enable = 4'b1111,
+                                           bit       val,
+                                           avery_data_base dbg = null );    </description></function><function><body><name>attach</name><arg>h</arg></body><description>[Class:apci_mem_model]
+     extern virtual function void attach(apci_mm_handler h);    </description></function><function><body><name>detach</name><arg>h</arg></body><description>[Class:apci_mem_model]
+     extern virtual function void detach(apci_mm_handler h);    </description></function><member>name</member><member>space</member></class><class><name>apci_doe_discovery</name><description>class apci_doe_discovery</description><function><body><name>new</name><arg>name</arg><arg>is_read</arg></body><description>[Class:apci_doe_discovery]
+     function new (string name="",
+ bit is_read = 0);    </description></function><member>bytes</member><member>dwords</member></class><class><name>apci_cap_ptm</name><description>class apci_cap_ptm</description><function><body><name>set_next_cap_offset</name><arg>v</arg></body><description>[Class:apci_cap_ptm]
+     virtual function void set_next_cap_offset(avery_u16 v);    </description></function><function><body><name>get_next_cap_offset</name><arg /></body><description>[Class:apci_cap_ptm]
+     virtual function bit       get_next_cap_offset();    </description></function><function><body><name>get_cap_id</name><arg /></body><description>[Class:apci_cap_ptm]
+     virtual function bit       get_cap_id();    </description></function><function><body><name>new</name><arg>name</arg><arg>ptype</arg></body><description>[Class:apci_cap_ptm]
+     function new(string name = "apci_cap_ptm",
+apci_port_type ptype = APCI_PORT_unknown);    </description></function><function><body><name>get_cap_size</name><arg /></body><description>[Class:apci_cap_ptm]
+     virtual function bit       get_cap_size();    </description></function></class><class><name>apci_cap_frs_q</name><description>class apci_cap_frs_q</description><function><body><name>set_next_cap_offset</name><arg>v</arg></body><description>[Class:apci_cap_frs_q]
+     virtual function void set_next_cap_offset(avery_u16 v);                                                                                                                     </description></function><function><body><name>get_next_cap_offset</name><arg /></body><description>[Class:apci_cap_frs_q]
+     virtual function bit       get_next_cap_offset();      </description></function><function><body><name>get_cap_id</name><arg /></body><description>[Class:apci_cap_frs_q]
+     virtual function bit       get_cap_id();    </description></function><function><body><name>new</name><arg>name</arg><arg>ptype</arg></body><description>[Class:apci_cap_frs_q]
+     function new(string name = "apci_cap_frs_q",
+                 apci_port_type ptype = APCI_PORT_unknown);    </description></function><function><body><name>get_cap_size</name><arg /></body><description>[Class:apci_cap_frs_q]
+     virtual function bit       get_cap_size();    </description></function></class><class><name>apci_cap_pl_gen6</name><description>class apci_cap_pl_gen6</description><function><body><name>set_next_cap_offset</name><arg>v</arg></body><description>[Class:apci_cap_pl_gen6]
+     virtual function void set_next_cap_offset(avery_u16 v);    </description></function><function><body><name>get_next_cap_offset</name><arg /></body><description>[Class:apci_cap_pl_gen6]
+     virtual function bit       get_next_cap_offset();    </description></function><function><body><name>get_cap_id</name><arg /></body><description>[Class:apci_cap_pl_gen6]
+     virtual function bit       get_cap_id();    </description></function><function><body><name>new</name><arg>name</arg><arg>ptype</arg></body><description>[Class:apci_cap_pl_gen6]
+     function new(string name = "apci_cap_pl_gen6",
+                 apci_port_type ptype = APCI_PORT_unknown);    </description></function><function><body><name>create_dynamic_fields</name><arg /></body><description>[Class:apci_cap_pl_gen6]
+     virtual function void create_dynamic_fields();    </description></function><function><body><name>get_cap_size</name><arg>max_link_width</arg></body><description>[Class:apci_cap_pl_gen6]
+     virtual function bit       get_cap_size(int max_link_width);    </description></function></class><class><name>apci_cap_shadow_func</name><description>class apci_cap_shadow_func</description><function><body><name>set_next_cap_offset</name><arg>v</arg></body><description>[Class:apci_cap_shadow_func]
+     virtual function void set_next_cap_offset(avery_u16 v);    </description></function><function><body><name>get_next_cap_offset</name><arg /></body><description>[Class:apci_cap_shadow_func]
+     virtual function bit       get_next_cap_offset();    </description></function><function><body><name>get_cap_id</name><arg /></body><description>[Class:apci_cap_shadow_func]
+     virtual function bit       get_cap_id();    </description></function><function><body><name>new</name><arg>name</arg><arg>ptype</arg></body><description>[Class:apci_cap_shadow_func]
+     function new(string name = "apci_cap_shadow_func",
+                 apci_port_type ptype = APCI_PORT_unknown);    </description></function><function><body><name>create_dynamic_fields</name><arg /></body><description>[Class:apci_cap_shadow_func]
+     virtual function void create_dynamic_fields();    </description></function><function><body><name>get_cap_size</name><arg /></body><description>[Class:apci_cap_shadow_func]
+     virtual function bit       get_cap_size();    </description></function></class><class><name>acxl_fm_enum_mgr</name><description>class acxl_fm_enum_mgr</description><function><body><name>new</name><arg>name</arg></body><description>[Class:acxl_fm_enum_mgr]
+     function new(string name = "acxl_fm_enum_mgr");    </description></function></class><class><name>acxl_msg_callbacks</name><description>class acxl_msg_callbacks</description></class><class><name>apci_device_base</name><description>class apci_device_base</description><function><body><name>post_transaction</name><arg>tr</arg></body><description>[Class:apci_device_base]
+     virtual function void post_transaction( apci_transaction  tr);    </description></function><function><body><name>post_tlp</name><arg>p</arg></body><description>[Class:apci_device_base]
+     virtual function void post_tlp( apci_tlp  p );    </description></function><function><body><name>new</name><arg>name</arg><arg>`avery_xvm_parent</arg></body><description>[Class:apci_device_base]
+     function new( string name,
+ `avery_xvm_parent);    </description></function><function><body><name>build_phase</name><arg>phase</arg></body><description>[Class:apci_device_base]
+     virtual function void build_phase(uvm_phase phase);    </description></function><task><body><name>run</name><arg /></body><description>[Class:apci_device_base]
+     virtual task run();    </description></task><function><body><name>bus_enum_load_cfg</name><arg>phase</arg><arg>csp</arg><arg>pid</arg><arg>fid</arg></body><description>[Class:apci_device_base]
+     virtual function void bus_enum_load_cfg(int phase,
+ apci_cfg_space csp = null,
+ int pid = 0,
+ int fid = 0);    </description></function><function><body><name>bus_enum_load_db</name><arg>k2p</arg></body><description>[Class:apci_device_base]
+     virtual function void bus_enum_load_db(ref apci_bdf_t k2p      );    </description></function><member>name</member><member>device_id</member><member>int1</member></class><class><name>acxl_cdat_dslbis</name><description>class acxl_cdat_dslbis</description><function><body><name>new</name><arg>name</arg></body><description>[Class:acxl_cdat_dslbis]
+     function new(string name = "acxl_cdat_dslbis");    </description></function></class><class><name>apci_cap_type1</name><description>class apci_cap_type1</description><function><body><name>set_next_cap_offset</name><arg>v</arg></body><description>[Class:apci_cap_type1]
+     virtual function void set_next_cap_offset(avery_u16 v);    </description></function><function><body><name>get_next_cap_offset</name><arg /></body><description>[Class:apci_cap_type1]
+     virtual function bit       get_next_cap_offset();    </description></function><function><body><name>get_cap_id</name><arg /></body><description>[Class:apci_cap_type1]
+     virtual function bit       get_cap_id();    </description></function><function><body><name>new</name><arg>name</arg><arg>ptype</arg></body><description>[Class:apci_cap_type1]
+     function new(string name = "apci_cap_type1",
+         apci_port_type ptype = APCI_PORT_unknown);    </description></function><function><body><name>get_behind_io</name><arg>base</arg><arg>limit</arg><arg>log</arg></body><description>[Class:apci_cap_type1]
+     function void get_behind_io(output avery_u32 base,
+ avery_u32 limit,
+ input apci_log log);    </description></function><function><body><name>get_behind_mio</name><arg>base</arg><arg>limit</arg></body><description>[Class:apci_cap_type1]
+     function void get_behind_mio(output avery_u32 base,
+ avery_u32 limit);    </description></function><function><body><name>get_behind_pref</name><arg>base</arg><arg>limit</arg></body><description>[Class:apci_cap_type1]
+     function void get_behind_pref(output avery_u64 base,
+ avery_u64 limit);    </description></function><function><body><name>collect_bar_ranges</name><arg>ranges</arg><arg>expansion_rom</arg></body><description>[Class:apci_cap_type1]
+     function void collect_bar_ranges(ref apci_bar_t ranges      ,
+ input bit expansion_rom = 1);    </description></function></class><class><name>apci_cap_dvsec_flexbus_port</name><description>class apci_cap_dvsec_flexbus_port</description><function><body><name>new</name><arg>name</arg><arg>ptype</arg></body><description>[Class:apci_cap_dvsec_flexbus_port]
+     function new(string name = "apci_cap_dvsec_flexbus_port",
+ apci_port_type ptype = APCI_PORT_unknown);    </description></function></class><class><name>apci_statistics</name><description>class apci_statistics</description><function><body><name>new</name><arg>port_id</arg><arg>is_tx</arg></body><description>[Class:apci_statistics]
+     function new(int port_id,
+ bit is_tx);    </description></function><member>port_id</member><member>is_tx</member><member>n_tlps</member><member>n_dllps</member><member>n_tlp_bytes</member><member>n_dllp_bytes</member><member>n_ts</member><member>n_skpos</member><member>n_eieos</member></class><class><name>apci_cap_dvsec_cxl_port_ext</name><description>class apci_cap_dvsec_cxl_port_ext</description><function><body><name>new</name><arg>name</arg><arg>ptype</arg></body><description>[Class:apci_cap_dvsec_cxl_port_ext]
+     function new(string name = "apci_cap_dvsec_cxl_port_ext",
+ apci_port_type ptype = APCI_PORT_unknown);    </description></function><function><body><name>add_alt_ranges</name><arg>q</arg></body><description>[Class:apci_cap_dvsec_cxl_port_ext]
+     function void add_alt_ranges(ref apci_bar_t q      );    </description></function><function><body><name>get_local_rcrb</name><arg /></body><description>[Class:apci_cap_dvsec_cxl_port_ext]
+     function apci_bar_t get_local_rcrb();    </description></function><function><body><name>get_rcrb_base</name><arg /></body><description>[Class:apci_cap_dvsec_cxl_port_ext]
+     function avery_u64 get_rcrb_base();    </description></function><function><body><name>add_rcrb_range</name><arg>q</arg></body><description>[Class:apci_cap_dvsec_cxl_port_ext]
+     function void add_rcrb_range(ref apci_bar_t q      );    </description></function></class><class><name>acxl_cmd_security_send</name><description>class acxl_cmd_security_send</description><function><body><name>new</name><arg>name</arg><arg>is_response</arg></body><description>[Class:acxl_cmd_security_send]
+     function new(string name="",
+ bit is_response=0); super.new(name,
+ ACXL_DC_security_send); this.is_response = is_response; endfunction    </description></function><member>

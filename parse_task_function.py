@@ -1,10 +1,13 @@
 #!/usr/bin/env python
-from os.path import isfile, join
 import os
 import re
 import glob
 import json
 import settings
+import subprocess
+from os.path import isfile, join
+import json as j
+
 
 files_list = []
 for path in settings.PATHS:
@@ -84,7 +87,6 @@ def data_task(sv, line, line_list, i, type_class):
             line_list = a + b
             print(line_list)
         remove_equal = line_list
-
         struc_i = [0, 0]
         struc_i[0], struc_i[1] = make_json( name, fix_argvs(remove_equal), type_, line, type_class) #key end argument for top dictionary
     print(struc_i)
@@ -122,7 +124,7 @@ def make_json(name, arguments, type_, function, type_class):
     function = function.replace('\n', '')
     function = function.replace('\t', '')
     function = function.replace(',', ',\n')
-    function = function.replace('(', '(\n')
+    #function = function.replace('(', '(\n')
     # we join the processed arguments with ${n:argv} for the body
     temp = ", ".join(arguments)
     body = [name + '(' + temp + ');']
@@ -142,8 +144,6 @@ def make_json_class(name, function):
     return name, dates
 
 
-
-
 # Filter out uneeded files
 for files in files_list:
     #print(files)
@@ -153,11 +153,13 @@ for files in files_list:
             if filterx in filex:
                 print("REMOVE FILE: ", filex)
                 files.remove(filex)
-
+vec_class = []
+vec_class_i_members = []
+vec_class_members = []
 for files in files_list:
    for filex in files:
        #initial values and flags
-       i, fix_line, line_class, flag, flag_comment = 0, '', '', 0, 0
+       i, fix_line, line_class, flag, flag_comment, flag_protected , flag_members, flag_struct = 0, '', '', 0, 0, 0, 1, 0
        with open(filex, 'r') as fp:
            flag_class, flag_ext_d_class, flag_one_time = 0, 0, 0
            for line in fp:
@@ -168,6 +170,13 @@ for files in files_list:
                    flag_comment = 0
                if flag_comment == 1:
                    continue
+               # We ignore protected lines  `protected ... `endprotected
+               if '`protected' in line:
+                   flag_protected = 1
+               if '`endprotected' in line:
+                   flag_protected = 0
+               if flag_protected == 1:
+                   continue
                # delete comment //
                vec_temp = []
                line_temp = line
@@ -175,9 +184,9 @@ for files in files_list:
                if "//" in line_temp:
                    line_temp = line_temp.split('//')
                    line_temp = line_temp[0]
-
                #we detect a class and extract its type
-               list_extr_class = separate(line_temp)
+               string_extr_class = delete_parenthesis(line_temp)
+               list_extr_class = separate(string_extr_class) #to ignore when extract members
                if ('class' in list_extr_class) and (('typedef' in list_extr_class) == False):
                    flag_class = 1
                if 'endclass' in list_extr_class:
@@ -204,6 +213,7 @@ for files in files_list:
                    vec_struc_json[name] = body
                    flag_one_time = 0
                    line_class = ''
+                   vec_class.append(name_class) # to create the XML file
                if (';' in line_temp_c) and (flag_ext_d_class == 1):
                    flag_ext_d_class = 0
                    flag_one_time = 1
@@ -219,17 +229,19 @@ for files in files_list:
                    # we invoke functions
                    fix_line = delete_parenthesis(fix_line)
                    temp_list = separate(fix_line)
-
                    # we eliminate the fields before the word -function or task-
                    if (len(temp_list) >= 2) and ((temp_list[1] == vfuntion) or (temp_list[1] == vtask)):
                        temp_list.pop(0)
                    else:
-                       if (len(temp_list) >= 3) and ((temp_list[2] == vfuntion) or (temp_list[1] == vtask)):
+                       if (len(temp_list) >= 3) and ((temp_list[2] == vfuntion) or (temp_list[2] == vtask)): #before (temp_list[1] == vtask)
                            temp_list.pop(0)
                            temp_list.pop(0)
-                   if (temp_list[0] == vtask) or (
-                           len(temp_list) >= 2 and temp_list[1] == vtask) or (temp_list[0] == vfuntion):
+
+                   print(temp_list)
+                   if (temp_list[0] == vtask) or (len(temp_list) >= 2 and temp_list[1] == vtask) or (temp_list[0] == vfuntion):
                         #We add each function and task to a long dictionary with json format
+                       if ('automatic' in temp_list):
+                           temp_list.remove('automatic')
                        struc_json = data_task(filex, fix_line, temp_list, i, type_class)
                        vec_struc_json[struc_json[0]] = struc_json[1] #key ang argument
                    fix_line = ''
@@ -239,6 +251,9 @@ for files in files_list:
 # we write in the file
 with open(settings.FILENAME, 'w') as f:
     json.dump(vec_struc_json, f, indent=4)
+
+#we write the snippets in the visual snippet file
+subprocess.call('cp ' + settings.FILENAME + ' ~/.config/Code/User/snippets/systemverilog.json', shell=True)
 
 
 
