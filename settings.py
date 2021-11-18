@@ -2,8 +2,7 @@
   
 #Example:
 FILENAME = "file.json"
-VIPPATH = "AVERY_PCIE"
+VIPPATH = "PATH"
 PATHS = ["src", "src.VCS"]
 FILTER = ["file.svh", "file.svh", "file.svh"]
-
-
+ 
