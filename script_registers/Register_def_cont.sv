@@ -1,0 +1,8 @@
+uvm _reg  PIO_SEND_DLY  // PIO send delay, offset = (Chx_Rbase + 0xD40)
+uvm _reg  PIO_SEND_CMD  // PIO send Command, offset = (Chx_Rbase + 0xD44)
+uvm _reg  PIO_SEND_ADDR  // PIO send Address, offset = (Chx_Rbase + 0xD48)
+uvm _reg  PIO_SEND_WDATA  // PIO send Data phase to Flash, offset = (Chx_Rbase + 0xDC)
+uvm _reg  PIO_GET_RDATA  // PIO Read Data phase to Flash, offset = (Chx_Rbase + 0xE0)
+uvm _reg  PIO_GET_WDATA  // PIO FIFO Write Data, offset = (Chx_Rbase + 0xE4)
+uvm _reg  PIO_GFIFO_RDATA  // PIO read data from flash to ADM FIFO, offset = (Chx_Rbase + 0xE8)
+uvm _reg  PIO_SET_CE  // PIO Set CE, offset = (Chx_Rbase + 0xEC)
