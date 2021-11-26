@@ -1,0 +1,70 @@
+User_To_MEC
+[39:0] new LBA
+[42:40] sector number
+[43] LBA size
+[45:44] dest code
+[50:46] Group code
+[60:58] Start sector valid of this 4KB block
+[63:61] End sector valid of this 4KB block
+[79:64] CTAG
+[87:80] NSTAG
+[88] force unc
+[89] virtual flag
+[90] MPTR flag
+[91] LBMD metadata enable
+[94:92] MDSZ metadata size
+[95] E2E flag
+[97:96] Split_ID
+
+User_From_MEC
+[39:0] new LBA
+[45:44] source code
+[50:46] Group code
+[63:48] CTAG
+[64] force unc
+[65] virtual flag
+[66] MPTR flag
+[67] LBMD metadata enable
+[70:68] MDSZ metadata size
+[71] E2E flag
+[73:72] Split_ID
+
+CMD
+[15:0] CTAG
+[19:16] CTYPE
+[23:20] SPLIT_ID
+[31:24] OP_CODE
+[71:32] NEW_SLBA
+[87:72] NEW_NLB
+[95:88] NSTAG
+
+PPA_To_MEC
+[15:0] CTAG
+[19:16] Reserved
+[23:20] SPLIT_ID
+[31:24] IDX
+[95:32] PPA
+
+PPA_From_MEC
+[15:0]   CTAG
+[19:16] Reserved
+[23:20] SPLIT_ID
+[31:24] IDX
+[95:32] PPA
+
+RLBN 
+[15:0] CTAG
+[16]    FORCE_UNC
+[17]    VFLAG
+[19:18] Reserved
+[23:20] SPLIT_ID
+[31:24] Reserved
+[71:32] NEW_SLBA
+[79:72] SECTROR_VALID
+[82:80] MDSZ
+[83] Reserved
+[84] MPTR
+[85] LBSIZE
+[86] LBMD_EN
+[87] E2E_FLAG
+[95:88] NSTAG
