@@ -4,7 +4,7 @@ lines = open("alifs_20_raw.txt", "r")
 flag_struct = 0
 members = ''
 
-with open('prueba.sv', 'w') as f:
+with open('strucs_reg.sv', 'w') as f:
     for line in lines:
         line = line.replace('[', '   [   ')
         line = line.replace(']', '   ]   ')

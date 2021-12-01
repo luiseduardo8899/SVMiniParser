@@ -22,12 +22,13 @@ for s in sheets:
             if str(row_list[0]) != 'nan':
                 flag_reg = (-1)*flag_reg
                 #print(flag_reg)
-                name_struct = str(row_list[1])
-                print(name_struct)
+                name_struct_aux = str(row_list[1])
+                base_aux = str(row_list[2])
+                #print(name_struct)
                 if (members != ''):
                     struct = 'typedef struct packed { \n' + members + '}' + name_struct + ';'  + '\n\n'
-                    struct =  '\\' + '\\' + str(row_list[2]) + '\n' + struct
-                    for_l_strct = '\\' + '\\' + str(row_list[0]) + '\n' + '\\' + '\\' + str(row_list[2]) + '\n' 
+                    struct =  '\\' + '\\' + base + '\n' + struct
+                    for_l_strct = '\\' + '\\' + base_aux + '\n' 
                 f.write(struct)
 
                 members = ''
@@ -39,6 +40,8 @@ for s in sheets:
                 comment = comment[ : comment.index('-')]
             except:
                 comment = str(row_list[5])'''
+            name_struct = name_struct_aux
+            base = base_aux
             comment = str(row_list[5]).replace('\n', '=> ')
             #comment = comment[:comment.find('(')] + comment[comment.find(')')+1:]
             name_field = str(row_list[5]).split()
