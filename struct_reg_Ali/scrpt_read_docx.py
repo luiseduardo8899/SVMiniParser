@@ -22,10 +22,13 @@ for i in range(len(doc.paragraphs)):
 
     #print(line)
 
-    if (len(line) == 2) and str(line[0])!='Table': #conditions for the line to be saved
+    #conditions for the line to be saved. New: discard text -if this is not a 'NVMe H3' heading-
+    if (len(line) == 2) and str(line[0])!='Table' and (doc.paragraphs[i].style.name=='NVMe H3'): 
 
         line = [line[0], line[1]]
         line_tex.append(line)
+
+
 
 
 #using as indexing the table
@@ -41,10 +44,11 @@ for table in tablesD:
     if i==0: #build 1st row of titles for the exel (can be omptimized)
         sheet.write(i, 0, 'Empty')
         sheet.write(i, 1, 'Description Header')
-        sheet.write(i, 2, 'Bits')
-        sheet.write(i, 3, 'RW')
-        sheet.write(i, 4, 'Description')
-        sheet.write(i, 5, 'Default')
+        sheet.write(i, 2, 'Base Bus')
+        sheet.write(i, 3, 'Bits')
+        sheet.write(i, 4, 'RW')
+        sheet.write(i, 5, 'Description')
+        sheet.write(i, 6, 'Default')
 
         i=1
 
@@ -60,6 +64,8 @@ for table in tablesD:
 
             sheet.write(i, 0, '-')
             sheet.write(i, 1, line_tex[k-1][0])
+            sheet.write(i, 2, line_tex[k-1][1].replace('(','').replace(')', ''))
+
 
             noFirst = 0 #ommit the first row of every table...
             for row in table.rows:
@@ -70,8 +76,8 @@ for table in tablesD:
 
                     for cell in row.cells:
 
-                        print(cell.text)
-                        sheet.write(i, j+2, str(cell.text))
+                        #print(cell.text)
+                        sheet.write(i, j+3, str(cell.text))
 
                         j = j + 1
 

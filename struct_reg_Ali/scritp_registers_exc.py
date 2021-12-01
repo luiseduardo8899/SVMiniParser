@@ -2,9 +2,9 @@ import pandas as pd                     # pip install pandas
 from openpyxl import load_workbook      # pip install openpyxl
 
 # we upload the file and obtain your data
-path = 'Book_registers_ali.xlsx'
+path = 'listed_info.xlsx'
 # we get the names of the leaves
-wb = load_workbook(filename = 'Book_registers_ali.xlsx')
+wb = load_workbook(filename = 'listed_info.xlsx')
 sheets = wb.sheetnames
 
 for s in sheets:
@@ -21,11 +21,12 @@ for s in sheets:
             #print(str(list(i)[0]))
             if str(row_list[0]) != 'nan':
                 flag_reg = (-1)*flag_reg
-                print(flag_reg)
+                #print(flag_reg)
                 name_struct = str(row_list[1])
+                print(name_struct)
                 if (members != ''):
-                    struct = 'typedef struct packed { \n' + members + '}' + name_struct + ';'  + '\n' + '\n'
-                    struct = '\\' + '\\' + str(row_list[0]) + '\n' + '\\' + '\\' + str(row_list[2]) + '\n' + struct
+                    struct = 'typedef struct packed { \n' + members + '}' + name_struct + ';'  + '\n\n'
+                    struct =  '\\' + '\\' + str(row_list[2]) + '\n' + struct
                     for_l_strct = '\\' + '\\' + str(row_list[0]) + '\n' + '\\' + '\\' + str(row_list[2]) + '\n' 
                 f.write(struct)
 
@@ -38,7 +39,8 @@ for s in sheets:
                 comment = comment[ : comment.index('-')]
             except:
                 comment = str(row_list[5])'''
-            comment = str(row_list[5])
+            comment = str(row_list[5]).replace('\n', '=> ')
+            #comment = comment[:comment.find('(')] + comment[comment.find(')')+1:]
             name_field = str(row_list[5]).split()
             # We count the reserved fields
             if ('Reserved' in name_field[0]):
@@ -52,7 +54,7 @@ for s in sheets:
             else:
                 bits = str(row_list[3])
             # We concatenate the members
-            members = '\t' + 'bit ' + bits + ' ' + name_field + ';' + 2*'\t' + '\\' + '\\' + str(row_list[6]) + ',  ' + 'descrip: ' + comment + ', permits: ' + str(row_list[4]) + '\n' + members
+            members = '\t' + 'bit ' + bits + ' ' + name_field + ';' + 2*'\t' + '\\' + '\\' + 'Default: ' + str(row_list[6]) + ',  ' + 'descrip: ' + comment + ', permits: ' + str(row_list[4]) + '\n' + members
         if (members != ''):
             struct = 'typedef struct packed { \n' + members + '}' + name_struct + ';'  + '\n' + '\n'
             struct = for_l_strct + struct

@@ -1,78 +1,79 @@
-\\1.2.2  p1
-\\ (0x5000_0004)
+\\0x5E00_0004
 typedef struct packed { 
-	bit [31:0] obq0_0_baddr_I;		\\32'h00,  descrip: obq0_0_baddr_I (baddr) - obq0_0_fifo, permits: R/W
-} obq0_0_baddr_h;
+	bit [31:0] obq0_0_baddr;		\\Default: 32'h00,  descrip: obq0_0_baddr (baddr) - => obq0_0 fifo 起始基地址32位, permits: R/W
+}obq0_0_depth;
 
-\\1.2.3  p1
-\\ (0x5000_0008)
+\\0x5E00_0008
 typedef struct packed { 
-	bit [31:8] Reserved_0;		\\0x0,  descrip: Reserved, permits: nan
-	bit [7:0] obq0_0_baddr_h;		\\32'h00,  descrip: obq0_0_baddr_h (baddr) - obq0_0_fifo, permits: R/W
-} obq1_0_baddr_I;
+	bit [31:16] Reserved_0;		\\Default: 0x0,  descrip: Reserved, permits: nan
+	bit [15:0] obq0_0_depth;		\\Default: 16'h40,  descrip: obq0_0_depth (depth) - => obq0_0 fifo的深度, permits: R/W
+}obq0_0_tailer;
 
-\\1.2.4  p1
-\\ (0x5000_000C)
+\\0x5E00_000C
 typedef struct packed { 
-	bit [31:0] obq1_0_baddr_I;		\\32'h00,  descrip: obq1_0_baddr_I (baddr) – obq1_0_fifo, permits: R/W
-} obq1_0_baddr_h;
+	bit [31:16] Reserved_0;		\\Default: 0x0,  descrip: Reserved, permits: nan
+	bit [15:0] obq0_0_tailer;		\\Default: 16'h0,  descrip: obq0_0_tailer (tailer) - => obq0_0的写指针, permits: R/W
+}obq0_0_hed_addr;
 
-\\1.2.5  p2
-\\ (0x5000_0010)
+\\0x5E00_0010
 typedef struct packed { 
-	bit [31:8] Reserved_0;		\\0x0,  descrip: Reserved, permits: nan
-	bit [7:0] obq0_0_baddr_h;		\\8'h00,  descrip: obq0_0_baddr_h (baddr) – obq1_0_fifo, permits: R/W
-} obq2_0_baddr_I;
+	bit [31:0] obq0_0_hed_addr;		\\Default: 32'h00,  descrip: obq0_0_hed_addr (addr) - => obq0_0  fifo  header指针地址32位, permits: R/W
+}obq0_0_header;
 
-\\1.2.6 p2
-\\ (0x5000_0014)
+\\0x5E00_0014
 typedef struct packed { 
-	bit [31:0] obq2_0_baddr_I;		\\32'h00,  descrip: obq2_0_baddr_I (baddr) - obq2_0_fifo, permits: R/W
-} obq1_0_baddr_h;
+	bit [31:16] Reserved_0;		\\Default: 0x0,  descrip: Reserved, permits: nan
+	bit [15:0] obq0_0_header;		\\Default: 16'h0,  descrip: obq0_0_header (header) - => obq0_0的读指针, permits: RO
+}obq0_0_status;
 
-\\1.2.7 p2
-\\ (0x5000_0018)
+\\0x5E00_0018
 typedef struct packed { 
-	bit [31:8] Reserved_0;		\\0x0,  descrip: Reserved, permits: nan
-	bit [7:0] obq2_0_baddr_h;		\\8'h00,  descrip: obq2_0_baddr_h (baddr) – obq2_0_fifo, permits: R/W
-} obq3_0_baddr_I;
+	bit [31:4] Reserved_0;		\\Default: 0x0,  descrip: Reserved, permits: nan
+	bit [3] obq0_0_alempty;		\\Default: 1'b0,  descrip: obq0_0_alempty (alempty) - => , permits: RO
+	bit [2] obq0_0_alfull;		\\Default: 1'b0,  descrip: obq0_0_alfull (alfull) - => , permits: RO
+	bit [1] obq0_0_empty;		\\Default: 1'b0,  descrip: obq0_0_empty (empty) - => , permits: RO
+	bit [0] obq0_0_full;		\\Default: 1'b0,  descrip: obq0_0_full (full) - => , permits: RO
+}obq0_0_cnt;
 
-\\1.2.8
-\\ (0x5000_001C)
+\\0x5E00_001C
 typedef struct packed { 
-	bit [31:0] obq3_0_baddr_I;		\\32'h00,  descrip: obq3_0_baddr_I (baddr) - obq3_0_fifo, permits: R/W
-} obq3_0_baddr_h;
+	bit [31:16] Reserved_0;		\\Default: 0x0,  descrip: Reserved, permits: nan
+	bit [15:0] obq0_0_cnt;		\\Default: 16'h0,  descrip: obq0_0_cnt (num) - => obq0_0fifo内部还剩多少个entry没取, permits: R/W
+}obq0_0_th;
 
-\\1.2.9 p2
-\\ (0x5000_0020)
+\\0x5E00_0020
 typedef struct packed { 
-	bit [31:8] Reserved_0;		\\0x0,  descrip: Reserved, permits: nan
-	bit [7:0] obq3_0_baddr_h;		\\8'h00,  descrip: obq3_0_baddr_h (baddr) – obq3_0_fifo, permits: R/W
-} obq4_0_baddr_I;
+	bit [31:16] Reserved_0;		\\Default: 0x0,  descrip: Reserved, permits: nan
+	bit [15:8] obq0_0_alem_th;		\\Default: 8'h6,  descrip: obq0_0_alem_th (alem_th) - => obq0_0 fifo 将空阈值, permits: R/W
+	bit [7:0] obq0_0_alful_th;		\\Default: 8'h6,  descrip: obq0_0_alful_th (alful_th) - => obq0_0 fifo 将满阈值, permits: R/W
+}obq0_1_baddr;
 
-\\1.2.8 p3
-\\ (0x5000_0024)
+\\0x5E00_0024
 typedef struct packed { 
-	bit [31:0] nan;		\\nan,  descrip: nan, permits: 1.2.9 obq4_0_baddr_I (0x5000_0020)
-}obq4_0_baddr_h;
+	bit [31:0] obq0_1_baddr;		\\Default: 32'h00,  descrip: obq0_1_baddr (baddr) - => obq0_1 fifo 起始基地址32位, permits: R/W
+}obq0_1_depth;
 
-\\1.2.536 p3
-\\ (0x5000_0DAC)
+\\0x5E00_0028
 typedef struct packed { 
-	bit [31:8] Reserved_0;		\\0x0,  descrip: Reserved, permits: nan
-	bit [7:0] obq4_0_baddr_h;		\\8'h00,  descrip: obq4_0_baddr_h (baddr) – obq4_0_fifo, permits: R/W
-} obq9_1_status;
+	bit [31:16] Reserved_0;		\\Default: 0x0,  descrip: Reserved, permits: nan
+	bit [15:0] obq0_1_depth;		\\Default: 16'h40,  descrip: obq0_1_depth (depth) - => obq0_1 fifo的深度, permits: R/W
+}obq0_1_tailer;
 
-\\1.2.536 p3
-\\ (0x5000_0DAC)
+\\0x5E00_002C
 typedef struct packed { 
-	bit [31:24] Reserved_1;		\\0x0,  descrip: Reserved, permits: nan
-	bit [23:16] obq9_1_alem_th;		\\8’h6,  descrip: obq9_1_alem_th (alem_th) – obq9_1_fifo, permits: R/W
-	bit [15:8] obq9_1_alful_th;		\\8’h6,  descrip: obq9_1_alful_th (alful_th) – obq9_1_fifo, permits: R/W
-	bit [7:4] Reserved_0;		\\0x0,  descrip: Reserved, permits: nan
-	bit [3] obq9_1_alempty;		\\1'b0,  descrip: obq9_1_alempty (alempty), permits: RO
-	bit [2] obq9_1_alfull;		\\1'b0,  descrip: obq9_1_alfull (alfull), permits: RO
-	bit [1] obq9_1_empty;		\\1'b0,  descrip: obq9_1_empty (empty), permits: RO
-	bit [0] obq9_1_full;		\\1'b0,  descrip: obq9_1_full (full), permits: RO
-} obq9_1_status;
+	bit [31:16] Reserved_0;		\\Default: 0x0,  descrip: Reserved, permits: nan
+	bit [15:0] obq0_1_tailer;		\\Default: 16'h0,  descrip: obq0_1_tailer (tailer) - => obq0_1的写指针, permits: R/W
+}obq0_1_hed_addr;
+
+\\0x5E00_0030
+typedef struct packed { 
+	bit [31:0] obq0_1_hed_addr;		\\Default: 32'h00,  descrip: obq0_1_hed_addr (addr) - => obq0_1  fifo  header指针地址32位, permits: R/W
+}obq0_1_header;
+
+\\-
+\\0x5E00_0030
+typedef struct packed { 
+	bit [31:16] Reserved_0;		\\Default: 0x0,  descrip: Reserved, permits: nan
+	bit [15:0] obq0_1_header;		\\Default: 16'h0,  descrip: obq0_1_header (header) - => obq0_1的读指针, permits: RO
+}obq0_1_header;
 
